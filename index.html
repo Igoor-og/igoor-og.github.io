@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Igor Almeida | Video Editor</title>
+<meta name="description" content="Portfólio de edições de vídeo de Igor Almeida" />
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+<style>
+  :root{
+    --bg:#0b0f12;
+    --card:#0f1417;
+    --muted:#9aa3a8;
+    --accent:#7c4dff;
+    --glass: rgba(255,255,255,0.03);
+    --radius:14px;
+    --maxw:1100px;
+    --gap:18px;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,#060708 0%,var(--bg) 100%);
+    color:#e6eef3;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+    display:flex;
+    justify-content:center;
+    padding:40px 20px;
+  }
+
+  .site{
+    width:100%;
+    max-width:var(--maxw);
+  }
+
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:28px;
+    padding:12px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    border-radius:12px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 6px 18px rgba(2,6,10,0.7);
+  }
+
+  .brand{
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+  .logo{
+    width:56px;height:56px;border-radius:12px;
+    background:linear-gradient(135deg,var(--accent),#ff7ab6);
+    display:flex;align-items:center;justify-content:center;font-weight:700;
+    color:white;font-size:18px;box-shadow:0 6px 20px rgba(124,77,255,0.14);
+  }
+  .brand h1{margin:0;font-size:18px;letter-spacing:0.2px}
+  .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+  nav{display:flex;gap:12px;align-items:center}
+  .navlink{color:var(--muted);text-decoration:none;font-size:14px;padding:8px 12px;border-radius:10px}
+  .navlink:hover{background:var(--glass);color: #fff}
+
+  .cta{
+    display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;
+    background:linear-gradient(90deg,var(--accent),#ff7ab6);
+    color:white;text-decoration:none;font-weight:600;
+    box-shadow:0 6px 24px rgba(124,77,255,0.18);
+  }
+
+  main{margin-top:22px;display:grid;gap:26px}
+
+  /* Hero */
+  .hero{
+    display:flex;gap:18px;align-items:center;padding:22px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    box-shadow:0 6px 20px rgba(2,6,10,0.6);
+    overflow:hidden;
+  }
+  .hero-left{flex:1}
+  .hero h2{margin:0;font-size:22px}
+  .hero p{color:var(--muted);margin-top:8px}
+  .hero-actions{margin-top:14px;display:flex;gap:12px}
+  .btn{
+    padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);
+    color:var(--muted);text-decoration:none;font-weight:600;
+  }
+  .btn.primary{background:linear-gradient(90deg,var(--accent),#ff7ab6);color:white;border:0;box-shadow:0 8px 26px rgba(124,77,255,0.16)}
+  .hero-thumb{width:220px;height:120px;border-radius:10px;background:linear-gradient(90deg,#111316,#14181b);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;font-size:12px}
+
+  /* Grid of cards */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+    gap:var(--gap);
+  }
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 8px 30px rgba(2,6,10,0.6);
+    transform:translateY(12px);
+    opacity:0;
+    transition:transform .55s cubic-bezier(.2,.9,.2,1),opacity .55s;
+  }
+  .card.visible{transform:none;opacity:1}
+  .thumb{
+    height:150px;background:#000;display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .card-body{padding:12px}
+  .title{font-weight:700;margin:0;font-size:15px}
+  .meta{color:var(--muted);font-size:13px;margin-top:6px}
+  .card-actions{margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .badge{font-size:12px;color:var(--muted);padding:6px 8px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)}
+
+  .watch{
+    padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);
+    color:white;text-decoration:none;font-weight:700;
+  }
+
+  /* Modal */
+  .modal{
+    position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:28px;
+    background:rgba(2,6,10,0.6);backdrop-filter: blur(6px);opacity:0;pointer-events:none;transition:opacity .18s;
+  }
+  .modal.open{opacity:1;pointer-events:auto}
+  .player{
+    width:min(960px,98%);aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;position:relative;
+  }
+  .close{
+    position:absolute;right:12px;top:12px;background:rgba(255,255,255,0.04);padding:8px;border-radius:8px;border:0;color:#fff;font-weight:700;cursor:pointer;
+  }
+
+  footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+  /* responsive */
+  @media (max-width:640px){
+    .hero{flex-direction:column;align-items:flex-start}
+    .hero-thumb{width:100%;height:140px}
+  }
+
+  /* small helper */
+  .muted{color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="site">
+    <header>
+      <div class="brand">
+        <div class="logo">IA</div>
+        <div>
+          <h1>Igor Almeida | Video Editor</h1>
+          <p class="muted">Edições rápidas, cortes dinâmicos e storytelling visual.</p>
+        </div>
+      </div>
+
+      <nav>
+        <a class="navlink" href="#home">Home</a>
+        <a class="navlink" href="#modelos">Modelos de Vídeos</a>
+        <a class="navlink" href="#contato">Contato</a>
+        <a class="cta" id="whatsBtn" href="https://wa.me/5511970688232?text=Fala%20Igor,%20vi%20teu%20trabalho%20e%20quero%20combinar%20uma%20edi%C3%A7%C3%A3o" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-left">
+          <h2>Portfólio de edições — Igor Almeida</h2>
+          <p>Sou editor de vídeo — cortes rápidos, color grading e ritmo que prende a atenção. Aqui estão alguns modelos e edições que eu uso com frequência.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#modelos">Ver Modelos</a>
+            <a class="btn" href="#contato">Entrar em contato</a>
+          </div>
+        </div>
+        <div class="hero-thumb">Trailers • Reels • Shorts</div>
+      </section>
+
+      <section id="modelos">
+        <h3 style="margin:0 0 12px 4px">Modelos de Vídeos</h3>
+        <div class="grid" id="grid">
+          <!-- Card template - DUPLICA / ADICIONA mais com o mesmo formato -->
+          <!-- Exemplo de card (troque data-video pelo ID do YouTube) -->
+          <article class="card" data-video="VIDEO_ID_AQUI">
+            <div class="thumb">
+              <img alt="Thumbnail" src="https://img.youtube.com/vi/VIDEO_ID_AQUI/hqdefault.jpg" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h4 class="title">Nome do modelo / Edição 1</h4>
+              <div class="meta">Duração: 00:45 • Ritmo dinâmico</div>
+              <div class="card-actions">
+                <span class="badge">Modelo</span>
+                <a class="watch" href="#" data-play>Assistir</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Copia e cole mais cards e troque VIDEO_ID_AQUI pelo ID real do YouTube -->
+        </div>
+      </section>
+
+      <section id="contato" style="margin-top:6px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));box-shadow:0 8px 20px rgba(2,6,10,0.6)">
+        <h3 style="margin:0 0 8px 0">Contato</h3>
+        <p class="muted" style="margin:0 0 12px 0">Quer uma edição? Manda no privado que eu respondo.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="cta" href="https://wa.me/5511970688232?text=Fala%20Igor,%20vi%20teu%20trabalho%20e%20quero%20combinar%20uma%20edi%C3%A7%C3%A3o" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a class="btn" href="mailto:igoralmeidadesantana0@gmail.com">Email</a>
+          <a class="btn" href="#" onclick="alert('Coloca teu @ do Insta aqui!')">Instagram</a>
+        </div>
+      </section>
+
+      <footer>© <span id="year"></span> Igor Almeida — Portfólio leve e focado no resultado.</footer>
+    </main>
+  </div>
+
+  <!-- Modal player -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog">
+    <div class="player" id="playerWrap">
+      <button class="close" id="closeBtn">Fechar ✕</button>
+      <div id="playerInner" style="width:100%;height:100%"></div>
+    </div>
+  </div>
+
+<script>
+  // Inserir ano
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // UTILIDADES: extrai YouTube ID de URL qualquer (https://youtu.be/ID, etc.)
+  function extractYTid(url){
+    if(!url) return '';
+    // if already id
+    if(!url.includes('http') && !url.includes('/')) return url;
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtu\.be\/)([^&?\/\s]{11})/,
+      /v=([^&]{11})/
+    ];
+    for(const p of patterns){
+      const m = url.match(p);
+      if(m && m[1]) return m[1];
+    }
+    // fallback: try to grab last path segment
+    try{ const u = new URL(url); const parts = u.pathname.split('/').filter(Boolean); return parts.pop(); } catch(e){ return ''; }
+  }
+
+  // Set thumbnails automatically for all cards if src contains VIDEO_ID placeholder
+  document.querySelectorAll('.card').forEach(card=>{
+    const data = card.getAttribute('data-video') || '';
+    const id = extractYTid(data);
+    const img = card.querySelector('img');
+    if(id && img) img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    // set play link
+    const play = card.querySelector('[data-play]');
+    if(play){
+      play.addEventListener('click', (e)=>{
+        e.preventDefault();
+        openPlayer(id);
+      });
+    }
+    // also clicking in thumb opens
+    const thumb = card.querySelector('.thumb');
+    if(thumb){
+      thumb.style.cursor='pointer';
+      thumb.addEventListener('click', ()=> openPlayer(id));
+    }
+  });
+
+  // Modal player
+  const modal = document.getElementById('modal');
+  const playerInner = document.getElementById('playerInner');
+  const closeBtn = document.getElementById('closeBtn');
+
+  function openPlayer(videoId){
+    if(!videoId) return;
+    playerInner.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" title="Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+  }
+  function closePlayer(){
+    modal.classList.remove('open');
+    playerInner.innerHTML='';
+    modal.setAttribute('aria-hidden','true');
+  }
+  closeBtn.addEventListener('click', closePlayer);
+  modal.addEventListener('click', (e)=>{ if(e.target === modal) closePlayer(); });
+
+  // Fade-in on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, {threshold:0.12});
+  document.querySelectorAll('.card').forEach(c => io.observe(c));
+
+  // Small UX: smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+</script>
+</body>
+</html>
