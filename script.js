@@ -1,324 +1,285 @@
-/* ═══════════════════════════════════════════════
-   IGOR ALMEIDA — LANDING PAGE PREMIUM
-   script.js — Interações, GSAP e animações
-   ═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   IGOR ALMEIDA — script.js v3
+   ═══════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ══════════════════════════════════════════════
-     AGUARDA O GSAP CARREGAR (pode estar em defer)
-     ══════════════════════════════════════════════ */
-  function waitForGSAP(callback) {
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-      callback();
-    } else {
-      setTimeout(() => waitForGSAP(callback), 100);
-    }
+  function waitGSAP(cb) {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') cb();
+    else setTimeout(() => waitGSAP(cb), 80);
   }
+  waitGSAP(init);
 
-  waitForGSAP(initAll);
-
-  function initAll() {
+  function init() {
     gsap.registerPlugin(ScrollTrigger);
-
-    initCursor();
     initNavbar();
     initHamburger();
-    initHeroAnimations();
-    initScrollAnimations();
-    initCardTilt();
-    initMagneticButton();
-    initMobileMarquee();
+    initHeroAnim();
+    initScrollReveal();   // ← reinicia ao sair/entrar
+    initSkewSections();   // ← IntersectionObserver para skewY
+    initUnderline();
+    initSwiperDep();
+    initSwiperBen();
+    initFAQ();
+    initMagnetic();
   }
 
-  /* ══════════════════════════════════════════════
-     1. CURSOR PERSONALIZADO
-        — Segue o mouse com suavidade
-     ══════════════════════════════════════════════ */
-  function initCursor() {
-    const cursor         = document.getElementById('cursor');
-    const cursorFollower = document.getElementById('cursorFollower');
-
-    // Só ativa em dispositivos com hover real (desktop)
-    if (!window.matchMedia('(hover: hover)').matches) return;
-
-    let mouseX = 0, mouseY = 0;
-    let followerX = 0, followerY = 0;
-
-    // Atualiza posição do cursor instantaneamente
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursor.style.left = mouseX + 'px';
-      cursor.style.top  = mouseY + 'px';
-    });
-
-    // Follower segue com lag suave via requestAnimationFrame
-    function animateFollower() {
-      followerX += (mouseX - followerX) * 0.12;
-      followerY += (mouseY - followerY) * 0.12;
-      cursorFollower.style.left = followerX + 'px';
-      cursorFollower.style.top  = followerY + 'px';
-      requestAnimationFrame(animateFollower);
-    }
-    animateFollower();
-
-    // Expande o follower ao passar em links e botões
-    const interactives = document.querySelectorAll('a, button, [data-tilt]');
-    interactives.forEach(el => {
-      el.addEventListener('mouseenter', () => cursorFollower.classList.add('hovered'));
-      el.addEventListener('mouseleave', () => cursorFollower.classList.remove('hovered'));
-    });
-  }
-
-  /* ══════════════════════════════════════════════
-     2. NAVBAR — Adiciona classe "scrolled" ao rolar
-     ══════════════════════════════════════════════ */
+  /* ══ 1. NAVBAR ══ */
   function initNavbar() {
-    const navbar = document.getElementById('navbar');
+    const nav = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
+      nav.classList.toggle('scrolled', scrollY > 40);
     }, { passive: true });
   }
 
-  /* ══════════════════════════════════════════════
-     3. MENU HAMBÚRGUER — Abre/fecha menu mobile
-     ══════════════════════════════════════════════ */
+  /* ══ 2. HAMBÚRGUER ══ */
   function initHamburger() {
-    const btn        = document.getElementById('hamburger');
-    const menu       = document.getElementById('mobileMenu');
-    const mobLinks   = document.querySelectorAll('.mob-link');
+    const btn  = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    const links = menu.querySelectorAll('.mob-link');
 
-    function toggleMenu(open) {
+    function toggle(open) {
       btn.classList.toggle('open', open);
       menu.classList.toggle('open', open);
       btn.setAttribute('aria-expanded', String(open));
       menu.setAttribute('aria-hidden', String(!open));
-      // Bloqueia scroll do body quando menu está aberto
       document.body.style.overflow = open ? 'hidden' : '';
     }
 
-    btn.addEventListener('click', () => {
-      const isOpen = menu.classList.contains('open');
-      toggleMenu(!isOpen);
+    btn.addEventListener('click', () => toggle(!menu.classList.contains('open')));
+    links.forEach(l => l.addEventListener('click', () => toggle(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+  }
+
+  /* ══ 3. HERO — elementos entram da esquerda com blur ══ */
+  function initHeroAnim() {
+    const els = document.querySelectorAll('.hero-anim');
+    // Pequeno delay para o CSS transition funcionar após DOMContentLoaded
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        els.forEach(el => el.classList.add('on'));
+      }, 80);
+    });
+  }
+
+  /* ══ 4. SCROLL REVEAL — REINICIA ao sair da viewport ══
+     Diferente da versão anterior, aqui usamos threshold duplo
+     para resetar quando o elemento sai, permitindo reanimar. */
+  function initScrollReveal() {
+    const targets = document.querySelectorAll('.anim-el, .anim-scale');
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Entra → anima
+          entry.target.classList.add('on');
+        } else {
+          // Sai → reseta para reanimar na próxima vez
+          entry.target.classList.remove('on');
+        }
+      });
+    }, {
+      threshold: 0.15,
+      // rootMargin negativo: só dispara quando está bem na tela
+      rootMargin: '-5% 0px -5% 0px'
     });
 
-    // Fecha ao clicar em qualquer link do menu mobile
-    mobLinks.forEach(link => {
-      link.addEventListener('click', () => toggleMenu(false));
-    });
+    targets.forEach(el => obs.observe(el));
+  }
 
-    // Fecha ao pressionar ESC
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu.classList.contains('open')) {
-        toggleMenu(false);
+  /* ══ 5. TELA INCLINADA — skewY com IntersectionObserver ══
+     Exatamente como você passou: remove 'ativa' fora, adiciona dentro */
+  function initSkewSections() {
+    const sections = document.querySelectorAll('.tela-inclinada');
+
+    sections.forEach(elemento => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            elemento.classList.add('ativa');    // 60% visível → volta ao normal
+          } else {
+            elemento.classList.remove('ativa'); // fora → inclina
+          }
+        },
+        {
+          threshold: 0.6  // quando 60% estiver visível no centro da tela
+        }
+      );
+      observer.observe(elemento);
+    });
+  }
+
+  /* ══ 6. SUBLINHADO DESENHADO ══ */
+  function initUnderline() {
+    const el = document.querySelector('.u-draw');
+    if (!el) return;
+
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => el.classList.add('drawn'), 350);
+      } else {
+        // Reinicia quando sai da tela
+        el.classList.remove('drawn');
+      }
+    }, { threshold: 0.5 });
+
+    obs.observe(el);
+  }
+
+  /* ══ 7. SWIPER DEPOIMENTOS ══ */
+  function initSwiperDep() {
+    buildSwiper({
+      trackId:    'depTrack',
+      viewportId: 'depViewport',
+      prevId:     'depPrev',
+      nextId:     'depNext',
+      dotsId:     'depDots',
+      cardSel:    '.dep-card',
+      getVisible: () => {
+        if (window.innerWidth < 600) return 1;
+        if (window.innerWidth < 960) return 2;
+        return 3;
       }
     });
   }
 
-  /* ══════════════════════════════════════════════
-     4. HERO — Animações de entrada com GSAP
-        — Elementos surgem de baixo para cima (fade-up)
-     ══════════════════════════════════════════════ */
-  function initHeroAnimations() {
-    const heroElements = document.querySelectorAll('.hero [data-gsap="fade-up"]');
-
-    // Linha do tempo sequencial para os elementos do hero
-    const tl = gsap.timeline({ delay: 0.1 });
-
-    tl.from(heroElements, {
-      y: 40,
-      opacity: 0,
-      duration: 0.9,
-      stagger: 0.15,  // Cada elemento aparece 0.15s após o anterior
-      ease: 'power3.out',
-    });
-
-    // Animação flutuante suave do container Spline
-    gsap.to('#spline-container', {
-      y: -12,
-      duration: 4,
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true,
+  /* ══ 8. SWIPER BENEFÍCIOS ══ */
+  function initSwiperBen() {
+    buildSwiper({
+      trackId:    'benTrack',
+      viewportId: 'benViewport',
+      prevId:     'benPrev',
+      nextId:     'benNext',
+      dotsId:     'benDots',
+      cardSel:    '.ben-card',
+      getVisible: () => {
+        if (window.innerWidth < 600) return 1;
+        if (window.innerWidth < 960) return 2;
+        return 3;
+      }
     });
   }
 
-  /* ══════════════════════════════════════════════
-     5. SCROLL ANIMATIONS — Elementos entram ao rolar
-        — Parallax stagger nos cards (velocidades diferentes)
-     ══════════════════════════════════════════════ */
-  function initScrollAnimations() {
+  /* ── Swiper reutilizável ── */
+  function buildSwiper({ trackId, viewportId, prevId, nextId, dotsId, cardSel, getVisible }) {
+    const track    = document.getElementById(trackId);
+    const viewport = document.getElementById(viewportId);
+    const prevBtn  = document.getElementById(prevId);
+    const nextBtn  = document.getElementById(nextId);
+    const dotsWrap = document.getElementById(dotsId);
+    if (!track) return;
 
-    /* ── Elementos fade-up genéricos ── */
-    gsap.utils.toArray('[data-gsap="fade-up"]').forEach((el) => {
-      // Pula elementos do hero (já animados na entrada)
-      if (el.closest('.hero')) return;
+    const cards = track.querySelectorAll(cardSel);
+    let current = 0;
 
-      gsap.from(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          toggleActions: 'play none none none',
-        },
-        y: 36,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
+    function gap() { return 19; } // ~1.2rem em px
+
+    function cardW() {
+      if (!cards[0]) return 0;
+      return cards[0].getBoundingClientRect().width + gap();
+    }
+
+    function maxSlide() {
+      return Math.max(0, cards.length - getVisible());
+    }
+
+    function goTo(idx) {
+      current = Math.max(0, Math.min(idx, maxSlide()));
+      track.style.transform = `translateX(-${current * cardW()}px)`;
+      updateDots();
+    }
+
+    function buildDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      const total = maxSlide() + 1;
+      for (let i = 0; i < total; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'dot';
+        btn.setAttribute('aria-label', `Ir para slide ${i + 1}`);
+        btn.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(btn);
+      }
+      updateDots();
+    }
+
+    function updateDots() {
+      if (!dotsWrap) return;
+      dotsWrap.querySelectorAll('.dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
       });
+    }
+
+    prevBtn?.addEventListener('click', () => goTo(current - 1));
+    nextBtn?.addEventListener('click', () => goTo(current + 1));
+
+    // Touch swipe
+    let startX = 0;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+    }, { passive: true });
+
+    buildDots();
+
+    // Recalcula no resize
+    let timer;
+    window.addEventListener('resize', () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { buildDots(); goTo(0); }, 200);
     });
+  }
 
-    /* ── Cards com stagger/parallax ──
-       Cada card entra com velocidade ligeiramente diferente,
-       criando o efeito de profundidade/parallax */
-    const staggerGroups = document.querySelectorAll('.services-grid, .plans-grid');
+  /* ══ 9. FAQ ACCORDION ══ */
+  function initFAQ() {
+    const items = document.querySelectorAll('.faq-item');
 
-    staggerGroups.forEach((group) => {
-      const cards = group.querySelectorAll('[data-gsap="stagger"]');
+    items.forEach(item => {
+      const btn  = item.querySelector('.faq-q');
+      const body = item.querySelector('.faq-body');
+      if (!btn || !body) return;
 
-      gsap.from(cards, {
-        scrollTrigger: {
-          trigger: group,
-          start: 'top 82%',
-          toggleActions: 'play none none none',
-        },
-        y: (i) => 50 + i * 15,  // Cada card começa um pouco mais abaixo
-        opacity: 0,
-        duration: 0.85,
-        stagger: {
-          amount: 0.4,           // Distribui o stagger ao longo de 0.4s
-          from: 'start',
-        },
-        ease: 'power3.out',
-      });
-    });
+      btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
 
-    /* ── Planos extras ── */
-    gsap.utils.toArray('[data-gsap="stagger"]').forEach((el) => {
-      if (el.closest('.services-grid') || el.closest('.plans-grid')) return;
+        // Fecha todos
+        items.forEach(other => {
+          const ob = other.querySelector('.faq-q');
+          const od = other.querySelector('.faq-body');
+          if (ob && od) {
+            ob.setAttribute('aria-expanded', 'false');
+            od.classList.remove('faq-body-open');
+          }
+        });
 
-      gsap.from(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          toggleActions: 'play none none none',
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.7,
-        ease: 'power3.out',
+        // Alterna este
+        if (!isOpen) {
+          btn.setAttribute('aria-expanded', 'true');
+          body.classList.add('faq-body-open');
+        }
       });
     });
   }
 
-  /* ══════════════════════════════════════════════
-     6. TILT 3D — Efeito de inclinação nos cards
-        — Responde ao movimento do mouse
-     ══════════════════════════════════════════════ */
-  function initCardTilt() {
-    // Não aplica tilt em touch devices
+  /* ══ 10. BOTÃO MAGNÉTICO ══ */
+  function initMagnetic() {
+    const btn = document.getElementById('magneticBtn');
+    if (!btn) return;
     if (!window.matchMedia('(hover: hover)').matches) return;
 
-    const tiltCards = document.querySelectorAll('[data-tilt]');
+    const wrap = btn.parentElement;
 
-    tiltCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect    = card.getBoundingClientRect();
-        const centerX = rect.left + rect.width  / 2;
-        const centerY = rect.top  + rect.height / 2;
-
-        // Normaliza posição do mouse (-1 a 1)
-        const deltaX  = (e.clientX - centerX) / (rect.width  / 2);
-        const deltaY  = (e.clientY - centerY) / (rect.height / 2);
-
-        // Intensidade máxima de inclinação em graus
-        const maxTilt = 8;
-        const rotateX = -deltaY * maxTilt;
-        const rotateY =  deltaX * maxTilt;
-
-        // Aplica via GSAP para suavidade
-        gsap.to(card, {
-          rotateX,
-          rotateY,
-          scale: 1.02,
-          duration: 0.4,
-          ease: 'power2.out',
-          transformPerspective: 800,
-        });
-      });
-
-      // Reseta ao sair
-      card.addEventListener('mouseleave', () => {
-        gsap.to(card, {
-          rotateX: 0,
-          rotateY: 0,
-          scale: 1,
-          duration: 0.6,
-          ease: 'elastic.out(1, 0.5)',
-        });
-      });
-    });
-  }
-
-  /* ══════════════════════════════════════════════
-     7. BOTÃO MAGNÉTICO — Atrai em direção ao mouse
-        — O botão se desloca suavemente para o cursor
-     ══════════════════════════════════════════════ */
-  function initMagneticButton() {
-    const wrap = document.querySelector('.magnetic-wrap');
-    const btn  = document.getElementById('magneticBtn');
-    if (!wrap || !btn) return;
-
-    // Só ativa em desktop
-    if (!window.matchMedia('(hover: hover)').matches) return;
-
-    wrap.addEventListener('mousemove', (e) => {
-      const rect    = wrap.getBoundingClientRect();
-      const centerX = rect.left + rect.width  / 2;
-      const centerY = rect.top  + rect.height / 2;
-
-      // Força de atração (quanto o botão se move)
-      const magnetStrength = 0.35;
-      const deltaX = (e.clientX - centerX) * magnetStrength;
-      const deltaY = (e.clientY - centerY) * magnetStrength;
-
-      gsap.to(btn, {
-        x: deltaX,
-        y: deltaY,
-        duration: 0.4,
-        ease: 'power2.out',
-      });
+    wrap.addEventListener('mousemove', e => {
+      const r  = btn.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width  / 2)) * 0.32;
+      const dy = (e.clientY - (r.top  + r.height / 2)) * 0.32;
+      gsap.to(btn, { x: dx, y: dy, duration: .4, ease: 'power2.out' });
     });
 
     wrap.addEventListener('mouseleave', () => {
-      // Retorna ao centro com efeito elástico
-      gsap.to(btn, {
-        x: 0,
-        y: 0,
-        duration: 0.8,
-        ease: 'elastic.out(1, 0.4)',
-      });
+      gsap.to(btn, { x: 0, y: 0, duration: .8, ease: 'elastic.out(1,.4)' });
     });
-  }
-
-  /* ══════════════════════════════════════════════
-     8. MARQUEE — Pausa no toque mobile
-        — CSS já pausa no :hover
-        — Aqui adicionamos suporte a touchstart/touchend
-     ══════════════════════════════════════════════ */
-  function initMobileMarquee() {
-    const track = document.querySelector('.marquee-track');
-    if (!track) return;
-
-    // Toque inicia → pausa animação
-    track.addEventListener('touchstart', () => {
-      track.style.animationPlayState = 'paused';
-    }, { passive: true });
-
-    // Toque termina → retoma animação
-    track.addEventListener('touchend', () => {
-      track.style.animationPlayState = 'running';
-    }, { passive: true });
   }
 
 }); // fim DOMContentLoaded
