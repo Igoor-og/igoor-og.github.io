@@ -176,6 +176,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function cardW() {
       if (!cards[0]) return 0;
+      // No mobile (1 card visível) calcula pelo viewport para evitar cortes
+      const vp = viewport.getBoundingClientRect().width;
+      const visible = getVisible();
+      if (visible === 1) {
+        return vp + gap();
+      }
       return cards[0].getBoundingClientRect().width + gap();
     }
 
@@ -201,6 +207,15 @@ document.addEventListener('DOMContentLoaded', () => {
         dotsWrap.appendChild(btn);
       }
       updateDots();
+
+      // Ajusta largura dos cards no mobile
+      const visible = getVisible();
+      if (visible === 1) {
+        const vp = viewport.getBoundingClientRect().width;
+        cards.forEach(c => { c.style.minWidth = vp + 'px'; c.style.maxWidth = vp + 'px'; });
+      } else {
+        cards.forEach(c => { c.style.minWidth = ''; c.style.maxWidth = ''; });
+      }
     }
 
     function updateDots() {

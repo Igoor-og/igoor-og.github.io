@@ -188,10 +188,12 @@ img  { max-width: 100%; display: block; }
 
 /* Menu mobile */
 .mobile-menu {
-  display: none; flex-direction: column; align-items: center; justify-content: center;
+  flex-direction: column; align-items: center; justify-content: center;
   gap: 1.8rem; position: fixed; inset: 0;
   background: rgba(8,8,8,.97); backdrop-filter: blur(24px);
   z-index: 150; opacity: 0; pointer-events: none; transition: opacity .3s;
+  /* Usa display:flex sempre, mas oculto via opacity+pointer-events */
+  display: flex;
 }
 .mobile-menu.open { opacity: 1; pointer-events: all; }
 .mob-link {
@@ -283,11 +285,36 @@ img  { max-width: 100%; display: block; }
 .stat span { font-size: .68rem; color: var(--muted); margin-top: .2rem; }
 .stat-sep { width: 1px; height: 32px; background: var(--line); }
 
-/* Spline container */
+/* Hero visual / foto */
 .hero-visual {
   position: relative; height: 460px;
   display: flex; align-items: center; justify-content: center;
   border-radius: 20px; overflow: hidden;
+}
+
+/* Foto de perfil no hero */
+.hero-photo-wrap {
+  border-radius: 24px;
+  background: transparent;
+}
+.hero-photo {
+  position: relative; z-index: 2;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  border-radius: 24px;
+  /* Moldura sutil */
+  box-shadow:
+    0 0 0 1px rgba(200,32,26,.25),
+    0 24px 80px rgba(0,0,0,.7),
+    0 0 60px rgba(200,32,26,.12);
+  /* Degrade na base para fundir com o fundo */
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  animation: photoFloat 6s ease-in-out infinite;
+}
+@keyframes photoFloat {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
 }
 .hero-orb {
   position: absolute; border-radius: 50%; filter: blur(50px);
@@ -672,7 +699,8 @@ img  { max-width: 100%; display: block; }
   .hero-badge { margin: 0 auto 1.6rem; }
   .hero-sub   { margin: 0 auto 2.4rem; }
   .hero-actions, .hero-stats { justify-content: center; }
-  .hero-visual { height: 260px; }
+  .hero-visual { height: 340px; max-width: 340px; margin: 0 auto; }
+  .hero-photo { -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%); mask-image: linear-gradient(to bottom, black 60%, transparent 100%); }
   .scroll-line-wrap { display: none; }
   .nav-links  { display: none; }
   .hamburger  { display: flex; }
@@ -686,9 +714,18 @@ img  { max-width: 100%; display: block; }
   .container { padding: 0 1.2rem; }
   .sec-dor, .sec-dep, .sec-ben,
   .sec-plans, .sec-faq, .sec-cta { padding: 5rem 0; }
-  .swiper-outer { padding: 0 2.4rem; }
-  .dep-card   { min-width: calc(100% - 0px); }
-  .ben-card   { min-width: 220px; }
+  /* Swiper mobile: botões menores e padding ajustado */
+  .swiper-outer { padding: 0 2.8rem; }
+  .sw-btn { width: 36px; height: 36px; font-size: .7rem; }
+  /* Cards: largura total, considerando gap do sw-track */
+  .dep-card {
+    min-width: calc(100% - 1.2rem);
+    max-width: calc(100% - 1.2rem);
+  }
+  .ben-card {
+    min-width: calc(100% - 1.2rem);
+    max-width: calc(100% - 1.2rem);
+  }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .plans-grid { grid-template-columns: 1fr; }
   .dor-grid   { grid-template-columns: 1fr 1fr; }
