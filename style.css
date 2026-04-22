@@ -190,19 +190,38 @@ img  { max-width: 100%; display: block; }
 .mobile-menu {
   display: flex;
   flex-direction: column; align-items: center; justify-content: center;
-  gap: 1.8rem; position: fixed; inset: 0;
-  background: rgba(8,8,8,.97); backdrop-filter: blur(24px);
-  z-index: 150;
+  gap: 1.8rem;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  background: #080808;
+  z-index: 300;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity .3s, visibility .3s;
+  transition: opacity .35s ease, visibility .35s ease;
 }
 .mobile-menu.open {
   opacity: 1;
   visibility: visible;
   pointer-events: all;
 }
+
+/* Botão X para fechar dentro do menu */
+.mob-close {
+  position: absolute;
+  top: 18px; right: 18px;
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--white);
+  font-size: 1.1rem;
+  transition: background .2s, color .2s;
+}
+.mob-close:hover { background: var(--red); border-color: var(--red); }
+
 .mob-link {
   font-family: var(--fd); font-size: clamp(1.6rem,7vw,2.8rem);
   font-weight: 800; color: var(--text); transition: color .2s;
@@ -461,9 +480,16 @@ img  { max-width: 100%; display: block; }
 
 /* Cards depoimento */
 .dep-card {
-  min-width: calc(33.333% - .8rem); flex-shrink: 0;
+  /* Largura fixa baseada em 3 visíveis com gap de 1.2rem */
+  width: calc(33.333% - .8rem);
+  min-width: calc(33.333% - .8rem);
+  max-width: calc(33.333% - .8rem);
+  flex-shrink: 0;
   background: var(--white); border-radius: 16px; padding: 1.8rem;
   border: 1px solid #ddd; box-shadow: 0 4px 20px rgba(0,0,0,.07);
+  /* Quebra texto longo sem vazar */
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 .dep-head { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
 .dep-av {
@@ -518,10 +544,18 @@ img  { max-width: 100%; display: block; }
 }
 .li-extra { color: #ff8880; }
 .li-extra::before { background: #ff8880 !important; }
-.plan-price-wrap { text-align: center; margin-bottom: 1.4rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.06); }
+.plan-price-wrap {
+  text-align: center; margin-bottom: 1.4rem; padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,.06);
+  overflow: hidden;
+}
 .plan-price {
-  font-family: var(--fd); font-size: 2.8rem; font-weight: 800;
-  color: var(--white); letter-spacing: -.04em;
+  font-family: var(--fd); font-weight: 800;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  color: var(--white); letter-spacing: -.03em;
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
 }
 .plan-price em { font-style: normal; font-size: 1rem; font-weight: 400; color: var(--muted); }
 .plan-btn {
@@ -713,20 +747,27 @@ img  { max-width: 100%; display: block; }
   .hamburger  { display: flex; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .faq-grid   { grid-template-columns: 1fr; }
-  .dep-card   { min-width: calc(50% - .6rem); }
+  /* 2 cards visíveis em tablet */
+  .dep-card {
+    width: calc(50% - .6rem);
+    min-width: calc(50% - .6rem);
+    max-width: calc(50% - .6rem);
+  }
+  /* Preço menor em tablet */
+  .plan-price { font-size: clamp(1.4rem, 3vw, 2rem); }
 }
 
 @media (max-width: 600px) {
   .container { padding: 0 1.2rem; }
   .sec-dor, .sec-dep, .sec-ben,
   .sec-plans, .sec-faq, .sec-cta { padding: 5rem 0; }
-  /* Swiper mobile: botões menores e padding ajustado */
   .swiper-outer { padding: 0 2.8rem; }
   .sw-btn { width: 36px; height: 36px; font-size: .7rem; }
-  /* Cards: largura total, considerando gap do sw-track */
+  /* 1 card visível em mobile */
   .dep-card {
-    min-width: calc(100% - 1.2rem);
-    max-width: calc(100% - 1.2rem);
+    width: calc(100% - 0px);
+    min-width: calc(100% - 0px);
+    max-width: calc(100% - 0px);
   }
   .ben-card {
     min-width: calc(100% - 1.2rem);
