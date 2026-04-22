@@ -34,19 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ══ 2. HAMBÚRGUER ══ */
   function initHamburger() {
-    const btn  = document.getElementById('hamburger');
-    const menu = document.getElementById('mobileMenu');
-    const links = menu.querySelectorAll('.mob-link');
+    const btn      = document.getElementById('hamburger');
+    const menu     = document.getElementById('mobileMenu');
+    const closeBtn = document.getElementById('mobClose');
+    const links    = menu.querySelectorAll('.mob-link');
 
     function toggle(open) {
       btn.classList.toggle('open', open);
       menu.classList.toggle('open', open);
       btn.setAttribute('aria-expanded', String(open));
-      menu.setAttribute('aria-hidden', String(!open));
+      menu.setAttribute('aria-hidden',  String(!open));
+      // Trava/libera rolagem no body E no html
+      document.documentElement.style.overflow = open ? 'hidden' : '';
       document.body.style.overflow = open ? 'hidden' : '';
     }
 
-    btn.addEventListener('click', () => toggle(!menu.classList.contains('open')));
+    btn.addEventListener('click', () => toggle(true));
+    closeBtn?.addEventListener('click', () => toggle(false));
     links.forEach(l => l.addEventListener('click', () => toggle(false)));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
   }
@@ -87,22 +91,24 @@ document.addEventListener('DOMContentLoaded', () => {
     targets.forEach(el => obs.observe(el));
   }
 
-  /* ══ 5. TELA INCLINADA — skewY com IntersectionObserver ══
-     Exatamente como você passou: remove 'ativa' fora, adiciona dentro */
+  /* ══ 5. TELA INCLINADA — skewY com IntersectionObserver ══ */
   function initSkewSections() {
     const sections = document.querySelectorAll('.tela-inclinada');
 
     sections.forEach(elemento => {
+      // threshold com múltiplos pontos evita o loop no meio da tela
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) {
-            elemento.classList.add('ativa');    // 60% visível → volta ao normal
-          } else {
-            elemento.classList.remove('ativa'); // fora → inclina
+          // Só muda estado quando cruza 30% (entra) ou sai completamente
+          if (entry.intersectionRatio >= 0.3) {
+            elemento.classList.add('ativa');
+          } else if (entry.intersectionRatio < 0.05) {
+            elemento.classList.remove('ativa');
           }
+          // Entre 5% e 30%: não faz nada → elimina o loop bugado
         },
         {
-          threshold: 0.6  // quando 60% estiver visível no centro da tela
+          threshold: [0, 0.05, 0.3, 0.6, 1.0]
         }
       );
       observer.observe(elemento);
