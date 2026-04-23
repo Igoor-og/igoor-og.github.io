@@ -19,7 +19,6 @@
   --fd:      'Syne', sans-serif;
   --fb:      'DM Sans', sans-serif;
   --ease:    cubic-bezier(.22,1,.36,1);
-  --orb-blur: 40px; /* Reduzido para performance */
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -338,21 +337,18 @@ img  { max-width: 100%; display: block; }
   -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
   animation: photoFloat 6s ease-in-out infinite;
-  will-change: transform;
 }
 @keyframes photoFloat {
   0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(-6px); }
+  50%     { transform: translateY(-8px); }
 }
 .hero-orb {
-  position: absolute; border-radius: 50%; filter: blur(var(--orb-blur));
-  animation: orbF 10s ease-in-out infinite;
-  will-change: transform;
-  pointer-events: none;
+  position: absolute; border-radius: 50%; filter: blur(50px);
+  animation: orbF 7s ease-in-out infinite;
 }
-.orb-1 { width: 320px; height: 320px; background: radial-gradient(circle, rgba(200,32,26,.2) 0%,transparent 70%); animation-delay:0s; top: 50%; left: 50%; transform: translate(-70%, -60%); }
-.orb-2 { width: 240px; height: 240px; background: radial-gradient(circle, rgba(60,0,200,.1) 0%,transparent 70%); animation-delay:2s; top: 50%; left: 50%; transform: translate(10%, -40%); }
-.orb-3 { width: 200px; height: 200px; background: radial-gradient(circle, rgba(200,32,26,.12) 0%,transparent 70%); top: 50%; left: 50%; transform: translate(-30%, 10%); animation-delay:4s; }
+.orb-1 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(200,32,26,.3) 0%,transparent 70%); animation-delay:0s; }
+.orb-2 { width: 190px; height: 190px; background: radial-gradient(circle, rgba(60,0,200,.15) 0%,transparent 70%); animation-delay:2s; }
+.orb-3 { width: 130px; height: 130px; background: radial-gradient(circle, rgba(200,32,26,.18) 0%,transparent 70%); top:20%;right:15%; animation-delay:4s; }
 @keyframes orbF {
   0%,100% { transform: translateY(0) scale(1); }
   50%     { transform: translateY(-18px) scale(1.04); }
@@ -378,8 +374,6 @@ img  { max-width: 100%; display: block; }
   font-size: clamp(1.8rem,3.5vw,2.8rem); color: var(--white);
   margin-bottom: 1rem; line-height: 1.1;
 }
-.sec-head { text-align: center; margin-bottom: 3.5rem; }
-.sec-head .sec-title { margin-bottom: 0.8rem; }
 .dark-title { color: #111; }
 .sec-sub { color: #555; font-size: .95rem; margin-bottom: 2.5rem; }
 .thin-line { height: 1px; background: rgba(255,255,255,.1); margin-bottom: 3rem; }
@@ -434,15 +428,10 @@ img  { max-width: 100%; display: block; }
 }
 .glass-card:hover {
   border-color: rgba(200,32,26,.3); transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 12px 40px rgba(0,0,0,.4);
 }
 
-.ben-card { 
-  min-width: 250px; 
-  flex-shrink: 0; 
-  padding: 2rem 1.8rem; 
-  will-change: transform;
-}
+.ben-card { min-width: 250px; flex-shrink: 0; padding: 2rem 1.8rem; }
 .ben-icon {
   width: 46px; height: 46px; background: rgba(200,32,26,.1);
   border: 1px solid rgba(200,32,26,.2); border-radius: 10px;
@@ -460,9 +449,8 @@ img  { max-width: 100%; display: block; }
 .swiper-outer {
   position: relative; display: flex; align-items: center;
   padding: 0 3.5rem; margin-top: 1rem;
-  overflow: visible; /* Garante que expansão no hover não corte */
 }
-.sw-viewport { overflow: visible; flex: 1; padding: 60px 0; margin-top: -60px; }
+.sw-viewport { overflow: hidden; flex: 1; }
 .sw-track    { display: flex; gap: 1.2rem; transition: transform .5s var(--ease); }
 
 .sw-btn {
@@ -523,8 +511,6 @@ img  { max-width: 100%; display: block; }
 .plans-grid {
   display: grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
   gap: 1.2rem; margin-bottom: 2rem;
-  padding-top: 20px; /* Evita corte do badge no topo */
-  overflow: visible;
 }
 .plan-card {
   background: var(--card); border: 1px solid rgba(200,32,26,.18);
@@ -532,7 +518,6 @@ img  { max-width: 100%; display: block; }
   position: relative; transition: transform .3s var(--ease), box-shadow .3s;
 }
 .plan-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,.5); }
-.plan-card { will-change: transform; }
 .plan-hot {
   border-color: var(--red) !important;
   box-shadow: 0 0 0 1px var(--red), 0 20px 50px rgba(200,32,26,.14) !important;
@@ -591,9 +576,9 @@ img  { max-width: 100%; display: block; }
    ════════════════════════════════════════ */
 .sec-faq { padding: 6rem 0 5rem; position: relative; overflow: hidden; }
 .faq-ghost {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
   font-family: var(--fd); font-size: clamp(8rem,18vw,16rem); font-weight: 800;
-  color: transparent; -webkit-text-stroke: 2px rgba(200,32,26,0.06);
+  color: transparent; -webkit-text-stroke: 2px rgba(200,32,26,.14);
   pointer-events: none; user-select: none; white-space: nowrap; z-index: 0;
   letter-spacing: -.04em;
 }
@@ -711,12 +696,11 @@ img  { max-width: 100%; display: block; }
   transform: scale(.96) translateY(18px);
   filter: blur(7px);
   transition:
-    opacity   .6s var(--ease),
-    transform .6s var(--ease),
-    filter    .6s var(--ease);
+    opacity   .65s var(--ease),
+    transform .65s var(--ease),
+    filter    .65s var(--ease);
   /* Delay personalizado por stagger via CSS var */
   transition-delay: var(--sd, 0s);
-  will-change: transform, opacity;
 }
 .anim-el.on {
   opacity: 1; transform: scale(1) translateY(0); filter: blur(0);
@@ -759,12 +743,8 @@ img  { max-width: 100%; display: block; }
   .hero-visual { height: 340px; max-width: 340px; margin: 0 auto; }
   .hero-photo { -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%); mask-image: linear-gradient(to bottom, black 60%, transparent 100%); }
   .scroll-line-wrap { display: none; }
-  .nav-links  { 
-    display: none !important; /* Removido conforme pedido */
-  }
-  .nav-inner { justify-content: center; height: 70px; }
-  .nav-logo { font-size: 1.1rem; }
-  .hamburger  { display: none; }
+  .nav-links  { display: none; }
+  .hamburger  { display: flex; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .faq-grid   { grid-template-columns: 1fr; }
   /* 2 cards visíveis em tablet */
