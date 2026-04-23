@@ -1,22 +1,21 @@
 /* ═══════════════════════════════════════
-   IGOR ALMEIDA — script.js v3
+   IGOR ALMEIDA — script.js v3 (Optimized)
    ═══════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   function waitGSAP(cb) {
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') cb();
-    else setTimeout(() => waitGSAP(cb), 80);
+    if (typeof gsap !== 'undefined') cb();
+    else setTimeout(() => waitGSAP(cb), 100);
   }
   waitGSAP(init);
 
   function init() {
-    gsap.registerPlugin(ScrollTrigger);
     initNavbar();
     initHamburger();
     initHeroAnim();
-    initScrollReveal();   // ← reinicia ao sair/entrar
-    initSkewSections();   // ← IntersectionObserver para skewY
+    initScrollReveal();
+    initSkewSections();
     initUnderline();
     initSwiperDep();
     initSwiperBen();
@@ -27,8 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ══ 1. NAVBAR ══ */
   function initNavbar() {
     const nav = document.getElementById('navbar');
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', scrollY > 40);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          nav.classList.toggle('scrolled', window.scrollY > 40);
+          ticking = false;
+        });
+        ticking = true;
+      }
     }, { passive: true });
   }
 
@@ -37,245 +43,153 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn      = document.getElementById('hamburger');
     const menu     = document.getElementById('mobileMenu');
     const closeBtn = document.getElementById('mobClose');
-    const links    = menu.querySelectorAll('.mob-link');
+    if(!btn || !menu) return;
 
     function toggle(open) {
       btn.classList.toggle('open', open);
       menu.classList.toggle('open', open);
       btn.setAttribute('aria-expanded', String(open));
       menu.setAttribute('aria-hidden',  String(!open));
-      // Trava/libera rolagem no body E no html
       document.documentElement.style.overflow = open ? 'hidden' : '';
       document.body.style.overflow = open ? 'hidden' : '';
     }
 
     btn.addEventListener('click', () => toggle(true));
     closeBtn?.addEventListener('click', () => toggle(false));
+    const links = menu.querySelectorAll('.mob-link');
     links.forEach(l => l.addEventListener('click', () => toggle(false)));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
   }
 
-  /* ══ 3. HERO — elementos entram da esquerda com blur ══ */
+  /* ══ 3. HERO — animação inicial ══ */
   function initHeroAnim() {
     const els = document.querySelectorAll('.hero-anim');
-    // Pequeno delay para o CSS transition funcionar após DOMContentLoaded
-    requestAnimationFrame(() => {
-      setTimeout(() => {
+    setTimeout(() => {
+      requestAnimationFrame(() => {
         els.forEach(el => el.classList.add('on'));
-      }, 80);
-    });
+      });
+    }, 120);
   }
 
-  /* ══ 4. SCROLL REVEAL — REINICIA ao sair da viewport ══
-     Diferente da versão anterior, aqui usamos threshold duplo
-     para resetar quando o elemento sai, permitindo reanimar. */
+  /* ══ 4. SCROLL REVEAL ══ */
   function initScrollReveal() {
     const targets = document.querySelectorAll('.anim-el, .anim-scale');
-
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Entra → anima
           entry.target.classList.add('on');
-        } else {
-          // Sai → reseta para reanimar na próxima vez
+        } else if (entry.boundingClientRect.top > 0) {
           entry.target.classList.remove('on');
         }
       });
-    }, {
-      threshold: 0.15,
-      // rootMargin negativo: só dispara quando está bem na tela
-      rootMargin: '-5% 0px -5% 0px'
-    });
-
+    }, { threshold: 0.1 });
     targets.forEach(el => obs.observe(el));
   }
 
-  /* ══ 5. TELA INCLINADA — skewY com IntersectionObserver ══ */
+  /* ══ 5. TELA INCLINADA ══ */
   function initSkewSections() {
     const sections = document.querySelectorAll('.tela-inclinada');
-
-    sections.forEach(elemento => {
-      // threshold com múltiplos pontos evita o loop no meio da tela
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          // Só muda estado quando cruza 30% (entra) ou sai completamente
-          if (entry.intersectionRatio >= 0.3) {
-            elemento.classList.add('ativa');
-          } else if (entry.intersectionRatio < 0.05) {
-            elemento.classList.remove('ativa');
-          }
-          // Entre 5% e 30%: não faz nada → elimina o loop bugado
-        },
-        {
-          threshold: [0, 0.05, 0.3, 0.6, 1.0]
-        }
-      );
-      observer.observe(elemento);
-    });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('ativa');
+        else entry.target.classList.remove('ativa');
+      });
+    }, { threshold: 0.15 });
+    sections.forEach(s => obs.observe(s));
   }
 
-  /* ══ 6. SUBLINHADO DESENHADO ══ */
+  /* ══ 6. SUBLINHADO ══ */
   function initUnderline() {
     const el = document.querySelector('.u-draw');
     if (!el) return;
-
     const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => el.classList.add('drawn'), 350);
-      } else {
-        // Reinicia quando sai da tela
-        el.classList.remove('drawn');
-      }
-    }, { threshold: 0.5 });
-
+      if (entry.isIntersecting) setTimeout(() => el.classList.add('drawn'), 300);
+      else el.classList.remove('drawn');
+    }, { threshold: 0.7 });
     obs.observe(el);
   }
 
-  /* ══ 7. SWIPER DEPOIMENTOS ══ */
+  /* ══ 7 & 8. SWIPERS ══ */
   function initSwiperDep() {
     buildSwiper({
-      trackId:    'depTrack',
-      viewportId: 'depViewport',
-      prevId:     'depPrev',
-      nextId:     'depNext',
-      dotsId:     'depDots',
-      cardSel:    '.dep-card',
-      getVisible: () => {
-        if (window.innerWidth < 600) return 1;
-        if (window.innerWidth < 960) return 2;
-        return 3;
-      }
+      trackId: 'depTrack', viewportId: 'depViewport', prevId: 'depPrev', nextId: 'depNext', dotsId: 'depDots', cardSel: '.dep-card',
+      getVisible: () => (window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3)
     });
   }
-
-  /* ══ 8. SWIPER BENEFÍCIOS ══ */
   function initSwiperBen() {
     buildSwiper({
-      trackId:    'benTrack',
-      viewportId: 'benViewport',
-      prevId:     'benPrev',
-      nextId:     'benNext',
-      dotsId:     'benDots',
-      cardSel:    '.ben-card',
-      getVisible: () => {
-        if (window.innerWidth < 600) return 1;
-        if (window.innerWidth < 960) return 2;
-        return 3;
-      }
+      trackId: 'benTrack', viewportId: 'benViewport', prevId: 'benPrev', nextId: 'benNext', dotsId: 'benDots', cardSel: '.ben-card',
+      getVisible: () => (window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3)
     });
   }
 
-  /* ── Swiper reutilizável ── */
   function buildSwiper({ trackId, viewportId, prevId, nextId, dotsId, cardSel, getVisible }) {
-    const track    = document.getElementById(trackId);
-    const viewport = document.getElementById(viewportId);
-    const prevBtn  = document.getElementById(prevId);
-    const nextBtn  = document.getElementById(nextId);
-    const dotsWrap = document.getElementById(dotsId);
+    const track = document.getElementById(trackId), viewport = document.getElementById(viewportId);
     if (!track) return;
+    const prevBtn = document.getElementById(prevId), nextBtn = document.getElementById(nextId), dotsWrap = document.getElementById(dotsId);
 
     const cards = track.querySelectorAll(cardSel);
     let current = 0;
+    const gap = 20;
 
-    function gap() { return 19; } // ~1.2rem em px
-
-    function cardW() {
-      if (!cards[0]) return 0;
-      // No mobile (1 card visível) calcula pelo viewport para evitar cortes
-      const vp = viewport.getBoundingClientRect().width;
-      const visible = getVisible();
-      if (visible === 1) {
-        return vp + gap();
-      }
-      return cards[0].getBoundingClientRect().width + gap();
-    }
-
-    function maxSlide() {
-      return Math.max(0, cards.length - getVisible());
+    function getCardW() {
+      const vW = viewport.offsetWidth;
+      return getVisible() === 1 ? vW + gap : cards[0].offsetWidth + gap;
     }
 
     function goTo(idx) {
-      current = Math.max(0, Math.min(idx, maxSlide()));
-      track.style.transform = `translateX(-${current * cardW()}px)`;
+      const max = Math.max(0, cards.length - getVisible());
+      current = Math.max(0, Math.min(idx, max));
+      track.style.transform = `translate3d(-${current * getCardW()}px, 0, 0)`;
       updateDots();
     }
 
     function buildDots() {
       if (!dotsWrap) return;
       dotsWrap.innerHTML = '';
-      const total = maxSlide() + 1;
+      const total = Math.max(0, cards.length - getVisible()) + 1;
       for (let i = 0; i < total; i++) {
-        const btn = document.createElement('button');
-        btn.className = 'dot';
-        btn.setAttribute('aria-label', `Ir para slide ${i + 1}`);
-        btn.addEventListener('click', () => goTo(i));
-        dotsWrap.appendChild(btn);
+        const d = document.createElement('button');
+        d.className = 'dot';
+        d.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(d);
+      }
+      if (getVisible() === 1) {
+        const vW = viewport.offsetWidth;
+        cards.forEach(c => { c.style.width = vW + 'px'; c.style.minWidth = vW + 'px'; });
+      } else {
+        cards.forEach(c => { c.style.width = ''; c.style.minWidth = ''; });
       }
       updateDots();
-
-      // Ajusta largura dos cards no mobile
-      const visible = getVisible();
-      if (visible === 1) {
-        const vp = viewport.getBoundingClientRect().width;
-        cards.forEach(c => { c.style.minWidth = vp + 'px'; c.style.maxWidth = vp + 'px'; });
-      } else {
-        cards.forEach(c => { c.style.minWidth = ''; c.style.maxWidth = ''; });
-      }
     }
 
     function updateDots() {
       if (!dotsWrap) return;
-      dotsWrap.querySelectorAll('.dot').forEach((d, i) => {
-        d.classList.toggle('active', i === current);
-      });
+      dotsWrap.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
     }
 
     prevBtn?.addEventListener('click', () => goTo(current - 1));
     nextBtn?.addEventListener('click', () => goTo(current + 1));
 
-    // Touch swipe
-    let startX = 0;
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener('touchend',   e => {
-      const diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 40) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+    let sX = 0;
+    track.addEventListener('touchstart', e => { sX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const move = sX - e.changedTouches[0].clientX;
+      if (Math.abs(move) > 50) goTo(move > 0 ? current + 1 : current - 1);
     }, { passive: true });
 
     buildDots();
-
-    // Recalcula no resize
-    let timer;
-    window.addEventListener('resize', () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => { buildDots(); goTo(0); }, 200);
-    });
+    window.addEventListener('resize', () => { buildDots(); goTo(0); }, { passive: true });
   }
 
-  /* ══ 9. FAQ ACCORDION ══ */
+  /* ══ 9. FAQ ══ */
   function initFAQ() {
-    const items = document.querySelectorAll('.faq-item');
-
-    items.forEach(item => {
-      const btn  = item.querySelector('.faq-q');
-      const body = item.querySelector('.faq-body');
-      if (!btn || !body) return;
-
-      btn.addEventListener('click', () => {
-        const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-        // Fecha todos
-        items.forEach(other => {
-          const ob = other.querySelector('.faq-q');
-          const od = other.querySelector('.faq-body');
-          if (ob && od) {
-            ob.setAttribute('aria-expanded', 'false');
-            od.classList.remove('faq-body-open');
-          }
-        });
-
-        // Alterna este
-        if (!isOpen) {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const btn = item.querySelector('.faq-q'), body = item.querySelector('.faq-body');
+      btn?.addEventListener('click', () => {
+        const isOp = btn.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.faq-q').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        document.querySelectorAll('.faq-body').forEach(d => d.classList.remove('faq-body-open'));
+        if (!isOp) {
           btn.setAttribute('aria-expanded', 'true');
           body.classList.add('faq-body-open');
         }
@@ -283,24 +197,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ══ 10. BOTÃO MAGNÉTICO ══ */
+  /* ══ 10. MAGNETIC ══ */
   function initMagnetic() {
     const btn = document.getElementById('magneticBtn');
-    if (!btn) return;
-    if (!window.matchMedia('(hover: hover)').matches) return;
-
+    if (!btn || window.innerWidth < 1024) return;
     const wrap = btn.parentElement;
-
     wrap.addEventListener('mousemove', e => {
-      const r  = btn.getBoundingClientRect();
-      const dx = (e.clientX - (r.left + r.width  / 2)) * 0.32;
-      const dy = (e.clientY - (r.top  + r.height / 2)) * 0.32;
-      gsap.to(btn, { x: dx, y: dy, duration: .4, ease: 'power2.out' });
-    });
-
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - (r.left + r.width/2)) * 0.3;
+      const y = (e.clientY - (r.top + r.height/2)) * 0.3;
+      gsap.to(btn, { x, y, duration: 0.3, overwrite: 'auto' });
+    }, { passive: true });
     wrap.addEventListener('mouseleave', () => {
-      gsap.to(btn, { x: 0, y: 0, duration: .8, ease: 'elastic.out(1,.4)' });
-    });
+      gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'power2.out' });
+    }, { passive: true });
   }
 
 }); // fim DOMContentLoaded
