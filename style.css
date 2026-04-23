@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════
-   IGOR ALMEIDA — style.css v3
+   IGOR ALMEIDA — style.css v4
    ═══════════════════════════════════════ */
 
 :root {
@@ -43,7 +43,7 @@ img  { max-width: 100%; display: block; }
 .light-bg { background: var(--light); color: #111; }
 .vinho-bg { background: var(--vinho); }
 
-/* ── Textura noise (pseudo-element helper) ── */
+/* ── Textura noise ── */
 .hero-noise, .footer-noise {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
@@ -51,34 +51,29 @@ img  { max-width: 100%; display: block; }
 }
 
 /* ════════════════════════════════════════
-   VINHETA BLUR INFERIOR — fixa na tela
+   VINHETA
    ════════════════════════════════════════ */
 .vinheta {
   position: fixed;
   bottom: 0; left: 0; right: 0;
   height: 120px;
   background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 100%);
-  /* Blur progressivo na borda inferior */
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   z-index: 90;
   pointer-events: none;
-  /* Máscara: só aplica na faixa inferior */
   -webkit-mask-image: linear-gradient(to top, black 0%, black 40%, transparent 100%);
   mask-image: linear-gradient(to top, black 0%, black 40%, transparent 100%);
 }
 
 /* ════════════════════════════════════════
-   SKEW DIVISOR — inclinação entre seções
+   SKEW DIVISOR
    ════════════════════════════════════════ */
 .skew-div {
   height: 80px;
   position: relative;
-  /* Evita overflow lateral no mobile */
   overflow: hidden;
 }
-
-/* Pseudo-elements criam o trapézio inclinado */
 .skew-div::before,
 .skew-div::after {
   content: '';
@@ -86,15 +81,11 @@ img  { max-width: 100%; display: block; }
   left: -5%; right: -5%;
   height: 100%;
 }
-
-/* Cores: before = seção anterior, after = próxima */
 .bg-dark-before::before  { background: var(--bg); }
 .bg-light-before::before { background: var(--light); }
 .bg-dark-after::after    { background: var(--bg); }
 .bg-light-after::after   { background: var(--light); }
 .bg-vinho-after::after   { background: var(--vinho); }
-
-/* O trapézio: before fica em cima normal, after fica inclinado embaixo */
 .skew-div::before {
   top: 0;
   clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
@@ -103,31 +94,24 @@ img  { max-width: 100%; display: block; }
   bottom: 0;
   clip-path: polygon(0 60%, 100% 20%, 100% 100%, 0 100%);
 }
-
-/* Entre dark e dark: linha sutil vermelha no meio */
 .bg-dark-before.bg-dark-after {
   background: linear-gradient(135deg, #1a0303 0%, #0a0a0a 50%, #0a0a0a 100%);
 }
-/* dark → light: fundo de transição */
 .bg-dark-before.bg-light-after { background: #888; }
-/* light → dark */
 .bg-light-before.bg-dark-after { background: #888; }
-/* dark → vinho */
 .bg-dark-before.bg-vinho-after { background: #0d0202; }
 
 /* ════════════════════════════════════════
-   EFEITO TELA INCLINADA — skewY ao scroll
+   TELA INCLINADA
    ════════════════════════════════════════ */
 .tela-inclinada {
   transform: skewY(2deg);
   transform-origin: left center;
   transition: transform .7s var(--ease);
-  /* Compensa o skew no conteúdo interno */
 }
 .tela-inclinada > * {
   transform: skewY(-2deg);
 }
-/* Quando 60% visível: volta ao normal */
 .tela-inclinada.ativa {
   transform: skewY(0deg);
 }
@@ -136,7 +120,7 @@ img  { max-width: 100%; display: block; }
 }
 
 /* ════════════════════════════════════════
-   NAVBAR
+   NAVBAR — ✅ sem hambúrguer
    ════════════════════════════════════════ */
 .navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -171,66 +155,9 @@ img  { max-width: 100%; display: block; }
 }
 .nav-cta:hover { background: var(--red-d) !important; }
 
-/* Hambúrguer */
-.hamburger {
-  display: none; flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: pointer; padding: 8px;
-  min-width: 44px; min-height: 44px; align-items: center; justify-content: center;
-}
-.hamburger span {
-  display: block; width: 22px; height: 2px;
-  background: var(--white); border-radius: 2px;
-  transition: transform .3s, opacity .3s;
-}
-.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
-
-/* Menu mobile */
-.mobile-menu {
-  display: flex;
-  flex-direction: column; align-items: center; justify-content: center;
-  gap: 1.8rem;
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%; height: 100%;
-  background: #080808;
-  z-index: 300;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity .35s ease, visibility .35s ease;
-}
-.mobile-menu.open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: all;
-}
-
-/* Botão X para fechar dentro do menu */
-.mob-close {
-  position: absolute;
-  top: 18px; right: 18px;
-  width: 44px; height: 44px;
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  color: var(--white);
-  font-size: 1.1rem;
-  transition: background .2s, color .2s;
-}
-.mob-close:hover { background: var(--red); border-color: var(--red); }
-
-.mob-link {
-  font-family: var(--fd); font-size: clamp(1.6rem,7vw,2.8rem);
-  font-weight: 800; color: var(--text); transition: color .2s;
-}
-.mob-link:hover { color: var(--red); }
-.mob-cta {
-  background: var(--red); color: var(--white) !important;
-  padding: .65rem 2.2rem; border-radius: 6px; font-size: clamp(1rem,4vw,1.3rem);
-}
+/* ✅ Hambúrguer e menu mobile completamente removidos */
+.hamburger { display: none !important; }
+.mobile-menu { display: none !important; }
 
 /* ════════════════════════════════════════
    HERO
@@ -311,14 +238,14 @@ img  { max-width: 100%; display: block; }
 .stat span { font-size: .68rem; color: var(--muted); margin-top: .2rem; }
 .stat-sep { width: 1px; height: 32px; background: var(--line); }
 
-/* Hero visual / foto */
+/* ✅ Hero visual — PNG sem fundo: object-fit contain, sem recorte */
 .hero-visual {
   position: relative; height: 460px;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 20px; overflow: hidden;
+  border-radius: 20px;
+  /* ✅ Removido overflow:hidden para não recortar PNG transparente */
 }
 
-/* Foto de perfil no hero */
 .hero-photo-wrap {
   border-radius: 24px;
   background: transparent;
@@ -326,16 +253,16 @@ img  { max-width: 100%; display: block; }
 .hero-photo {
   position: relative; z-index: 2;
   width: 100%; height: 100%;
-  object-fit: cover; object-position: center top;
-  border-radius: 24px;
-  /* Moldura sutil */
+  /* ✅ contain para PNG sem fundo aparecer inteiro sem corte */
+  object-fit: contain;
+  object-position: center bottom;
+  border-radius: 0;
   box-shadow:
-    0 0 0 1px rgba(200,32,26,.25),
-    0 24px 80px rgba(0,0,0,.7),
-    0 0 60px rgba(200,32,26,.12);
-  /* Degrade na base para fundir com o fundo */
-  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    0 24px 80px rgba(0,0,0,.5),
+    0 0 60px rgba(200,32,26,.10);
+  /* Degrade suave na base */
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   animation: photoFloat 6s ease-in-out infinite;
 }
 @keyframes photoFloat {
@@ -367,7 +294,7 @@ img  { max-width: 100%; display: block; }
 }
 
 /* ════════════════════════════════════════
-   SEÇÕES — títulos e util
+   SEÇÕES
    ════════════════════════════════════════ */
 .sec-title {
   font-family: var(--fd); font-weight: 800;
@@ -401,7 +328,6 @@ img  { max-width: 100%; display: block; }
   font-size: clamp(1.5rem,3vw,2.4rem); color: var(--white);
 }
 
-/* Sublinhado desenhado */
 .u-draw { position: relative; display: inline-block; color: var(--white); }
 .u-draw::after {
   content: ''; position: absolute; left: 0; bottom: -4px;
@@ -453,6 +379,18 @@ img  { max-width: 100%; display: block; }
 .sw-viewport { overflow: hidden; flex: 1; }
 .sw-track    { display: flex; gap: 1.2rem; transition: transform .5s var(--ease); }
 
+/* ✅ Benefícios: padding-bottom para o card não ser cortado ao subir no hover */
+.ben-swiper-outer {
+  padding-bottom: 12px;
+}
+.ben-sw-viewport {
+  /* overflow: visible no eixo Y para o hover não ser cortado */
+  overflow: visible;
+  /* Mas ainda esconde no eixo X para não vazar cards */
+  -webkit-clip-path: inset(0 0 -20px 0);
+  clip-path: inset(0 0 -20px 0);
+}
+
 .sw-btn {
   position: absolute; z-index: 10;
   width: 44px; height: 44px; border-radius: 50%;
@@ -480,14 +418,12 @@ img  { max-width: 100%; display: block; }
 
 /* Cards depoimento */
 .dep-card {
-  /* Largura fixa baseada em 3 visíveis com gap de 1.2rem */
   width: calc(33.333% - .8rem);
   min-width: calc(33.333% - .8rem);
   max-width: calc(33.333% - .8rem);
   flex-shrink: 0;
   background: var(--white); border-radius: 16px; padding: 1.8rem;
   border: 1px solid #ddd; box-shadow: 0 4px 20px rgba(0,0,0,.07);
-  /* Quebra texto longo sem vazar */
   word-break: break-word;
   overflow-wrap: break-word;
 }
@@ -505,7 +441,7 @@ img  { max-width: 100%; display: block; }
 .dep-card p { font-size: .82rem; color: #444; line-height: 1.65; }
 
 /* ════════════════════════════════════════
-   PLANOS
+   PLANOS — ✅ preço não corta no desktop
    ════════════════════════════════════════ */
 .sec-plans { padding: 6rem 0 5rem; }
 .plans-grid {
@@ -544,20 +480,26 @@ img  { max-width: 100%; display: block; }
 }
 .li-extra { color: #ff8880; }
 .li-extra::before { background: #ff8880 !important; }
+
+/* ✅ Preço: nunca corta, tamanho responsivo ajustado */
 .plan-price-wrap {
   text-align: center; margin-bottom: 1.4rem; padding-top: 1rem;
   border-top: 1px solid rgba(255,255,255,.06);
-  overflow: hidden;
+  /* ✅ Permite que o conteúdo respire */
+  overflow: visible;
+  min-height: 3.5rem;
+  display: flex; align-items: center; justify-content: center;
 }
 .plan-price {
   font-family: var(--fd); font-weight: 800;
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  /* ✅ Tamanho reduzido para não cortar nem em cards menores */
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
   color: var(--white); letter-spacing: -.03em;
   white-space: nowrap;
   display: inline-block;
-  max-width: 100%;
+  line-height: 1.2;
 }
-.plan-price em { font-style: normal; font-size: 1rem; font-weight: 400; color: var(--muted); }
+.plan-price em { font-style: normal; font-size: .9em; font-weight: 400; color: var(--muted); }
 .plan-btn {
   display: block; text-align: center; padding: .78rem;
   background: var(--red); color: var(--white); border-radius: 8px;
@@ -572,15 +514,23 @@ img  { max-width: 100%; display: block; }
 .pay-note i { color: var(--red); }
 
 /* ════════════════════════════════════════
-   FAQ
+   FAQ — ✅ texto "FAQ" do fundo centralizado
    ════════════════════════════════════════ */
 .sec-faq { padding: 6rem 0 5rem; position: relative; overflow: hidden; }
+
+/* ✅ Centralizando o ghost "FAQ" corretamente */
 .faq-ghost {
-  position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+  position: absolute;
+  top: -30px;
+  left: 0;
+  right: 0;
+  text-align: center;         /* ✅ centraliza o texto */
+  width: 100%;                /* ✅ ocupa toda largura */
   font-family: var(--fd); font-size: clamp(8rem,18vw,16rem); font-weight: 800;
   color: transparent; -webkit-text-stroke: 2px rgba(200,32,26,.14);
   pointer-events: none; user-select: none; white-space: nowrap; z-index: 0;
   letter-spacing: -.04em;
+  /* ✅ Removido transform: translateX(-50%) e left: 50% que causavam descentralização */
 }
 .sec-faq .container { position: relative; z-index: 1; }
 .faq-grid {
@@ -687,10 +637,8 @@ img  { max-width: 100%; display: block; }
 .footer-bottom p { font-size: .68rem; color: rgba(255,255,255,.2); }
 
 /* ════════════════════════════════════════
-   ANIMAÇÕES DE SCROLL — REINICIAM ao sair
+   ANIMAÇÕES DE SCROLL
    ════════════════════════════════════════ */
-
-/* Estado inicial de todos os elementos animáveis */
 .anim-el {
   opacity: 0;
   transform: scale(.96) translateY(18px);
@@ -699,14 +647,12 @@ img  { max-width: 100%; display: block; }
     opacity   .65s var(--ease),
     transform .65s var(--ease),
     filter    .65s var(--ease);
-  /* Delay personalizado por stagger via CSS var */
   transition-delay: var(--sd, 0s);
 }
 .anim-el.on {
   opacity: 1; transform: scale(1) translateY(0); filter: blur(0);
 }
 
-/* Escala para cards dos planos */
 .anim-scale {
   opacity: 0;
   transform: scale(.88);
@@ -719,7 +665,6 @@ img  { max-width: 100%; display: block; }
 }
 .anim-scale.on { opacity: 1; transform: scale(1); filter: blur(0); }
 
-/* Hero: entra da esquerda com blur */
 .hero-anim {
   opacity: 0;
   transform: translateX(-35px);
@@ -741,20 +686,32 @@ img  { max-width: 100%; display: block; }
   .hero-sub   { margin: 0 auto 2.4rem; }
   .hero-actions, .hero-stats { justify-content: center; }
   .hero-visual { height: 340px; max-width: 340px; margin: 0 auto; }
-  .hero-photo { -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%); mask-image: linear-gradient(to bottom, black 60%, transparent 100%); }
+  .hero-photo {
+    object-fit: contain;
+    -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+  }
   .scroll-line-wrap { display: none; }
-  .nav-links  { display: none; }
-  .hamburger  { display: flex; }
+
+  /* ✅ No tablet ainda mostra os links da nav (sem hamburger) */
+  .nav-links  { display: flex; gap: 1.2rem; }
+  .nav-links a { font-size: .7rem; }
+
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .faq-grid   { grid-template-columns: 1fr; }
-  /* 2 cards visíveis em tablet */
   .dep-card {
     width: calc(50% - .6rem);
     min-width: calc(50% - .6rem);
     max-width: calc(50% - .6rem);
   }
-  /* Preço menor em tablet */
-  .plan-price { font-size: clamp(1.4rem, 3vw, 2rem); }
+  .plan-price { font-size: clamp(1.3rem, 2.5vw, 1.9rem); }
+}
+
+@media (max-width: 700px) {
+  /* ✅ Em telas pequenas esconde os links da nav, mas não coloca hambúrguer —
+     fica só o nome conforme solicitado */
+  .nav-links a:not(.nav-cta) { display: none; }
+  .nav-links .nav-cta { display: inline-flex; }
 }
 
 @media (max-width: 600px) {
@@ -763,11 +720,10 @@ img  { max-width: 100%; display: block; }
   .sec-plans, .sec-faq, .sec-cta { padding: 5rem 0; }
   .swiper-outer { padding: 0 2.8rem; }
   .sw-btn { width: 36px; height: 36px; font-size: .7rem; }
-  /* 1 card visível em mobile */
   .dep-card {
-    width: calc(100% - 0px);
-    min-width: calc(100% - 0px);
-    max-width: calc(100% - 0px);
+    width: calc(100%);
+    min-width: calc(100%);
+    max-width: calc(100%);
   }
   .ben-card {
     min-width: calc(100% - 1.2rem);
@@ -779,11 +735,17 @@ img  { max-width: 100%; display: block; }
   .stat-sep   { display: none; }
   .hero-stats { gap: 1rem; flex-wrap: wrap; }
 
-  /* Reduz o skew no mobile para evitar overflow */
+  /* ✅ No mobile: só nome na nav */
+  .nav-links { display: flex; gap: .8rem; }
+  .nav-links a:not(.nav-cta) { display: none; }
+
   .tela-inclinada         { transform: skewY(1deg); }
   .tela-inclinada > *     { transform: skewY(-1deg); }
   .tela-inclinada.ativa   { transform: skewY(0deg); }
   .tela-inclinada.ativa > * { transform: skewY(0deg); }
 
   .skew-div { height: 50px; }
+
+  /* ✅ Preço menor em mobile */
+  .plan-price { font-size: 1.6rem; }
 }

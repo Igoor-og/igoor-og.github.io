@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════
-   IGOR ALMEIDA — script.js v3
+   IGOR ALMEIDA — script.js v4
    ═══════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function init() {
     gsap.registerPlugin(ScrollTrigger);
     initNavbar();
-    initHamburger();
+    // ✅ initHamburger() removido — menu hambúrguer excluído
     initHeroAnim();
-    initScrollReveal();   // ← reinicia ao sair/entrar
-    initSkewSections();   // ← IntersectionObserver para skewY
+    initScrollReveal();
+    initSkewSections();
     initUnderline();
     initSwiperDep();
     initSwiperBen();
@@ -32,33 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  /* ══ 2. HAMBÚRGUER ══ */
-  function initHamburger() {
-    const btn      = document.getElementById('hamburger');
-    const menu     = document.getElementById('mobileMenu');
-    const closeBtn = document.getElementById('mobClose');
-    const links    = menu.querySelectorAll('.mob-link');
-
-    function toggle(open) {
-      btn.classList.toggle('open', open);
-      menu.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', String(open));
-      menu.setAttribute('aria-hidden',  String(!open));
-      // Trava/libera rolagem no body E no html
-      document.documentElement.style.overflow = open ? 'hidden' : '';
-      document.body.style.overflow = open ? 'hidden' : '';
-    }
-
-    btn.addEventListener('click', () => toggle(true));
-    closeBtn?.addEventListener('click', () => toggle(false));
-    links.forEach(l => l.addEventListener('click', () => toggle(false)));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
-  }
-
-  /* ══ 3. HERO — elementos entram da esquerda com blur ══ */
+  /* ══ 2. HERO — elementos entram da esquerda com blur ══ */
   function initHeroAnim() {
     const els = document.querySelectorAll('.hero-anim');
-    // Pequeno delay para o CSS transition funcionar após DOMContentLoaded
     requestAnimationFrame(() => {
       setTimeout(() => {
         els.forEach(el => el.classList.add('on'));
@@ -66,46 +42,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ══ 4. SCROLL REVEAL — REINICIA ao sair da viewport ══
-     Diferente da versão anterior, aqui usamos threshold duplo
-     para resetar quando o elemento sai, permitindo reanimar. */
+  /* ══ 3. SCROLL REVEAL — reinicia ao sair da viewport ══ */
   function initScrollReveal() {
     const targets = document.querySelectorAll('.anim-el, .anim-scale');
 
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Entra → anima
           entry.target.classList.add('on');
         } else {
-          // Sai → reseta para reanimar na próxima vez
           entry.target.classList.remove('on');
         }
       });
     }, {
       threshold: 0.15,
-      // rootMargin negativo: só dispara quando está bem na tela
       rootMargin: '-5% 0px -5% 0px'
     });
 
     targets.forEach(el => obs.observe(el));
   }
 
-  /* ══ 5. TELA INCLINADA — skewY com IntersectionObserver ══ */
+  /* ══ 4. TELA INCLINADA — skewY com IntersectionObserver ══ */
   function initSkewSections() {
     const sections = document.querySelectorAll('.tela-inclinada');
 
     sections.forEach(elemento => {
-      // threshold com múltiplos pontos evita o loop no meio da tela
       const observer = new IntersectionObserver(
         ([entry]) => {
-          // Só muda estado quando cruza 30% (entra) ou sai completamente
           if (entry.intersectionRatio >= 0.3) {
             elemento.classList.add('ativa');
           } else if (entry.intersectionRatio < 0.05) {
             elemento.classList.remove('ativa');
           }
-          // Entre 5% e 30%: não faz nada → elimina o loop bugado
         },
         {
           threshold: [0, 0.05, 0.3, 0.6, 1.0]
@@ -115,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ══ 6. SUBLINHADO DESENHADO ══ */
+  /* ══ 5. SUBLINHADO DESENHADO ══ */
   function initUnderline() {
     const el = document.querySelector('.u-draw');
     if (!el) return;
@@ -124,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entry.isIntersecting) {
         setTimeout(() => el.classList.add('drawn'), 350);
       } else {
-        // Reinicia quando sai da tela
         el.classList.remove('drawn');
       }
     }, { threshold: 0.5 });
@@ -132,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     obs.observe(el);
   }
 
-  /* ══ 7. SWIPER DEPOIMENTOS ══ */
+  /* ══ 6. SWIPER DEPOIMENTOS ══ */
   function initSwiperDep() {
     buildSwiper({
       trackId:    'depTrack',
@@ -149,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ══ 8. SWIPER BENEFÍCIOS ══ */
+  /* ══ 7. SWIPER BENEFÍCIOS ══ */
   function initSwiperBen() {
     buildSwiper({
       trackId:    'benTrack',
@@ -178,11 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = track.querySelectorAll(cardSel);
     let current = 0;
 
-    function gap() { return 19; } // ~1.2rem em px
+    function gap() { return 19; }
 
     function cardW() {
       if (!cards[0]) return 0;
-      // No mobile (1 card visível) calcula pelo viewport para evitar cortes
       const vp = viewport.getBoundingClientRect().width;
       const visible = getVisible();
       if (visible === 1) {
@@ -214,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       updateDots();
 
-      // Ajusta largura dos cards no mobile
       const visible = getVisible();
       if (visible === 1) {
         const vp = viewport.getBoundingClientRect().width;
@@ -244,7 +209,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     buildDots();
 
-    // Recalcula no resize
     let timer;
     window.addEventListener('resize', () => {
       clearTimeout(timer);
@@ -252,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ══ 9. FAQ ACCORDION ══ */
+  /* ══ 8. FAQ ACCORDION ══ */
   function initFAQ() {
     const items = document.querySelectorAll('.faq-item');
 
@@ -283,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ══ 10. BOTÃO MAGNÉTICO ══ */
+  /* ══ 9. BOTÃO MAGNÉTICO ══ */
   function initMagnetic() {
     const btn = document.getElementById('magneticBtn');
     if (!btn) return;
