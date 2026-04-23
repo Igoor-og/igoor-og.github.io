@@ -384,11 +384,11 @@ img  { max-width: 100%; display: block; }
   padding-bottom: 12px;
 }
 .ben-sw-viewport {
-  /* overflow: visible no eixo Y para o hover não ser cortado */
-  overflow: visible;
-  /* Mas ainda esconde no eixo X para não vazar cards */
-  -webkit-clip-path: inset(0 0 -20px 0);
-  clip-path: inset(0 0 -20px 0);
+  /* ✅ overflow:hidden para não vazar cards (causava scroll lateral)
+     padding-top + margin-top negativos permitem o hover translateY(-4px) sem clip */
+  overflow: hidden;
+  padding-top: 8px;
+  margin-top: -8px;
 }
 
 .sw-btn {
@@ -705,9 +705,6 @@ img  { max-width: 100%; display: block; }
     max-width: calc(50% - .6rem);
   }
   .plan-price { font-size: clamp(1.3rem, 2.5vw, 1.9rem); }
-
-  /* ✅ Centraliza título da seção benefícios no mobile */
-  .sec-ben .container { text-align: center; }
 }
 
 @media (max-width: 700px) {
@@ -723,14 +720,17 @@ img  { max-width: 100%; display: block; }
   .sec-plans, .sec-faq, .sec-cta { padding: 5rem 0; }
   .swiper-outer { padding: 0 2.8rem; }
   .sw-btn { width: 36px; height: 36px; font-size: .7rem; }
+
+  /* ✅ Tamanho de card no mobile via CSS — não depende de JS medir viewport */
   .dep-card {
-    width: calc(100%);
-    min-width: calc(100%);
-    max-width: calc(100%);
+    width: calc(100vw - 5.6rem);
+    min-width: calc(100vw - 5.6rem);
+    max-width: calc(100vw - 5.6rem);
   }
   .ben-card {
-    min-width: calc(100% - 1.2rem);
-    max-width: calc(100% - 1.2rem);
+    min-width: calc(100vw - 5.6rem);
+    max-width: calc(100vw - 5.6rem);
+    width: calc(100vw - 5.6rem);
   }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .plans-grid { grid-template-columns: 1fr; }
@@ -751,4 +751,7 @@ img  { max-width: 100%; display: block; }
 
   /* ✅ Preço menor em mobile */
   .plan-price { font-size: 1.6rem; }
+
+  /* ✅ Centraliza título da seção benefícios no mobile */
+  .sec-ben .container { text-align: center; }
 }
