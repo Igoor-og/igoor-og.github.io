@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => {
       initSwiperDep();
       initSwiperBen();
+      initSwiperPort();
     });
     initFAQ();
   }
@@ -99,12 +100,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ══ 7.5. SWIPER PORTFÓLIO ══ */
+  function initSwiperPort() {
+    buildSwiper({
+      trackId: 'portTrack', viewportId: 'portViewport',
+      prevId: 'portPrev', nextId: 'portNext', dotsId: 'portDots',
+      cardSel: '.port-card',
+      getVisible: () => window.innerWidth < 600 ? 1 : window.innerWidth < 960 ? 2 : 2
+    });
+  }
+
   /* ── Swiper reutilizável ── */
   function buildSwiper({ trackId, viewportId, prevId, nextId, dotsId, cardSel, getVisible }) {
-    const track    = document.getElementById(trackId);
+    const track = document.getElementById(trackId);
     const viewport = document.getElementById(viewportId);
-    const prevBtn  = document.getElementById(prevId);
-    const nextBtn  = document.getElementById(nextId);
+    const prevBtn = document.getElementById(prevId);
+    const nextBtn = document.getElementById(nextId);
     const dotsWrap = document.getElementById(dotsId);
     if (!track) return;
 
@@ -151,19 +162,40 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    prevBtn?.addEventListener('click', () => goTo(current - 1));
-    nextBtn?.addEventListener('click', () => goTo(current + 1));
+    let autoplayTimer;
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = setInterval(() => {
+        if (current >= maxSlide()) goTo(0);
+        else goTo(current + 1);
+      }, 1800); // 1.8s autoplay
+    }
+    function stopAutoplay() {
+      clearInterval(autoplayTimer);
+    }
+    function resetAutoplay() {
+      startAutoplay();
+    }
+
+    prevBtn?.addEventListener('click', () => { goTo(current - 1); resetAutoplay(); });
+    nextBtn?.addEventListener('click', () => { goTo(current + 1); resetAutoplay(); });
+
+    // Pause on hover
+    track.addEventListener('mouseenter', stopAutoplay);
+    track.addEventListener('mouseleave', startAutoplay);
 
     // Touch swipe
     let startX = 0;
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; stopAutoplay(); }, { passive: true });
     track.addEventListener('touchend', e => {
       const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 40) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+      startAutoplay();
     }, { passive: true });
 
     buildDots();
     goTo(0);
+    startAutoplay();
 
     let resizeTimer;
     window.addEventListener('resize', () => {
@@ -176,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function initFAQ() {
     const items = document.querySelectorAll('.faq-item');
     items.forEach(item => {
-      const btn  = item.querySelector('.faq-q');
+      const btn = item.querySelector('.faq-q');
       const body = item.querySelector('.faq-body');
       if (!btn || !body) return;
       btn.addEventListener('click', () => {
@@ -201,8 +233,8 @@ document.addEventListener('DOMContentLoaded', () => {
     wrap.addEventListener('mousemove', e => {
       const r = btn.getBoundingClientRect();
       gsap.to(btn, {
-        x: (e.clientX - (r.left + r.width  / 2)) * 0.32,
-        y: (e.clientY - (r.top  + r.height / 2)) * 0.32,
+        x: (e.clientX - (r.left + r.width / 2)) * 0.32,
+        y: (e.clientY - (r.top + r.height / 2)) * 0.32,
         duration: .4, ease: 'power2.out'
       });
     });

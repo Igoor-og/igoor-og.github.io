@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Igor Almeida — Desenvolvimento Web Premium</title>
-  <meta name="description" content="Desenvolvimento web de alto padrão. Landing Pages e E-commerces que convertem."/>
-  <meta name="author" content="Igor Almeida"/>
-  <meta name="robots" content="index, follow"/>
-  <meta name="geo.region" content="BR-SP"/>
-  <meta property="og:title" content="Igor Almeida — Dev Premium"/>
-  <meta property="og:description" content="Sites que convertem. Do primeiro scroll ao checkout."/>
-  <meta property="og:type" content="website"/>
+  <meta name="description" content="Desenvolvimento web de alto padrão. Landing Pages e E-commerces que convertem." />
+  <meta name="author" content="Igor Almeida" />
+  <meta name="robots" content="index, follow" />
+  <meta name="geo.region" content="BR-SP" />
+  <meta property="og:title" content="Igor Almeida — Dev Premium" />
+  <meta property="og:description" content="Sites que convertem. Do primeiro scroll ao checkout." />
+  <meta property="og:type" content="website" />
 
   <!-- ✅ FAVICON — ícone na aba do navegador -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23C8201A'/><text x='50%25' y='54%25' font-family='sans-serif' font-weight='900' font-size='38' fill='white' text-anchor='middle' dominant-baseline='middle'>I</text></svg>"/>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23C8201A'/><text x='50%25' y='54%25' font-family='sans-serif' font-weight='900' font-size='38' fill='white' text-anchor='middle' dominant-baseline='middle'>I</text></svg>" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <!-- Vinheta blur inferior fixa na tela -->
@@ -36,7 +41,8 @@
         <a href="#servicos">Serviços</a>
         <a href="#planos">Planos</a>
         <a href="#faq">FAQ</a>
-        <a href="https://wa.me/5511970688232?text=Olá%20Igor!" class="nav-cta" target="_blank" rel="noopener">Falar agora</a>
+        <a href="https://wa.me/5511970688232?text=Olá%20Igor!" class="nav-cta" target="_blank" rel="noopener">Falar
+          agora</a>
       </nav>
       <!-- ✅ Hambúrguer removido — no CSS também foi escondido -->
     </div>
@@ -44,6 +50,16 @@
 
   <!-- HERO -->
   <section class="hero tela-inclinada" id="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 960px)" srcset="assets/heromobile.jpeg">
+        <img src="assets/herodesk.jpeg" alt="" class="hero-photo" />
+      </picture>
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+      <div class="hero-bg-overlay"></div>
+    </div>
     <div class="hero-noise" aria-hidden="true"></div>
     <div class="hero-glow-red" aria-hidden="true"></div>
     <div class="container hero-grid">
@@ -62,7 +78,7 @@
         </p>
         <div class="hero-actions hero-anim" style="--d:.5s">
           <a href="https://wa.me/5511970688232?text=Olá,%20Igor!%20Acabei%20de%20ver%20seu%20site%20e%20gostaria%20de%20desenvolver%20um%20projeto%20web%20exclusivo."
-             class="btn-primary" target="_blank" rel="noopener">
+            class="btn-primary" target="_blank" rel="noopener">
             <i class="fa-brands fa-whatsapp"></i> Iniciar projeto
           </a>
           <a href="#planos" class="btn-ghost">Ver planos</a>
@@ -74,13 +90,6 @@
           <div class="stat-sep"></div>
           <div class="stat"><strong>100%</strong><span>mobile-first</span></div>
         </div>
-      </div>
-      <!-- ✅ Foto na raiz do projeto (foto1.jpeg) -->
-      <div class="hero-visual hero-photo-wrap" id="spline-container" aria-hidden="true">
-        <div class="hero-orb orb-1"></div>
-        <div class="hero-orb orb-2"></div>
-        <div class="hero-orb orb-3"></div>
-        <img src="foto1.jpeg" alt="Igor Almeida" class="hero-photo" />
       </div>
     </div>
     <div class="scroll-line-wrap" aria-hidden="true"><div class="scroll-line"></div></div>
@@ -128,33 +137,43 @@
       <p class="sec-sub anim-el">Veja o que estão dizendo sobre o trabalho:</p>
     </div>
     <div class="swiper-outer">
-      <button class="sw-btn sw-prev" id="depPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="sw-btn sw-prev" id="depPrev" aria-label="Anterior"><i
+          class="fa-solid fa-chevron-left"></i></button>
       <div class="sw-viewport" id="depViewport">
         <div class="sw-track" id="depTrack">
           <div class="dep-card">
             <div class="dep-head">
-              <div class="dep-av">16</div>
+              <div class="dep-av"><img src="assets/pfp1629.jpeg" alt="1629"></div>
               <div><strong>16*29</strong><span>@16.29season</span></div>
             </div>
-            <p>Landing page limpa, rápida e integrada com checkout. Assino o plano base faz meses — qualquer ajuste resolvido no mesmo dia.</p>
+            <p>"Oi Igor, então... Eu achei que o site está perfeito mano, está incrível, ta do jeito que eu queria tá
+              ligado? Tá ótimo, tá fácil de entender, acho que ficou perfeito vey, de verdade, tá incrível. Você está
+              fazendo um ótimo trabalho."</p>
           </div>
           <div class="dep-card">
             <div class="dep-head">
-              <div class="dep-av">HC</div>
+              <div class="dep-av"><img src="assets/pfphcy.jpeg" alt="HcyAbove"></div>
               <div><strong>HcyAbove</strong><span>Cliente</span></div>
             </div>
-            <p>"Curti demais trabalhar contigo. Você tem compromisso, profissionalismo e dedicação. Sempre que eu puder te indicar pra alguém, vou fazer isso sem medo. Melhor de tudo é o preço que cabe no bolso. Você conseguiu me impressionar e fazer o site da maneira que eu imaginava. Obrigado pela paciência e pela dedicação!! Tmj"</p>
+            <p>"Curti demais trabalhar contigo. Você tem compromisso, profissionalismo e dedicação. Sempre que eu puder
+              te indicar pra alguém, vou fazer isso sem medo. Melhor de tudo é o preço que cabe no bolso. Você conseguiu
+              me impressionar e fazer o site da maneira que eu imaginava. Obrigado pela paciência e pela dedicação!!
+              Tmj"</p>
           </div>
           <div class="dep-card">
             <div class="dep-head">
-              <div class="dep-av">SI</div>
+              <div class="dep-av dep-wa"><i class="fa-brands fa-whatsapp"></i></div>
               <div><strong>Sirley</strong><span>Cliente</span></div>
             </div>
-            <p>"O site ficou incrível, amei de vdd, ficou perfeito em cada detalhe. Foi um memorial construído para contar a história do meu relacionamento, foi bem emocionante ver ele pronto. Mesmo depois de meses tendo feito ele, sempre entro e fico emocionada ao vê-lo. Com certeza foi um dos melhores presentes que já ganhei, mesmo não sendo físico tocou minha alma!"</p>
+            <p>"O site ficou incrível, amei de vdd, ficou perfeito em cada detalhe. Foi um memorial construído para
+              contar a história do meu relacionamento, foi bem emocionante ver ele pronto. Mesmo depois de meses tendo
+              feito ele, sempre entro e fico emocionada ao vê-lo. Com certeza foi um dos melhores presentes que já
+              ganhei, mesmo não sendo físico tocou minha alma!"</p>
           </div>
         </div>
       </div>
-      <button class="sw-btn sw-next" id="depNext" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>
+      <button class="sw-btn sw-next" id="depNext" aria-label="Próximo"><i
+          class="fa-solid fa-chevron-right"></i></button>
     </div>
     <div class="sw-dots" id="depDots"></div>
   </section>
@@ -169,20 +188,93 @@
     </div>
     <!-- ✅ padding-bottom no swiper-outer para o card não ser cortado ao subir no hover -->
     <div class="swiper-outer ben-swiper-outer">
-      <button class="sw-btn sw-btn-dark sw-prev" id="benPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="sw-btn sw-btn-dark sw-prev" id="benPrev" aria-label="Anterior"><i
+          class="fa-solid fa-chevron-left"></i></button>
       <div class="sw-viewport ben-sw-viewport" id="benViewport">
         <div class="sw-track" id="benTrack">
-          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-solid fa-bolt"></i></div><h3>Entrega Rápida</h3><p>Projetos em até 7 dias úteis. Sem enrolação, sem surpresa.</p></div>
-          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-brands fa-github"></i></div><h3>GitHub Pages</h3><p>Hospedagem gratuita e estável. Sem mensalidade de servidor.</p></div>
-          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-solid fa-mobile-screen"></i></div><h3>100% Mobile</h3><p>Design responsivo que funciona em qualquer tela.</p></div>
-          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-solid fa-credit-card"></i></div><h3>Stripe Integrado</h3><p>Pagamentos online funcionando desde o primeiro acesso.</p></div>
-          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-solid fa-magnifying-glass"></i></div><h3>SEO Incluso</h3><p>Estrutura otimizada para aparecer no Google.</p></div>
-          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-solid fa-headset"></i></div><h3>Suporte Direto</h3><p>Atendimento via WhatsApp durante todo o projeto.</p></div>
+          <div class="ben-card glass-card">
+            <div class="ben-icon"><i class="fa-solid fa-bolt"></i></div>
+            <h3>Entrega Rápida</h3>
+            <p>Projetos em até 7 dias úteis. Sem enrolação, sem surpresa.</p>
+          </div>
+          <div class="ben-card glass-card">
+            <div class="ben-icon"><i class="fa-brands fa-github"></i></div>
+            <h3>GitHub Pages</h3>
+            <p>Hospedagem gratuita e estável. Sem mensalidade de servidor.</p>
+          </div>
+          <div class="ben-card glass-card">
+            <div class="ben-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <h3>100% Mobile</h3>
+            <p>Design responsivo que funciona em qualquer tela.</p>
+          </div>
+          <div class="ben-card glass-card">
+            <div class="ben-icon"><i class="fa-solid fa-credit-card"></i></div>
+            <h3>Stripe Integrado</h3>
+            <p>Pagamentos online funcionando desde o primeiro acesso.</p>
+          </div>
+          <div class="ben-card glass-card">
+            <div class="ben-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h3>SEO Incluso</h3>
+            <p>Estrutura otimizada para aparecer no Google.</p>
+          </div>
+          <div class="ben-card glass-card">
+            <div class="ben-icon"><i class="fa-solid fa-headset"></i></div>
+            <h3>Suporte Direto</h3>
+            <p>Atendimento via WhatsApp durante todo o projeto.</p>
+          </div>
         </div>
       </div>
-      <button class="sw-btn sw-btn-dark sw-next" id="benNext" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>
+      <button class="sw-btn sw-btn-dark sw-next" id="benNext" aria-label="Próximo"><i
+          class="fa-solid fa-chevron-right"></i></button>
     </div>
     <div class="sw-dots sw-dots-light" id="benDots"></div>
+  </section>
+
+  <!-- DIVISOR SKEW -->
+  <div class="skew-div bg-dark-before bg-dark-after" aria-hidden="true"></div>
+
+  <!-- PORTFÓLIO -->
+  <section class="sec-port dark-bg tela-inclinada" id="portfolio">
+    <div class="container">
+      <h2 class="sec-title anim-el">Sites criados para <span class="red-text">gerar resultados.</span></h2>
+      <p class="sec-sub anim-el">Confira alguns dos últimos projetos entregues:</p>
+    </div>
+    <div class="swiper-outer port-swiper-outer">
+      <button class="sw-btn sw-btn-dark sw-prev" id="portPrev" aria-label="Anterior"><i
+          class="fa-solid fa-chevron-left"></i></button>
+      <div class="sw-viewport port-sw-viewport" id="portViewport">
+        <div class="sw-track" id="portTrack">
+          <div class="port-card anim-scale" style="--sd:.0s">
+            <div class="port-img-wrap">
+              <img src="assets/HCYABOVE/hcyabove (1).png" alt="Hierarchy Above"
+                style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="port-info">
+              <div class="port-tags"><span class="port-tag">E-commerce Estático</span></div>
+              <h3>Hierarchy Above</h3>
+              <a href="https://hierarchyabove.com.br" target="_blank" rel="noopener" class="port-link">Acessar projeto
+                <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="port-card anim-scale" style="--sd:.1s">
+            <div class="port-img-wrap">
+              <img src="assets/1629/SS (1).png" alt="Spike Season"
+                style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="port-info">
+              <div class="port-tags"><span class="port-tag">Landing Page com Checkout</span><span
+                  class="port-tag">Painel Adm</span></div>
+              <h3>Spike Season</h3>
+              <a href="https://igoor-og.github.io/spike-season/" target="_blank" rel="noopener"
+                class="port-link">Acessar projeto <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="sw-btn sw-btn-dark sw-next" id="portNext" aria-label="Próximo"><i
+          class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="sw-dots sw-dots-light" id="portDots"></div>
   </section>
 
   <!-- DIVISOR SKEW -->
@@ -196,44 +288,59 @@
         <div class="plan-card anim-scale" style="--sd:.0s">
           <div class="plan-name">Landing Page</div>
           <ul class="plan-list">
-            <li>1 página completa</li><li>Layout responsivo</li>
-            <li>GitHub Pages gratuito</li><li>Botão WhatsApp</li>
-            <li>Link checkout ou bio</li><li>Ajustes simples inclusos</li>
+            <li>1 página completa</li>
+            <li>Layout responsivo</li>
+            <li>GitHub Pages gratuito</li>
+            <li>Botão WhatsApp</li>
+            <li>Link checkout ou bio</li>
+            <li>Ajustes simples inclusos</li>
           </ul>
           <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;200<em>,00</em></span></div>
-          <a href="https://wa.me/5511970688232?text=Quero%20a%20Landing%20Page!" class="plan-btn" target="_blank" rel="noopener">Quero esse</a>
+          <a href="https://wa.me/5511970688232?text=Quero%20a%20Landing%20Page!" class="plan-btn" target="_blank"
+            rel="noopener">Quero esse</a>
         </div>
         <div class="plan-card anim-scale" style="--sd:.1s">
           <div class="plan-name">Site Presente</div>
           <ul class="plan-list">
-            <li>Layout romântico personalizado</li><li>Fotos e textos do casal</li>
-            <li>Contador de tempo juntos</li><li>GitHub Pages gratuito</li>
+            <li>Layout romântico personalizado</li>
+            <li>Fotos e textos do casal</li>
+            <li>Contador de tempo juntos</li>
+            <li>GitHub Pages gratuito</li>
             <li>Fácil de compartilhar</li>
           </ul>
           <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;50<em>,00</em></span></div>
-          <a href="https://wa.me/5511970688232?text=Quero%20o%20Site%20Presente!" class="plan-btn" target="_blank" rel="noopener">Quero esse</a>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20Site%20Presente!" class="plan-btn" target="_blank"
+            rel="noopener">Quero esse</a>
         </div>
         <div class="plan-card plan-hot anim-scale" style="--sd:.2s">
           <div class="plan-badge">Mais escolhido</div>
           <div class="plan-name">E-commerce Estático</div>
           <ul class="plan-list">
-            <li>Loja no GitHub Pages</li><li>Stripe integrado</li>
-            <li>EmailJS + Formspree</li><li>Catálogo personalizável</li>
-            <li>SEO básico incluso</li><li class="li-extra">Tudo da Landing Page</li>
+            <li>Loja no GitHub Pages</li>
+            <li>Stripe integrado</li>
+            <li>EmailJS + Formspree</li>
+            <li>Catálogo personalizável</li>
+            <li>SEO básico incluso</li>
+            <li class="li-extra">Tudo da Landing Page</li>
           </ul>
           <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;500<em>,00</em></span></div>
-          <a href="https://wa.me/5511970688232?text=Quero%20o%20E-commerce%20Estático!" class="plan-btn" target="_blank" rel="noopener">Quero esse</a>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20E-commerce%20Estático!" class="plan-btn" target="_blank"
+            rel="noopener">Quero esse</a>
         </div>
         <div class="plan-card anim-scale" style="--sd:.3s">
           <div class="plan-name">E-commerce Avançado</div>
           <ul class="plan-list">
-            <li>Banco de dados integrado</li><li>Painel administrativo</li>
-            <li>Gestão de pedidos</li><li>Autenticação de usuários</li>
-            <li>Deploy em servidor</li><li>1 mês de suporte incluso</li>
+            <li>Banco de dados integrado</li>
+            <li>Painel administrativo</li>
+            <li>Gestão de pedidos</li>
+            <li>Autenticação de usuários</li>
+            <li>Deploy em servidor</li>
+            <li>1 mês de suporte incluso</li>
             <li class="li-extra">Tudo do E-commerce Estático</li>
           </ul>
           <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;890<em>,00</em></span></div>
-          <a href="https://wa.me/5511970688232?text=Quero%20o%20E-commerce%20Avançado!" class="plan-btn" target="_blank" rel="noopener">Quero esse</a>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20E-commerce%20Avançado!" class="plan-btn" target="_blank"
+            rel="noopener">Quero esse</a>
         </div>
       </div>
       <p class="pay-note anim-el"><i class="fa-solid fa-lock"></i> 40% na contratação · 60% na entrega</p>
@@ -250,16 +357,62 @@
       <h2 class="sec-title anim-el">Perguntas Frequentes</h2>
       <div class="faq-grid">
         <div class="faq-col">
-          <div class="faq-item"><button class="faq-q" aria-expanded="false">Para quem é esse serviço? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>Para autônomos, pequenos negócios, casais e qualquer pessoa que precisa de presença digital profissional sem pagar preço de agência.</p></div></div>
-          <div class="faq-item"><button class="faq-q" aria-expanded="false">Qual a diferença entre estático e avançado? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>O estático fica no GitHub Pages, sem custo mensal, ideal para vender com Stripe. O avançado tem back-end, banco de dados e painel admin.</p></div></div>
-          <div class="faq-item"><button class="faq-q" aria-expanded="false">Posso trocar de plano depois? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>Sim. É possível escalar o projeto após a entrega. O valor pago é abatido no upgrade.</p></div></div>
-          <div class="faq-item"><button class="faq-q" aria-expanded="false">Como funciona o processo? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>1. Conversa → 2. Briefing → 3. 40% de entrada → 4. Desenvolvimento → 5. Ajustes → 6. Entrega + 60% restante.</p></div></div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Para quem é esse serviço? <i
+                class="fa-solid fa-chevron-right fa-arr"></i></button>
+            <div class="faq-body">
+              <p>Para autônomos, pequenos negócios, casais e qualquer pessoa que precisa de presença digital
+                profissional sem pagar preço de agência.</p>
+            </div>
+          </div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Qual a diferença entre estático e avançado?
+              <i class="fa-solid fa-chevron-right fa-arr"></i></button>
+            <div class="faq-body">
+              <p>O estático fica no GitHub Pages, sem custo mensal, ideal para vender com Stripe. O avançado tem
+                back-end, banco de dados e painel admin.</p>
+            </div>
+          </div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Posso trocar de plano depois? <i
+                class="fa-solid fa-chevron-right fa-arr"></i></button>
+            <div class="faq-body">
+              <p>Sim. É possível escalar o projeto após a entrega. O valor pago é abatido no upgrade.</p>
+            </div>
+          </div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Como funciona o processo? <i
+                class="fa-solid fa-chevron-right fa-arr"></i></button>
+            <div class="faq-body">
+              <p>1. Conversa → 2. Briefing → 3. 40% de entrada → 4. Desenvolvimento → 5. Ajustes → 6. Entrega + 60%
+                restante.</p>
+            </div>
+          </div>
         </div>
         <div class="faq-col">
-          <div class="faq-item faq-open-default"><button class="faq-q" aria-expanded="true">Posso pedir ajuste depois da entrega? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body faq-body-open"><p>Sim. Cada plano já inclui rodadas de ajuste. Após isso, cobro R$ 80 por rodada avulsa. Também há planos de manutenção a partir de R$ 150/mês.</p></div></div>
-          <div class="faq-item"><button class="faq-q" aria-expanded="false">Quanto tempo leva a entrega? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>Landing Page e Site Presente: 5–7 dias úteis. E-commerce Estático: 10–14 dias. E-commerce Avançado: prazo personalizado.</p></div></div>
-          <div class="faq-item"><button class="faq-q" aria-expanded="false">Preciso ter domínio próprio? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>Não é obrigatório. O GitHub Pages oferece subdomínio gratuito. Se quiser um .com.br personalizado, pode comprar e eu configuro.</p></div></div>
-          <div class="faq-item"><button class="faq-q" aria-expanded="false">Quais as formas de pagamento? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>Pix ou transferência bancária. Sempre 40% na contratação e 60% na entrega aprovada.</p></div></div>
+          <div class="faq-item faq-open-default"><button class="faq-q" aria-expanded="true">Posso pedir ajuste depois da
+              entrega? <i class="fa-solid fa-chevron-right fa-arr"></i></button>
+            <div class="faq-body faq-body-open">
+              <p>Sim. Cada plano já inclui rodadas de ajuste. Após isso, cobro R$ 80 por rodada avulsa. Também há planos
+                de manutenção a partir de R$ 150/mês.</p>
+            </div>
+          </div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Quanto tempo leva a entrega? <i
+                class="fa-solid fa-chevron-right fa-arr"></i></button>
+            <div class="faq-body">
+              <p>Landing Page e Site Presente: 5–7 dias úteis. E-commerce Estático: 10–14 dias. E-commerce Avançado:
+                prazo personalizado.</p>
+            </div>
+          </div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Preciso ter domínio próprio? <i
+                class="fa-solid fa-chevron-right fa-arr"></i></button>
+            <div class="faq-body">
+              <p>Não é obrigatório. O GitHub Pages oferece subdomínio gratuito. Se quiser um .com.br personalizado, pode
+                comprar e eu configuro.</p>
+            </div>
+          </div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Quais as formas de pagamento? <i
+                class="fa-solid fa-chevron-right fa-arr"></i></button>
+            <div class="faq-body">
+              <p>Pix ou transferência bancária. Sempre 40% na contratação e 60% na entrega aprovada.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -272,11 +425,11 @@
   <section class="sec-cta vinho-bg tela-inclinada" id="cta">
     <div class="cta-glow" aria-hidden="true"></div>
     <div class="container cta-inner">
-      <h2 class="cta-title anim-el">Pronto para <span class="red-text">transformar</span><br/>sua ideia?</h2>
+      <h2 class="cta-title anim-el">Pronto para <span class="red-text">transformar</span><br />sua ideia?</h2>
       <p class="cta-sub anim-el">Me chama no WhatsApp. Sem compromisso, sem enrolação.</p>
       <div class="cta-btn-wrap anim-el">
         <a href="https://wa.me/5511970688232?text=Olá,%20Igor!%20Acabei%20de%20ver%20seu%20site%20e%20gostaria%20de%20desenvolver%20um%20projeto%20web%20exclusivo."
-           class="btn-cta" id="magneticBtn" target="_blank" rel="noopener">
+          class="btn-cta" id="magneticBtn" target="_blank" rel="noopener">
           <i class="fa-brands fa-whatsapp"></i> Começar agora
         </a>
       </div>
@@ -295,15 +448,19 @@
       </div>
       <div class="footer-col">
         <h4 class="red-text">Suporte</h4>
-        <a href="https://wa.me/5511970688232" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp</a>
+        <a href="https://wa.me/5511970688232" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i>
+          Chamar no WhatsApp</a>
         <a href="mailto:igoralmeidadesantana0@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
       </div>
       <div class="footer-col">
         <h4 class="red-text">Redes sociais</h4>
         <div class="footer-socials">
-          <a href="https://instagram.com/igoralmeidall" target="_blank" rel="noopener" aria-label="Instagram profissional"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://instagram.com/igoralmeidal"  target="_blank" rel="noopener" aria-label="Instagram pessoal"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://wa.me/5511970688232"         target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://instagram.com/igoralmeidall" target="_blank" rel="noopener"
+            aria-label="Instagram profissional"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://instagram.com/igoralmeidal" target="_blank" rel="noopener" aria-label="Instagram pessoal"><i
+              class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/5511970688232" target="_blank" rel="noopener" aria-label="WhatsApp"><i
+              class="fa-brands fa-whatsapp"></i></a>
         </div>
         <p class="footer-handles">@igoralmeidall · @igoralmeidal</p>
       </div>
@@ -315,4 +472,5 @@
 
   <script src="script.js" defer></script>
 </body>
+
 </html>
