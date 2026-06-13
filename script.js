@@ -132,12 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function maxSlide() {
-      return Math.max(0, cards.length - getVisible());
+      const maxTx = Math.max(0, track.scrollWidth - viewport.clientWidth);
+      if (cardW() === 0) return 0;
+      return Math.ceil(maxTx / cardW());
     }
 
     function goTo(idx) {
       current = Math.max(0, Math.min(idx, maxSlide()));
-      track.style.transform = `translateX(-${current * cardW()}px)`;
+      let tx = current * cardW();
+      const maxTx = Math.max(0, track.scrollWidth - viewport.clientWidth);
+      if (tx > maxTx) tx = maxTx;
+      track.style.transform = `translateX(-${tx}px)`;
       updateDots();
     }
 
