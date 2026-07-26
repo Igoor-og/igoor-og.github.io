@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Igor Almeida — Desenvolvimento Web Premium</title>
-  <meta name="description" content="Desenvolvimento web de alto padrão. Landing Pages e E-commerces que convertem." />
+  <title>Igor Almeida — Desenvolvimento Web Premium & SEO Programático</title>
+  <meta name="description" content="Desenvolvimento web de alto padrão, integração com N8N, Landing Pages de alta conversão, E-commerces e SEO programático de alta performance." />
   <meta name="author" content="Igor Almeida" />
   <meta name="robots" content="index, follow" />
   <meta name="geo.region" content="BR-SP" />
-  <meta property="og:title" content="Igor Almeida — Dev Premium" />
-  <meta property="og:description" content="Sites que convertem. Do primeiro scroll ao checkout." />
+  <meta property="og:title" content="Igor Almeida — Dev Premium & Automações N8N" />
+  <meta property="og:description" content="Sites de alta velocidade e automações inteligentes. Do primeiro scroll ao checkout." />
   <meta property="og:type" content="website" />
 
   <!-- ✅ FAVICON — ícone na aba do navegador -->
   <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23C8201A'/><text x='50%25' y='54%25' font-family='sans-serif' f[...]" />
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23C8201A'/><text x='50%25' y='54%25' font-family='sans-serif' font-weight='bold' font-size='32' fill='white' text-anchor='middle' dominant-baseline='middle'>IA</text></svg>" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -29,29 +29,35 @@
 </head>
 
 <body>
-  
+
+  <!-- VÍDEO INTERATIVO DE FUNDO -->
+  <div class="video-bg-container" aria-hidden="true">
+    <video id="bgVideo" src="video1.mp4" playsinline muted loop preload="auto"></video>
+    <div class="video-overlay"></div>
+  </div>
+
   <!-- Vinheta blur inferior fixa na tela -->
   <div class="vinheta" aria-hidden="true"></div>
   <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 
-  <!-- NAVBAR — ✅ sem hambúrguer: só nome + links -->
+  <!-- NAVBAR -->
   <header class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">Igor Almeida<span>.</span></a>
       <nav class="nav-links">
         <a href="#dor">Problema</a>
         <a href="#servicos">Serviços</a>
+        <a href="#seo-autoridade">SEO & N8N</a>
+        <a href="#portfolio">Portfólio</a>
         <a href="#planos">Planos</a>
         <a href="#faq">FAQ</a>
-        <a href="https://wa.me/5511970688232?text=Olá%20Igor!" class="nav-cta" target="_blank" rel="noopener">Falar
-          agora</a>
+        <a href="https://wa.me/5511970688232?text=Olá%20Igor!" class="nav-cta" target="_blank" rel="noopener">Falar agora</a>
       </nav>
-      <!-- ✅ Hambúrguer removido — no CSS também foi escondido -->
     </div>
   </header>
 
   <!-- HERO -->
-  <section class="hero tela-inclinada" id="hero">
+  <section class="hero" id="hero">
     <div class="hero-bg" aria-hidden="true">
       <picture>
         <source media="(max-width: 960px)" srcset="assets/heromobile.webp">
@@ -75,8 +81,8 @@
           <span class="hero-anim red-text" style="--d:.3s">para crescer.</span>
         </h1>
         <p class="hero-sub hero-anim" style="--d:.4s">
-          Desenvolvimento sob medida: landing pages, e-commerce e muito mais.
-          Entrega rápida, preço justo, hospedagem no GitHub Pages.
+          Desenvolvimento sob medida: landing pages, e-commerce, automações N8N e SEO avançado.
+          Entrega rápida, preço justo, hospedagem inteligente.
         </p>
         <div class="hero-actions hero-anim" style="--d:.5s">
           <a href="https://wa.me/5511970688232?text=Olá,%20Igor!%20Acabei%20de%20ver%20seu%20site%20e%20gostaria%20de%20desenvolver%20um%20projeto%20web%20exclusivo."
@@ -94,6 +100,149 @@
         </div>
       </div>
     </div>
+
+    <!-- DASHBOARD GLASSMORPHISM INTERATIVO -->
+    <div class="container dashboard-container hero-anim" style="--d:.7s">
+      <div class="dashboard-glass" id="interactive-dashboard">
+        <div class="dashboard-header">
+          <div class="dashboard-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="ecommerce"><i class="fa-solid fa-cart-shopping"></i> E-commerce</button>
+            <button class="tab-btn" data-tab="n8n"><i class="fa-solid fa-diagram-project"></i> Automação N8N</button>
+            <button class="tab-btn" data-tab="performance"><i class="fa-solid fa-gauge-high"></i> Performance LP</button>
+          </div>
+        </div>
+        <div class="dashboard-content">
+          <!-- ABA E-COMMERCE -->
+          <div class="tab-pane active" id="tab-ecommerce">
+            <div class="pane-grid">
+              <div class="pane-sidebar">
+                <h4>Simulador de Vendas</h4>
+                <p class="sidebar-desc">Simule o faturamento com base no tráfego e taxa de conversão.</p>
+                <div class="input-group">
+                  <label for="sim-traffic">Tráfego Mensal (Visitas)</label>
+                  <input type="range" id="sim-traffic" min="1000" max="100000" step="1000" value="15000">
+                  <span class="range-val" id="val-traffic">15.000</span>
+                </div>
+                <div class="input-group">
+                  <label for="sim-conversion">Taxa de Conversão (%)</label>
+                  <input type="range" id="sim-conversion" min="0.5" max="5.0" step="0.1" value="1.5">
+                  <span class="range-val" id="val-conversion">1.5%</span>
+                </div>
+                <div class="input-group">
+                  <label for="sim-ticket">Ticket Médio (R$)</label>
+                  <input type="range" id="sim-ticket" min="20" max="500" step="5" value="120">
+                  <span class="range-val" id="val-ticket">R$ 120</span>
+                </div>
+              </div>
+              <div class="pane-main">
+                <div class="kpi-grid">
+                  <div class="kpi-card">
+                    <span class="kpi-label">Pedidos Estimados</span>
+                    <span class="kpi-value" id="kpi-orders">225</span>
+                  </div>
+                  <div class="kpi-card highlight">
+                    <span class="kpi-label">Faturamento Mensal</span>
+                    <span class="kpi-value" id="kpi-revenue">R$ 27.000,00</span>
+                  </div>
+                </div>
+                <div class="sim-chart-container">
+                  <div class="chart-bar-wrap">
+                    <span class="chart-label">LP Comum (0.5%)</span>
+                    <div class="chart-bar-bg"><div class="chart-bar" id="bar-low" style="width: 10%"></div></div>
+                    <span class="chart-num" id="num-low">R$ 9.000</span>
+                  </div>
+                  <div class="chart-bar-wrap">
+                    <span class="chart-label">Sua Nova LP (Ajustado)</span>
+                    <div class="chart-bar-bg highlight"><div class="chart-bar highlight" id="bar-sim" style="width: 30%"></div></div>
+                    <span class="chart-num highlight" id="num-sim">R$ 27.000</span>
+                  </div>
+                  <div class="chart-bar-wrap">
+                    <span class="chart-label">LP Otimizada Max (3.0%)</span>
+                    <div class="chart-bar-bg"><div class="chart-bar" id="bar-high" style="width: 60%"></div></div>
+                    <span class="chart-num" id="num-high">R$ 54.000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ABA N8N -->
+          <div class="tab-pane" id="tab-n8n">
+            <div class="n8n-canvas">
+              <div class="n8n-node start" id="node-webhook">
+                <div class="node-icon"><i class="fa-solid fa-globe"></i></div>
+                <div class="node-title">Webhook</div>
+                <div class="node-status">Esperando...</div>
+              </div>
+              <div class="n8n-connector"><div class="connector-pulse"></div></div>
+              <div class="n8n-node process" id="node-gpt">
+                <div class="node-icon"><i class="fa-solid fa-brain"></i></div>
+                <div class="node-title">ChatGPT API</div>
+                <div class="node-status">Pronto</div>
+              </div>
+              <div class="n8n-connector"><div class="connector-pulse"></div></div>
+              <div class="n8n-node action" id="node-crm">
+                <div class="node-icon"><i class="fa-solid fa-address-card"></i></div>
+                <div class="node-title">Salvar Lead</div>
+                <div class="node-status">Pronto</div>
+              </div>
+              <div class="n8n-connector"><div class="connector-pulse"></div></div>
+              <div class="n8n-node end" id="node-whatsapp">
+                <div class="node-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                <div class="node-title">Notificar WA</div>
+                <div class="node-status">Pronto</div>
+              </div>
+            </div>
+            <div class="n8n-controls">
+              <button class="btn-n8n-trigger" id="run-n8n-flow"><i class="fa-solid fa-play"></i> Simular Execução de Fluxo</button>
+              <div class="n8n-log" id="n8n-log-output">Aguardando gatilho para iniciar automação...</div>
+            </div>
+          </div>
+          <!-- ABA PERFORMANCE -->
+          <div class="tab-pane" id="tab-performance">
+            <div class="perf-grid">
+              <div class="perf-gauge-box">
+                <div class="circular-progress" id="perf-gauge" style="background: conic-gradient(var(--red) 360deg, rgba(255,255,255,0.05) 0deg)">
+                  <div class="value-container" id="perf-value">100</div>
+                </div>
+                <span class="gauge-label">Performance Core Web Vitals</span>
+              </div>
+              <div class="perf-metrics">
+                <div class="perf-metric-item">
+                  <div class="metric-meta">
+                    <span class="metric-name">LCP (Largest Contentful Paint)</span>
+                    <span class="metric-val text-green" id="perf-lcp">0.8s</span>
+                  </div>
+                  <div class="metric-bar-bg"><div class="metric-bar green" style="width: 95%"></div></div>
+                </div>
+                <div class="perf-metric-item">
+                  <div class="metric-meta">
+                    <span class="metric-name">FID (First Input Delay)</span>
+                    <span class="metric-val text-green" id="perf-fid">12ms</span>
+                  </div>
+                  <div class="metric-bar-bg"><div class="metric-bar green" style="width: 98%"></div></div>
+                </div>
+                <div class="perf-metric-item">
+                  <div class="metric-meta">
+                    <span class="metric-name">CLS (Cumulative Layout Shift)</span>
+                    <span class="metric-val text-green" id="perf-cls">0.01</span>
+                  </div>
+                  <div class="metric-bar-bg"><div class="metric-bar green" style="width: 99%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="perf-footer">
+              <p><i class="fa-solid fa-bolt text-green"></i> <strong>Mobile-first real:</strong> Carregamento instantâneo em redes móveis (3G/4G) e nota máxima no Google PageSpeed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="scroll-line-wrap" aria-hidden="true">
       <div class="scroll-line"></div>
     </div>
@@ -103,7 +252,7 @@
   <div class="skew-div bg-dark-after bg-dark-before" aria-hidden="true"></div>
 
   <!-- DOR -->
-  <section class="sec-dor dark-bg tela-inclinada" id="dor">
+  <section class="sec-dor dark-bg" id="dor">
     <div class="container">
       <h2 class="sec-title anim-el">Você não aguenta mais sites onde:</h2>
       <div class="thin-line"></div>
@@ -134,8 +283,8 @@
   <!-- DIVISOR SKEW dark → light -->
   <div class="skew-div bg-dark-before bg-light-after" aria-hidden="true"></div>
 
-  <!-- DEPOIMENTOS — ✅ Mariana K. removida -->
-  <section class="sec-dep light-bg tela-inclinada" id="depoimentos">
+  <!-- DEPOIMENTOS -->
+  <section class="sec-dep light-bg" id="depoimentos">
     <div class="container">
       <h2 class="sec-title dark-title anim-el">Clientes que <span class="red-text">já confiaram.</span></h2>
       <p class="sec-sub anim-el">Veja o que estão dizendo sobre o trabalho:</p>
@@ -193,60 +342,86 @@
   <!-- DIVISOR SKEW light → dark -->
   <div class="skew-div bg-light-before bg-dark-after" aria-hidden="true"></div>
 
-  <!-- BENEFÍCIOS -->
-  <section class="sec-ben dark-bg tela-inclinada" id="servicos">
+  <!-- BENEFÍCIOS (Substituído por Marquee Infinito Moderno) -->
+  <section class="sec-ben dark-bg" id="servicos">
     <div class="container">
       <h2 class="sec-title anim-el">Confira o que você <span class="red-text">vai receber:</span></h2>
     </div>
-    <!-- ✅ padding-bottom no swiper-outer para o card não ser cortado ao subir no hover -->
-    <div class="swiper-outer ben-swiper-outer">
-      <button class="sw-btn sw-btn-dark sw-prev" id="benPrev" aria-label="Anterior"><i
-          class="fa-solid fa-chevron-left"></i></button>
-      <div class="sw-viewport ben-sw-viewport" id="benViewport">
-        <div class="sw-track" id="benTrack">
-          <div class="ben-card glass-card">
-            <div class="ben-icon"><i class="fa-solid fa-bolt"></i></div>
-            <h3>Entrega Rápida</h3>
-            <p>Projetos em até 7 dias úteis. Sem enrolação, sem surpresa.</p>
-          </div>
-          <div class="ben-card glass-card">
-            <div class="ben-icon"><i class="fa-brands fa-github"></i></div>
-            <h3>GitHub Pages</h3>
-            <p>Hospedagem gratuita e estável. Sem mensalidade de servidor.</p>
-          </div>
-          <div class="ben-card glass-card">
-            <div class="ben-icon"><i class="fa-solid fa-mobile-screen"></i></div>
-            <h3>100% Mobile</h3>
-            <p>Design responsivo que funciona em qualquer tela.</p>
-          </div>
-          <div class="ben-card glass-card">
-            <div class="ben-icon"><i class="fa-solid fa-credit-card"></i></div>
-            <h3>Stripe Integrado</h3>
-            <p>Pagamentos online funcionando desde o primeiro acesso.</p>
-          </div>
-          <div class="ben-card glass-card">
-            <div class="ben-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-            <h3>SEO Incluso</h3>
-            <p>Estrutura otimizada para aparecer no Google.</p>
-          </div>
-          <div class="ben-card glass-card">
-            <div class="ben-icon"><i class="fa-solid fa-headset"></i></div>
-            <h3>Suporte Direto</h3>
-            <p>Atendimento via WhatsApp durante todo o projeto.</p>
-          </div>
+    
+    <!-- MARQUEE INFINITO FLUIDO EM CSS -->
+    <div class="marquee-container anim-el">
+      <div class="marquee-track">
+        <!-- Loop 1 -->
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Entrega Rápida</h3>
+          <p>Projetos em até 7 dias úteis. Sem enrolação.</p>
+        </div>
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-brands fa-github"></i></div>
+          <h3>GitHub Pages</h3>
+          <p>Hospedagem gratuita e estável. Sem mensalidade.</p>
+        </div>
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h3>100% Mobile</h3>
+          <p>Design responsivo focado em usabilidade móvel.</p>
+        </div>
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-solid fa-credit-card"></i></div>
+          <h3>Stripe Integrado</h3>
+          <p>Pagamentos online prontos e seguros para faturar.</p>
+        </div>
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>SEO Incluso</h3>
+          <p>Estrutura semântica otimizada para buscadores.</p>
+        </div>
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-solid fa-headset"></i></div>
+          <h3>Suporte Direto</h3>
+          <p>Atendimento exclusivo via WhatsApp.</p>
+        </div>
+        <!-- Loop 2 (Duplicado para efeito infinito) -->
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Entrega Rápida</h3>
+          <p>Projetos em até 7 dias úteis. Sem enrolação.</p>
+        </div>
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-brands fa-github"></i></div>
+          <h3>GitHub Pages</h3>
+          <p>Hospedagem gratuita e estável. Sem mensalidade.</p>
+        </div>
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h3>100% Mobile</h3>
+          <p>Design responsivo focado em usabilidade móvel.</p>
+        </div>
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-solid fa-credit-card"></i></div>
+          <h3>Stripe Integrado</h3>
+          <p>Pagamentos online prontos e seguros para faturar.</p>
+        </div>
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>SEO Incluso</h3>
+          <p>Estrutura semântica otimizada para buscadores.</p>
+        </div>
+        <div class="ben-card-marquee">
+          <div class="ben-icon"><i class="fa-solid fa-headset"></i></div>
+          <h3>Suporte Direto</h3>
+          <p>Atendimento exclusivo via WhatsApp.</p>
         </div>
       </div>
-      <button class="sw-btn sw-btn-dark sw-next" id="benNext" aria-label="Próximo"><i
-          class="fa-solid fa-chevron-right"></i></button>
     </div>
-    <div class="sw-dots sw-dots-light" id="benDots"></div>
   </section>
 
   <!-- DIVISOR SKEW -->
   <div class="skew-div bg-dark-before bg-dark-after" aria-hidden="true"></div>
 
   <!-- PORTFÓLIO -->
-  <section class="sec-port dark-bg tela-inclinada" id="portfolio">
+  <section class="sec-port dark-bg" id="portfolio">
     <div class="container">
       <h2 class="sec-title anim-el">Sites criados para <span class="red-text">gerar resultados.</span></h2>
       <p class="sec-sub anim-el">Confira alguns dos últimos projetos entregues:</p>
@@ -375,78 +550,190 @@
   <!-- DIVISOR SKEW -->
   <div class="skew-div bg-dark-before bg-dark-after" aria-hidden="true"></div>
 
-  <!-- PLANOS -->
-  <section class="sec-plans dark-bg tela-inclinada" id="planos">
+  <!-- SEÇÃO DE SEO & PROGRAMMATIC SEO (N8N) -->
+  <section class="sec-seo dark-bg" id="seo-autoridade">
     <div class="container">
-      <h2 class="sec-title anim-el">Escolha o seu <span class="red-text">plano:</span></h2>
-      <div class="plans-grid">
-        <div class="plan-card anim-scale" style="--sd:.0s">
-          <div class="plan-name">Landing Page</div>
-          <ul class="plan-list">
-            <li>1 página completa</li>
-            <li>Layout responsivo</li>
-            <li>GitHub Pages gratuito</li>
-            <li>Botão WhatsApp</li>
-            <li>Link checkout ou bio</li>
-            <li>Ajustes simples inclusos</li>
-          </ul>
-          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;200<em>,00</em></span></div>
-          <a href="https://wa.me/5511970688232?text=Quero%20a%20Landing%20Page!" class="plan-btn" target="_blank"
-            rel="noopener">Quero esse</a>
+      <h2 class="sec-title anim-el">Estratégias de <span class="red-text">SEO Programático & N8N</span></h2>
+      <p class="sec-sub anim-el">Como dominar as buscas orgânicas e automatizar a criação de conteúdo com inteligência artificial.</p>
+
+      <div class="seo-grid">
+        <div class="seo-feature-card anim-scale" style="--sd:0s">
+          <div class="seo-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+          <h3>SEO Programático</h3>
+          <p>Geração de páginas em escala focando em cauda longa e intenção de busca para trazer tráfego qualificado de forma automatizada e inteligente.</p>
         </div>
-        <div class="plan-card anim-scale" style="--sd:.1s">
-          <div class="plan-name">Site Presente</div>
-          <ul class="plan-list">
-            <li>Layout romântico personalizado</li>
-            <li>Fotos e textos do casal</li>
-            <li>Contador de tempo juntos</li>
-            <li>GitHub Pages gratuito</li>
-            <li>Fácil de compartilhar</li>
-          </ul>
-          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;50<em>,00</em></span></div>
-          <a href="https://wa.me/5511970688232?text=Quero%20o%20Site%20Presente!" class="plan-btn" target="_blank"
-            rel="noopener">Quero esse</a>
+        <div class="seo-feature-card anim-scale" style="--sd:0.1s">
+          <div class="seo-icon"><i class="fa-solid fa-network-wired"></i></div>
+          <h3>Integração com N8N</h3>
+          <p>Automações de fluxos de dados, CRM, envios em massa, inteligência artificial integrada às suas Landing Pages e sistemas web sem esforço.</p>
         </div>
-        <div class="plan-card plan-hot anim-scale" style="--sd:.2s">
-          <div class="plan-badge">Mais escolhido</div>
-          <div class="plan-name">E-commerce Estático</div>
-          <ul class="plan-list">
-            <li>Loja no GitHub Pages</li>
-            <li>Stripe integrado</li>
-            <li>EmailJS + Formspree</li>
-            <li>Catálogo personalizável</li>
-            <li>SEO básico incluso</li>
-            <li class="li-extra">Tudo da Landing Page</li>
-          </ul>
-          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;500<em>,00</em></span></div>
-          <a href="https://wa.me/5511970688232?text=Quero%20o%20E-commerce%20Estático!" class="plan-btn" target="_blank"
-            rel="noopener">Quero esse</a>
-        </div>
-        <div class="plan-card anim-scale" style="--sd:.3s">
-          <div class="plan-name">E-commerce Avançado</div>
-          <ul class="plan-list">
-            <li>Banco de dados integrado</li>
-            <li>Painel administrativo</li>
-            <li>Gestão de pedidos</li>
-            <li>Autenticação de usuários</li>
-            <li>Deploy em servidor</li>
-            <li>1 mês de suporte incluso</li>
-            <li class="li-extra">Tudo do E-commerce Estático</li>
-          </ul>
-          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;890<em>,00</em></span></div>
-          <a href="https://wa.me/5511970688232?text=Quero%20o%20E-commerce%20Avançado!" class="plan-btn" target="_blank"
-            rel="noopener">Quero esse</a>
+        <div class="seo-feature-card anim-scale" style="--sd:0.2s">
+          <div class="seo-icon"><i class="fa-solid fa-ranking-star"></i></div>
+          <h3>Palavras-chave Fortes</h3>
+          <p>Otimização minuciosa e posicionamento estratégico com foco direto em: <strong>N8N, LANDING PAGE, E-COMMERCE e SISTEMAS</strong>.</p>
         </div>
       </div>
-      <p class="pay-note anim-el"><i class="fa-solid fa-lock"></i> 40% na contratação · 60% na entrega</p>
+
+      <!-- FAQ DINÂMICO / ESTRUTURADO COM MICRODADOS SCHEMA.ORG -->
+      <div class="faq-structured-container anim-el" itemscope itemtype="https://schema.org/FAQPage">
+        <h3 class="faq-structured-title">FAQ Estratégico (Alimentado por N8N)</h3>
+        <div class="faq-structured-grid">
+          
+          <div class="faq-structured-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+            <button class="faq-structured-q" aria-expanded="false">
+              <span itemprop="name">Como o N8N pode otimizar as Landing Pages e E-commerces?</span>
+              <i class="fa-solid fa-chevron-down faq-structured-arrow"></i>
+            </button>
+            <div class="faq-structured-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <div itemprop="text">
+                <p>O N8N permite criar fluxos automatizados em tempo real. Sempre que um lead se cadastra na Landing Page, o N8N processa os dados, envia mensagens automáticas no WhatsApp, atualiza o CRM e qualifica o lead usando a API do ChatGPT, acelerando seu ciclo de vendas.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-structured-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+            <button class="faq-structured-q" aria-expanded="false">
+              <span itemprop="name">O que é SEO Programático e qual a sua importância?</span>
+              <i class="fa-solid fa-chevron-down faq-structured-arrow"></i>
+            </button>
+            <div class="faq-structured-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <div itemprop="text">
+                <p>SEO Programático é a técnica de criar centenas ou milhares de páginas otimizadas dinamicamente usando bancos de dados. É ideal para nichos altamente competitivos em Landing Pages, E-commerce e Sistemas, permitindo capturar tráfego de cauda longa com termos específicos e baixa concorrência.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-structured-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+            <button class="faq-structured-q" aria-expanded="false">
+              <span itemprop="name">Qual a velocidade de carregamento ideal de uma Landing Page?</span>
+              <i class="fa-solid fa-chevron-down faq-structured-arrow"></i>
+            </button>
+            <div class="faq-structured-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <div itemprop="text">
+                <p>Para obter as melhores pontuações nos Core Web Vitals e rankear bem no Google, uma Landing Page ou E-commerce deve carregar em menos de 1.5 segundos. Nosso desenvolvimento foca em código limpo, imagens WebP ultra-otimizadas e infraestrutura leve para atingir notas próximas de 100.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-structured-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+            <button class="faq-structured-q" aria-expanded="false">
+              <span itemprop="name">Como criar sistemas automatizados conectados a e-commerces?</span>
+              <i class="fa-solid fa-chevron-down faq-structured-arrow"></i>
+            </button>
+            <div class="faq-structured-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <div itemprop="text">
+                <p>Conectamos as APIs do seu E-commerce (como Stripe, Shopify ou plataformas estáticas) ao N8N. Isso permite automatizar o envio de emails de carrinho abandonado, emitir notas fiscais automaticamente, gerar links de pagamento rápidos e criar notificações personalizadas para a sua equipe.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- DIVISOR SKEW -->
   <div class="skew-div bg-dark-before bg-dark-after" aria-hidden="true"></div>
 
-  <!-- FAQ — ✅ faq-ghost centralizado via CSS -->
-  <section class="sec-faq dark-bg tela-inclinada" id="faq">
+  <!-- PLANOS -->
+  <section class="sec-plans dark-bg" id="planos">
+    <div class="container">
+      <h2 class="sec-title anim-el">Escolha o seu <span class="red-text">plano:</span></h2>
+      <div class="plans-grid">
+        <div class="plan-card anim-scale" style="--sd:.0s">
+          <div class="plan-name">Presente / Cartão Digital</div>
+          <ul class="plan-list">
+            <li>Layout personalizado</li>
+            <li>Fotos e textos customizados</li>
+            <li>Contador de tempo online</li>
+            <li>Fácil de compartilhar</li>
+            <li>Suporte para publicação</li>
+          </ul>
+          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;50<em>,00</em></span></div>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20plano%20Presente%20/%20Cartão%20Digital!" class="plan-btn" target="_blank"
+            rel="noopener">Quero esse</a>
+        </div>
+        <div class="plan-card anim-scale" style="--sd:.1s">
+          <div class="plan-name">Landing Page Profissional</div>
+          <ul class="plan-list">
+            <li>1 página completa e otimizada</li>
+            <li>Layout responsivo premium</li>
+            <li>Configuração de domínio</li>
+            <li>Estrutura de backend inclusa</li>
+            <li>Botão WhatsApp direto</li>
+            <li>Ajustes rápidos inclusos</li>
+          </ul>
+          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;500<em>,00</em></span></div>
+          <a href="https://wa.me/5511970688232?text=Quero%20a%20Landing%20Page%20Profissional!" class="plan-btn" target="_blank"
+            rel="noopener">Quero esse</a>
+        </div>
+        <div class="plan-card plan-hot anim-scale" style="--sd:.2s">
+          <div class="plan-badge">Mais escolhido</div>
+          <div class="plan-name">E-commerce Estático</div>
+          <ul class="plan-list">
+            <li>Loja estática ultra veloz</li>
+            <li>Domínio próprio configurado</li>
+            <li>Integração com backend</li>
+            <li>Stripe para pagamentos</li>
+            <li>EmailJS + Formspree</li>
+            <li class="li-extra">Tudo da Landing Page</li>
+          </ul>
+          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;700<em>,00</em></span></div>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20E-commerce%20Estático!" class="plan-btn" target="_blank"
+            rel="noopener">Quero esse</a>
+        </div>
+        <div class="plan-card anim-scale" style="--sd:.3s">
+          <div class="plan-name">E-commerce Avançado</div>
+          <ul class="plan-list">
+            <li>Banco de dados dedicado</li>
+            <li>Domínio próprio incluso</li>
+            <li>Integração completa de backend</li>
+            <li>Painel administrativo completo</li>
+            <li>Gestão de pedidos e estoque</li>
+            <li>Autenticação de usuários</li>
+            <li class="li-extra">Tudo do E-commerce Estático</li>
+          </ul>
+          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;1.200<em>,00</em></span></div>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20E-commerce%20Avançado!" class="plan-btn" target="_blank"
+            rel="noopener">Quero esse</a>
+        </div>
+        <div class="plan-card anim-scale" style="--sd:.4s">
+          <div class="plan-name">Automação N8N Starter</div>
+          <ul class="plan-list">
+            <li>Automação de Webhooks</li>
+            <li>Envio de leads para CRM</li>
+            <li>Integração simples de API</li>
+            <li>Suporte a 1 fluxo ativo</li>
+            <li>Relatórios básicos</li>
+          </ul>
+          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;200<em>,00</em><span class="plan-period">/mês</span></span></div>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20plano%20Automação%20N8N%20Starter!" class="plan-btn" target="_blank"
+            rel="noopener">Quero esse</a>
+        </div>
+        <div class="plan-card anim-scale" style="--sd:.5s">
+          <div class="plan-name">Automação N8N Pro</div>
+          <ul class="plan-list">
+            <li>Até 5 fluxos ativos</li>
+            <li>IA integrada (ChatGPT API)</li>
+            <li>Notificações automáticas WA</li>
+            <li>Sincronização bidirecional CRM</li>
+            <li>Monitoramento em tempo real</li>
+            <li class="li-extra">Tudo do N8N Starter</li>
+          </ul>
+          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;300<em>,00</em><span class="plan-period">/mês</span></span></div>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20plano%20Automação%20N8N%20Pro!" class="plan-btn" target="_blank"
+            rel="noopener">Quero esse</a>
+        </div>
+      </div>
+      <p class="pay-note anim-el"><i class="fa-solid fa-cloud"></i> Hospedagem e Mensalidades a partir de R$&nbsp;29,90 por mês · 40% na contratação · 60% na entrega</p>
+    </div>
+  </section>
+
+  <!-- DIVISOR SKEW -->
+  <div class="skew-div bg-dark-before bg-dark-after" aria-hidden="true"></div>
+
+  <!-- FAQ -->
+  <section class="sec-faq dark-bg" id="faq">
     <div class="faq-ghost" aria-hidden="true">FAQ</div>
     <div class="container">
       <h2 class="sec-title anim-el">Perguntas Frequentes</h2>
@@ -517,7 +804,7 @@
   <div class="skew-div bg-dark-before bg-vinho-after" aria-hidden="true"></div>
 
   <!-- CTA FINAL -->
-  <section class="sec-cta vinho-bg tela-inclinada" id="cta">
+  <section class="sec-cta vinho-bg" id="cta">
     <div class="cta-glow" aria-hidden="true"></div>
     <div class="container cta-inner">
       <h2 class="cta-title anim-el">Pronto para <span class="red-text">transformar</span><br />sua ideia?</h2>
@@ -538,7 +825,7 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <span class="nav-logo footer-logo">Igor Almeida<span>.</span></span>
-        <p>Desenvolvimento Web · São Paulo, Brasil</p>
+        <p>Desenvolvimento Web & SEO · São Paulo, Brasil</p>
         <p class="f-tagline">Sites que <span class="red-text">convertem.</span></p>
       </div>
       <div class="footer-col">
@@ -556,16 +843,10 @@
               class="fa-brands fa-instagram"></i></a>
           <a href="https://wa.me/5511970688232" target="_blank" rel="noopener" aria-label="WhatsApp"><i
               class="fa-brands fa-whatsapp"></i></a>
-          <a href="https://br.linkedin.com/in/igor-almeida-232877422" target="_blank" rel="noopener" aria-label="LinkedIn"><i
-              class="fa-brands fa-linkedin"></i></a>
+          <a href="https://br.linkedin.com/in/igor-almeida-232877422" target="_blank" rel="noopener"
+            aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
         </div>
         <p class="footer-handles">@igoralmeidall · @igoralmeidal</p>
-      </div>
-      <!-- Badge LinkedIn -->
-      <div class="footer-col linkedin-badge-container">
-        <div class="badge-base LI-profile-badge" data-locale="pt_BR" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="igor-almeida-232877422" data-version="v1">
-          <a class="badge-base__link LI-simple-link" href="https://br.linkedin.com/in/igor-almeida-232877422?trk=profile-badge">Igor Almeida</a>
-        </div>
       </div>
     </div>
     <div class="footer-bottom">
