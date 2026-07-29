@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Igor Almeida ÔÇö Desenvolvimento Web Premium</title>
+  <meta name="description" content="Desenvolvimento web de alto padr├úo. Landing Pages e E-commerces que convertem."/>
+  <meta name="author" content="Igor Almeida"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="geo.region" content="BR-SP"/>
+  <meta property="og:title" content="Igor Almeida ÔÇö Dev Premium"/>
+  <meta property="og:description" content="Sites que convertem. Do primeiro scroll ao checkout."/>
+  <meta property="og:type" content="website"/>
+
+  <!-- Ô£à FAVICON ÔÇö ├¡cone na aba do navegador -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23C8201A'/><text x='50%25' y='54%25' font-family='sans-serif' font-weight='900' font-size='38' fill='white' text-anchor='middle' dominant-baseline='middle'>I</text></svg>"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- Vinheta blur inferior fixa na tela -->
+  <div class="vinheta" aria-hidden="true"></div>
+
+  <!-- NAVBAR ÔÇö Ô£à sem hamb├║rguer: s├│ nome + links -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">Igor Almeida<span>.</span></a>
+      <nav class="nav-links">
+        <a href="#dor">Problema</a>
+        <a href="#servicos">Servi├ºos</a>
+        <a href="#planos">Planos</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://wa.me/5511970688232?text=Ol├í%20Igor!" class="nav-cta" target="_blank" rel="noopener">Falar agora</a>
+      </nav>
+      <!-- Ô£à Hamb├║rguer removido ÔÇö no CSS tamb├®m foi escondido -->
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero tela-inclinada" id="hero">
+    <div class="hero-noise" aria-hidden="true"></div>
+    <div class="hero-glow-red" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <div class="hero-badge hero-anim" style="--d:0s">
+          <span class="badge-pulse"></span> Dispon├¡vel para novos projetos
+        </div>
+        <h1 class="hero-h1">
+          <span class="hero-anim" style="--d:.1s">O site que sua</span>
+          <span class="hero-anim" style="--d:.2s">empresa precisa</span>
+          <span class="hero-anim red-text" style="--d:.3s">para crescer.</span>
+        </h1>
+        <p class="hero-sub hero-anim" style="--d:.4s">
+          Desenvolvimento sob medida: landing pages, e-commerce e muito mais.
+          Entrega r├ípida, pre├ºo justo, hospedagem no GitHub Pages.
+        </p>
+        <div class="hero-actions hero-anim" style="--d:.5s">
+          <a href="https://wa.me/5511970688232?text=Ol├í,%20Igor!%20Acabei%20de%20ver%20seu%20site%20e%20gostaria%20de%20desenvolver%20um%20projeto%20web%20exclusivo."
+             class="btn-primary" target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i> Iniciar projeto
+          </a>
+          <a href="#planos" class="btn-ghost">Ver planos</a>
+        </div>
+        <div class="hero-stats hero-anim" style="--d:.6s">
+          <div class="stat"><strong>R$&nbsp;50</strong><span>entrada</span></div>
+          <div class="stat-sep"></div>
+          <div class="stat"><strong>48h</strong><span>prazo m├¡n.</span></div>
+          <div class="stat-sep"></div>
+          <div class="stat"><strong>100%</strong><span>mobile-first</span></div>
+        </div>
+      </div>
+      <!-- Ô£à Foto na raiz do projeto (foto1.jpeg) -->
+      <div class="hero-visual hero-photo-wrap" id="spline-container" aria-hidden="true">
+        <div class="hero-orb orb-1"></div>
+        <div class="hero-orb orb-2"></div>
+        <div class="hero-orb orb-3"></div>
+        <img src="foto1.jpeg" alt="Igor Almeida" class="hero-photo" />
+      </div>
+    </div>
+    <div class="scroll-line-wrap" aria-hidden="true"><div class="scroll-line"></div></div>
+  </section>
+
+  <!-- DIVISOR SKEW -->
+  <div class="skew-div bg-dark-after bg-dark-before" aria-hidden="true"></div>
+
+  <!-- DOR -->
+  <section class="sec-dor dark-bg tela-inclinada" id="dor">
+    <div class="container">
+      <h2 class="sec-title anim-el">Voc├¬ n├úo aguenta mais sites onde:</h2>
+      <div class="thin-line"></div>
+      <div class="dor-grid">
+        <div class="dor-item anim-el" style="--sd:.0s">
+          <div class="x-box"><i class="fa-solid fa-xmark"></i></div>
+          <p>O designer demora meses e entrega algo gen├®rico</p>
+        </div>
+        <div class="dor-item anim-el" style="--sd:.12s">
+          <div class="x-box"><i class="fa-solid fa-xmark"></i></div>
+          <p>A ag├¬ncia cobra caro demais por algo simples</p>
+        </div>
+        <div class="dor-item anim-el" style="--sd:.24s">
+          <div class="x-box"><i class="fa-solid fa-xmark"></i></div>
+          <p>O resultado n├úo converte e voc├¬ joga dinheiro fora</p>
+        </div>
+        <div class="dor-item anim-el" style="--sd:.36s">
+          <div class="x-box"><i class="fa-solid fa-xmark"></i></div>
+          <p>O site trava no celular e perde clientes toda hora</p>
+        </div>
+      </div>
+      <div class="dor-cta anim-el" style="--sd:.1s">
+        <h3>Ent├úo o Igor Almeida <span class="u-draw">├® para voc├¬!</span></h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVISOR SKEW dark ÔåÆ light -->
+  <div class="skew-div bg-dark-before bg-light-after" aria-hidden="true"></div>
+
+  <!-- DEPOIMENTOS ÔÇö Ô£à Mariana K. removida -->
+  <section class="sec-dep light-bg tela-inclinada" id="depoimentos">
+    <div class="container">
+      <h2 class="sec-title dark-title anim-el">Clientes que <span class="red-text">j├í confiaram.</span></h2>
+      <p class="sec-sub anim-el">Veja o que est├úo dizendo sobre o trabalho:</p>
+    </div>
+    <div class="swiper-outer">
+      <button class="sw-btn sw-prev" id="depPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="sw-viewport" id="depViewport">
+        <div class="sw-track" id="depTrack">
+          <div class="dep-card">
+            <div class="dep-head">
+              <div class="dep-av">16</div>
+              <div><strong>16*29</strong><span>@16.29season</span></div>
+            </div>
+            <p>Landing page limpa, r├ípida e integrada com checkout. Assino o plano base faz meses ÔÇö qualquer ajuste resolvido no mesmo dia.</p>
+          </div>
+          <div class="dep-card">
+            <div class="dep-head">
+              <div class="dep-av">HC</div>
+              <div><strong>HcyAbove</strong><span>Cliente</span></div>
+            </div>
+            <p>"Curti demais trabalhar contigo. Voc├¬ tem compromisso, profissionalismo e dedica├º├úo. Sempre que eu puder te indicar pra algu├®m, vou fazer isso sem medo. Melhor de tudo ├® o pre├ºo que cabe no bolso. Voc├¬ conseguiu me impressionar e fazer o site da maneira que eu imaginava. Obrigado pela paci├¬ncia e pela dedica├º├úo!! Tmj"</p>
+          </div>
+          <div class="dep-card">
+            <div class="dep-head">
+              <div class="dep-av">SI</div>
+              <div><strong>Sirley</strong><span>Cliente</span></div>
+            </div>
+            <p>"O site ficou incr├¡vel, amei de vdd, ficou perfeito em cada detalhe. Foi um memorial constru├¡do para contar a hist├│ria do meu relacionamento, foi bem emocionante ver ele pronto. Mesmo depois de meses tendo feito ele, sempre entro e fico emocionada ao v├¬-lo. Com certeza foi um dos melhores presentes que j├í ganhei, mesmo n├úo sendo f├¡sico tocou minha alma!"</p>
+          </div>
+        </div>
+      </div>
+      <button class="sw-btn sw-next" id="depNext" aria-label="Pr├│ximo"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="sw-dots" id="depDots"></div>
+  </section>
+
+  <!-- DIVISOR SKEW light ÔåÆ dark -->
+  <div class="skew-div bg-light-before bg-dark-after" aria-hidden="true"></div>
+
+  <!-- BENEF├ìCIOS -->
+  <section class="sec-ben dark-bg tela-inclinada" id="servicos">
+    <div class="container">
+      <h2 class="sec-title anim-el">Confira o que voc├¬ <span class="red-text">vai receber:</span></h2>
+    </div>
+    <!-- Ô£à padding-bottom no swiper-outer para o card n├úo ser cortado ao subir no hover -->
+    <div class="swiper-outer ben-swiper-outer">
+      <button class="sw-btn sw-btn-dark sw-prev" id="benPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="sw-viewport ben-sw-viewport" id="benViewport">
+        <div class="sw-track" id="benTrack">
+          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-solid fa-bolt"></i></div><h3>Entrega R├ípida</h3><p>Projetos em at├® 7 dias ├║teis. Sem enrola├º├úo, sem surpresa.</p></div>
+          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-brands fa-github"></i></div><h3>GitHub Pages</h3><p>Hospedagem gratuita e est├ível. Sem mensalidade de servidor.</p></div>
+          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-solid fa-mobile-screen"></i></div><h3>100% Mobile</h3><p>Design responsivo que funciona em qualquer tela.</p></div>
+          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-solid fa-credit-card"></i></div><h3>Stripe Integrado</h3><p>Pagamentos online funcionando desde o primeiro acesso.</p></div>
+          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-solid fa-magnifying-glass"></i></div><h3>SEO Incluso</h3><p>Estrutura otimizada para aparecer no Google.</p></div>
+          <div class="ben-card glass-card"><div class="ben-icon"><i class="fa-solid fa-headset"></i></div><h3>Suporte Direto</h3><p>Atendimento via WhatsApp durante todo o projeto.</p></div>
+        </div>
+      </div>
+      <button class="sw-btn sw-btn-dark sw-next" id="benNext" aria-label="Pr├│ximo"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="sw-dots sw-dots-light" id="benDots"></div>
+  </section>
+
+  <!-- DIVISOR SKEW -->
+  <div class="skew-div bg-dark-before bg-dark-after" aria-hidden="true"></div>
+
+  <!-- PLANOS -->
+  <section class="sec-plans dark-bg tela-inclinada" id="planos">
+    <div class="container">
+      <h2 class="sec-title anim-el">Escolha o seu <span class="red-text">plano:</span></h2>
+      <div class="plans-grid">
+        <div class="plan-card anim-scale" style="--sd:.0s">
+          <div class="plan-name">Landing Page</div>
+          <ul class="plan-list">
+            <li>1 p├ígina completa</li><li>Layout responsivo</li>
+            <li>GitHub Pages gratuito</li><li>Bot├úo WhatsApp</li>
+            <li>Link checkout ou bio</li><li>Ajustes simples inclusos</li>
+          </ul>
+          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;200<em>,00</em></span></div>
+          <a href="https://wa.me/5511970688232?text=Quero%20a%20Landing%20Page!" class="plan-btn" target="_blank" rel="noopener">Quero esse</a>
+        </div>
+        <div class="plan-card anim-scale" style="--sd:.1s">
+          <div class="plan-name">Site Presente</div>
+          <ul class="plan-list">
+            <li>Layout rom├óntico personalizado</li><li>Fotos e textos do casal</li>
+            <li>Contador de tempo juntos</li><li>GitHub Pages gratuito</li>
+            <li>F├ícil de compartilhar</li>
+          </ul>
+          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;50<em>,00</em></span></div>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20Site%20Presente!" class="plan-btn" target="_blank" rel="noopener">Quero esse</a>
+        </div>
+        <div class="plan-card plan-hot anim-scale" style="--sd:.2s">
+          <div class="plan-badge">Mais escolhido</div>
+          <div class="plan-name">E-commerce Est├ítico</div>
+          <ul class="plan-list">
+            <li>Loja no GitHub Pages</li><li>Stripe integrado</li>
+            <li>EmailJS + Formspree</li><li>Cat├ílogo personaliz├ível</li>
+            <li>SEO b├ísico incluso</li><li class="li-extra">Tudo da Landing Page</li>
+          </ul>
+          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;500<em>,00</em></span></div>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20E-commerce%20Est├ítico!" class="plan-btn" target="_blank" rel="noopener">Quero esse</a>
+        </div>
+        <div class="plan-card anim-scale" style="--sd:.3s">
+          <div class="plan-name">E-commerce Avan├ºado</div>
+          <ul class="plan-list">
+            <li>Banco de dados integrado</li><li>Painel administrativo</li>
+            <li>Gest├úo de pedidos</li><li>Autentica├º├úo de usu├írios</li>
+            <li>Deploy em servidor</li><li>1 m├¬s de suporte incluso</li>
+            <li class="li-extra">Tudo do E-commerce Est├ítico</li>
+          </ul>
+          <div class="plan-price-wrap"><span class="plan-price">R$&nbsp;890<em>,00</em></span></div>
+          <a href="https://wa.me/5511970688232?text=Quero%20o%20E-commerce%20Avan├ºado!" class="plan-btn" target="_blank" rel="noopener">Quero esse</a>
+        </div>
+      </div>
+      <p class="pay-note anim-el"><i class="fa-solid fa-lock"></i> 40% na contrata├º├úo ┬À 60% na entrega</p>
+    </div>
+  </section>
+
+  <!-- DIVISOR SKEW -->
+  <div class="skew-div bg-dark-before bg-dark-after" aria-hidden="true"></div>
+
+  <!-- FAQ ÔÇö Ô£à faq-ghost centralizado via CSS -->
+  <section class="sec-faq dark-bg tela-inclinada" id="faq">
+    <div class="faq-ghost" aria-hidden="true">FAQ</div>
+    <div class="container">
+      <h2 class="sec-title anim-el">Perguntas Frequentes</h2>
+      <div class="faq-grid">
+        <div class="faq-col">
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Para quem ├® esse servi├ºo? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>Para aut├┤nomos, pequenos neg├│cios, casais e qualquer pessoa que precisa de presen├ºa digital profissional sem pagar pre├ºo de ag├¬ncia.</p></div></div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Qual a diferen├ºa entre est├ítico e avan├ºado? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>O est├ítico fica no GitHub Pages, sem custo mensal, ideal para vender com Stripe. O avan├ºado tem back-end, banco de dados e painel admin.</p></div></div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Posso trocar de plano depois? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>Sim. ├ë poss├¡vel escalar o projeto ap├│s a entrega. O valor pago ├® abatido no upgrade.</p></div></div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Como funciona o processo? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>1. Conversa ÔåÆ 2. Briefing ÔåÆ 3. 40% de entrada ÔåÆ 4. Desenvolvimento ÔåÆ 5. Ajustes ÔåÆ 6. Entrega + 60% restante.</p></div></div>
+        </div>
+        <div class="faq-col">
+          <div class="faq-item faq-open-default"><button class="faq-q" aria-expanded="true">Posso pedir ajuste depois da entrega? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body faq-body-open"><p>Sim. Cada plano j├í inclui rodadas de ajuste. Ap├│s isso, cobro R$ 80 por rodada avulsa. Tamb├®m h├í planos de manuten├º├úo a partir de R$ 150/m├¬s.</p></div></div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Quanto tempo leva a entrega? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>Landing Page e Site Presente: 5ÔÇô7 dias ├║teis. E-commerce Est├ítico: 10ÔÇô14 dias. E-commerce Avan├ºado: prazo personalizado.</p></div></div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Preciso ter dom├¡nio pr├│prio? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>N├úo ├® obrigat├│rio. O GitHub Pages oferece subdom├¡nio gratuito. Se quiser um .com.br personalizado, pode comprar e eu configuro.</p></div></div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false">Quais as formas de pagamento? <i class="fa-solid fa-chevron-right fa-arr"></i></button><div class="faq-body"><p>Pix ou transfer├¬ncia banc├íria. Sempre 40% na contrata├º├úo e 60% na entrega aprovada.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVISOR SKEW dark ÔåÆ vinho -->
+  <div class="skew-div bg-dark-before bg-vinho-after" aria-hidden="true"></div>
+
+  <!-- CTA FINAL -->
+  <section class="sec-cta vinho-bg tela-inclinada" id="cta">
+    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="container cta-inner">
+      <h2 class="cta-title anim-el">Pronto para <span class="red-text">transformar</span><br/>sua ideia?</h2>
+      <p class="cta-sub anim-el">Me chama no WhatsApp. Sem compromisso, sem enrola├º├úo.</p>
+      <div class="cta-btn-wrap anim-el">
+        <a href="https://wa.me/5511970688232?text=Ol├í,%20Igor!%20Acabei%20de%20ver%20seu%20site%20e%20gostaria%20de%20desenvolver%20um%20projeto%20web%20exclusivo."
+           class="btn-cta" id="magneticBtn" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> Come├ºar agora
+        </a>
+      </div>
+      <p class="cta-note anim-el"><i class="fa-solid fa-clock"></i> Resposta em at├® 2h em dias ├║teis</p>
+    </div>
+  </section>
+
+  <!-- RODAP├ë -->
+  <footer class="footer">
+    <div class="footer-noise" aria-hidden="true"></div>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <span class="nav-logo footer-logo">Igor Almeida<span>.</span></span>
+        <p>Desenvolvimento Web ┬À S├úo Paulo, Brasil</p>
+        <p class="f-tagline">Sites que <span class="red-text">convertem.</span></p>
+      </div>
+      <div class="footer-col">
+        <h4 class="red-text">Suporte</h4>
+        <a href="https://wa.me/5511970688232" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp</a>
+        <a href="mailto:igoralmeidadesantana0@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+      </div>
+      <div class="footer-col">
+        <h4 class="red-text">Redes sociais</h4>
+        <div class="footer-socials">
+          <a href="https://instagram.com/igoralmeidall" target="_blank" rel="noopener" aria-label="Instagram profissional"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://instagram.com/igoralmeidal"  target="_blank" rel="noopener" aria-label="Instagram pessoal"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/5511970688232"         target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-handles">@igoralmeidall ┬À @igoralmeidal</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>┬® 2026 Igor Almeida ÔÇö Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
