@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HD Barbearia</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/sales.css">
+  <link rel="stylesheet" href="./css/management.css">
 </head>
 <body>
   <main class="app">
@@ -157,8 +161,27 @@
       </header>
 
       <div class="dashboard-body">
+        <div class="day-card ios-card-highlight">
+          <div class="day-card-top">
+            <div class="day-card-info">
+              <span class="day-card-label">Faturamento de Hoje</span>
+              <span class="day-card-value" id="day-revenue">R$ 340,00</span>
+              <span class="day-card-sub" id="day-sub">14 cortes concluídos · +12% vs ontem</span>
+            </div>
+            <span class="day-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </span>
+          </div>
+          <button type="button" id="new-attend-btn" class="btn btn-primary day-cta">
+            <span class="btn-label">+ Novo Atendimento</span>
+          </button>
+        </div>
+
         <div class="metrics-grid">
-          <div class="metric-card metric-primary">
+          <div class="metric-card">
             <span class="metric-label">Sua Comissão Hoje</span>
             <span class="metric-value">R$ 158,00</span>
             <span class="metric-sub">+12% vs ontem</span>
@@ -175,10 +198,6 @@
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
-        </button>
-
-        <button type="button" id="new-attend-btn" class="btn btn-primary cta-btn">
-          <span class="btn-label">+ NOVO ATENDIMENTO</span>
         </button>
 
         <div class="shortcuts-grid">
@@ -271,8 +290,8 @@
       <div class="sales-body">
         <div class="period-tabs" id="period-tabs">
           <button type="button" class="tab-btn active" data-period="hoje">Hoje</button>
-          <button type="button" class="tab-btn" data-period="semana">Esta Semana</button>
-          <button type="button" class="tab-btn" data-period="mes">Este Mês</button>
+          <button type="button" class="tab-btn" data-period="semana">Semanal</button>
+          <button type="button" class="tab-btn" data-period="mes">Mensal</button>
         </div>
 
         <div class="sales-filters" id="sales-filters">
@@ -336,7 +355,7 @@
           </div>
         </div>
 
-        <div class="summary-card cashflow-card">
+        <div class="summary-card ios-card-highlight">
           <div class="cashflow-row">
             <span class="cashflow-label">Faturamento Bruto</span>
             <span class="cashflow-value" id="summary-total">R$ 0,00</span>
@@ -381,113 +400,64 @@
 
     <!-- ===== TELA 7: GESTÃO & COMISSÕES ===== -->
     <section id="commission-screen" class="screen commission-screen">
-      <div class="commission-header">
-        <button type="button" id="btn-back-commission" class="back-btn" aria-label="Voltar">&lt;</button>
-        <h1 class="screen-title commission-title">Gestão &amp; Comissões</h1>
-        <span class="commission-header-spacer"></span>
-      </div>
+      <header class="commission-header">
+        <div class="commission-topbar">
+          <button type="button" id="btn-back-commission" class="back-btn" aria-label="Voltar">&lt;</button>
+          <h1 class="screen-title commission-title">Gestão &amp; Comissões</h1>
+          <span class="commission-header-spacer"></span>
+        </div>
+        <nav class="segmented-control" id="commission-tabs" aria-label="Seções da Gestão e Comissões">
+          <button type="button" class="comm-tab active" data-tab="summary">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="12" width="4" height="9"></rect>
+              <rect x="10" y="7" width="4" height="14"></rect>
+              <rect x="17" y="3" width="4" height="18"></rect>
+            </svg>
+            Resumo
+          </button>
+          <button type="button" class="comm-tab" data-tab="team">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            Equipe
+          </button>
+          <button type="button" class="comm-tab" data-tab="clients">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Clientes
+          </button>
+        </nav>
+      </header>
 
-      <div class="commission-tabs" id="commission-tabs">
-        <button type="button" class="comm-tab active" data-view="overview">Visão Geral</button>
-        <button type="button" class="comm-tab" data-view="closure">Fechamento Barbeiros</button>
-        <button type="button" class="comm-tab" data-view="xray">Raio-X Clientes</button>
-      </div>
-
-      <!-- VISÃO GERAL -->
-      <div class="comm-view active" id="view-overview">
+      <!-- ABA 1: RESUMO GERAL -->
+      <div class="comm-view tab-content active" id="tab-summary">
         <div class="comm-body">
-          <h3 class="comm-section-title">Métricas do Mês</h3>
           <div class="metrics-grid comm-metrics">
             <div class="metric-card comm-metric">
               <span class="metric-label">Clientes Novos</span>
-              <span class="comm-metric-value comm-value-new" id="m-new-clients">12</span>
-              <span class="comm-metric-sub" id="m-new-pct">40% do total</span>
+              <span class="comm-metric-value" id="m-new-clients">0</span>
+              <span class="comm-metric-sub" id="m-new-pct">0% do total</span>
             </div>
             <div class="metric-card comm-metric">
               <span class="metric-label">Clientes Recorrentes</span>
-              <span class="comm-metric-value comm-value-rec" id="m-recurrent">18</span>
+              <span class="comm-metric-value" id="m-recurrent">0</span>
               <span class="comm-metric-sub">cortaram 2x+ este mês</span>
             </div>
-            <div class="metric-card comm-metric metric-primary">
-              <span class="metric-label">A Pagar (Pedro - 50%)</span>
+            <div class="metric-card comm-metric metric-primary span-2">
+              <span class="metric-label">Saldo Pendente do Mês</span>
               <span class="comm-metric-value comm-metric-gold" id="m-payable">R$ 0,00</span>
-              <span class="comm-metric-sub">acumulado pendente</span>
+              <span class="comm-metric-sub">comissão do barbeiro a receber</span>
             </div>
           </div>
-
-          <h3 class="comm-section-title">Fechamento &amp; Pagamento do Barbeiro</h3>
-          <div class="barber-card" id="barber-card">
-            <div class="barber-head">
-              <div class="barber-id">
-                <div class="barber-avatar">P</div>
-                <div class="barber-info">
-                  <span class="barber-name">Pedro</span>
-                  <span class="barber-role">Barbeiro · Comissão 50%</span>
-                </div>
-              </div>
-              <span class="pay-badge" id="pay-badge">PENDENTE DE PAGAMENTO</span>
-            </div>
-            <div class="barber-split">
-              <div class="barber-stat">
-                <span class="barber-stat-label">Bruto Gerado</span>
-                <span class="barber-stat-value" id="barber-gross">R$ 0,00</span>
-              </div>
-              <div class="barber-stat">
-                <span class="barber-stat-label">Comissão Devida</span>
-                <span class="barber-stat-value barber-stat-gold" id="barber-commission">R$ 0,00</span>
-              </div>
-            </div>
-            <div id="barber-status-row" class="barber-status-row">
-              <span class="pay-status-tag" id="pay-status-tag">A PAGAR</span>
-            </div>
-            <button type="button" class="btn btn-primary comm-cta" id="btn-open-pay">MARCAR PAGAMENTO REALIZADO</button>
-            <div id="receipt-stamp" class="receipt-stamp" style="display:none"></div>
-          </div>
-
-          <h3 class="comm-section-title">Desempenho do Mês</h3>
-          <div class="kpi-grid">
-            <div class="kpi-card">
-              <span class="kpi-label">Faturamento Bruto</span>
-              <span class="kpi-value" id="kpi-gross">R$ 0,00</span>
-            </div>
-            <div class="kpi-card kpi-card-gold">
-              <span class="kpi-label">Comissão Devida</span>
-              <span class="kpi-value" id="kpi-commission">R$ 0,00</span>
-            </div>
-          </div>
-
-          <div class="kpi-card kpi-clients">
-            <span class="kpi-label">Clientes Atendidos no Mês</span>
-            <div class="client-split-bar" id="client-split-bar">
-              <span class="split-seg split-rec" id="split-rec" style="width:0%"></span>
-              <span class="split-seg split-new" id="split-new" style="width:0%"></span>
-              <span class="split-seg split-miss" id="split-miss" style="width:0%"></span>
-            </div>
-            <div class="client-split-legend" id="client-split-legend">
-              <span class="legend-item"><span class="legend-dot dot-rec"></span>Recorrentes <b id="legend-rec">0</b></span>
-              <span class="legend-item"><span class="legend-dot dot-new"></span>Novos <b id="legend-new">0</b></span>
-              <span class="legend-item"><span class="legend-dot dot-miss"></span>Sumidos <b id="legend-miss">0</b></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FECHAMENTO BARBEIROS -->
-      <div class="comm-view" id="view-closure">
-        <div class="comm-body">
-          <h3 class="comm-section-title">Histórico de Pagamentos</h3>
-          <div class="closure-list" id="closure-list"></div>
-        </div>
-      </div>
-
-      <!-- RAIO-X CLIENTES -->
-      <div class="comm-view" id="view-xray">
-        <div class="comm-body">
-          <h3 class="comm-section-title">Inteligência de Clientes</h3>
 
           <div class="retention-card">
             <div class="retention-head">
-              <span class="retention-title">Retenção no Mês</span>
+              <span class="retention-title">Retenção de Clientes</span>
               <span class="retention-pct" id="retention-pct">0%</span>
             </div>
             <div class="retention-bar">
@@ -499,24 +469,93 @@
               <span class="legend-item"><span class="legend-dot dot-new"></span>Novos</span>
             </div>
           </div>
+        </div>
+      </div>
 
+      <!-- ABA 2: EQUIPE & COMISSÃO -->
+      <div class="comm-view tab-content" id="tab-team">
+        <div class="comm-body">
+          <div class="barber-card" id="barber-card">
+            <div class="barber-head">
+              <div class="barber-id">
+                <div class="barber-avatar" id="barber-avatar">P</div>
+                <div class="barber-info">
+                  <span class="barber-name" id="barber-name">Pedro</span>
+                  <span class="barber-role" id="barber-role">Barbeiro · Comissão 50%</span>
+                </div>
+              </div>
+              <button type="button" class="barber-edit-btn" id="barber-edit-btn">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+                  <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+                </svg>
+                Editar Perfil
+              </button>
+            </div>
+            <div class="barber-split">
+              <div class="barber-stat">
+                <span class="barber-stat-label">Faturamento Bruto</span>
+                <span class="barber-stat-value" id="barber-gross">R$ 0,00</span>
+              </div>
+              <div class="barber-stat">
+                <span class="barber-stat-label">Comissão Devida</span>
+                <span class="barber-stat-value barber-stat-gold" id="barber-commission">R$ 0,00</span>
+              </div>
+            </div>
+            <div id="barber-status-row" class="barber-status-row">
+              <span class="pay-status-tag" id="pay-status-tag">A PAGAR</span>
+            </div>
+            <button type="button" class="btn btn-primary comm-cta" id="btn-open-pay">Marcar Pagamento</button>
+            <div id="receipt-stamp" class="receipt-stamp" style="display:none"></div>
+          </div>
+
+          <div class="finchart-card">
+            <div class="finchart-head">
+              <span class="finchart-title">Comparativo de Faturamento</span>
+              <span class="finchart-sub">Bruto × Comissão · últimos 6 meses</span>
+            </div>
+            <div class="finchart" id="finchart"></div>
+            <div class="finchart-legend">
+              <span class="legend-item"><span class="legend-swatch swatch-gross"></span>Faturamento Bruto</span>
+              <span class="legend-item"><span class="legend-swatch swatch-commission"></span>Comissão Paga</span>
+            </div>
+          </div>
+
+          <h3 class="comm-section-title">Pagamentos Realizados</h3>
+          <div class="closure-list" id="closure-list"></div>
+        </div>
+      </div>
+
+      <!-- ABA 3: RAIO-X DE CLIENTES -->
+      <div class="comm-view tab-content" id="tab-clients">
+        <div class="comm-body">
+          <div class="clients-actions">
+            <button type="button" class="btn btn-primary client-new-btn" id="btn-new-client">+ Novo Cliente</button>
+          </div>
+          <div class="client-search-field">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="client-search" class="client-search-input" placeholder="Buscar cliente por nome..." autocomplete="off">
+          </div>
           <div class="retention-tabs" id="retention-tabs">
             <button type="button" class="ret-tab active" data-filter="todos">Todos</button>
-            <button type="button" class="ret-tab" data-filter="novos">Novos</button>
             <button type="button" class="ret-tab" data-filter="recorrentes">Recorrentes</button>
-            <button type="button" class="ret-tab" data-filter="sumidos">Sumidos / Oferta</button>
+            <button type="button" class="ret-tab" data-filter="novos">Novos</button>
+            <button type="button" class="ret-tab" data-filter="inativos">Inativos</button>
           </div>
           <div class="client-xray-list" id="client-xray-list"></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== MODAL: CONFIRMAÇÃO DE PAGAMENTO DO BARBEIRO ===== -->
+    <!-- ===== MODAL: REGISTRAR PAGAMENTO DO BARBEIRO ===== -->
     <div id="pay-modal" class="modal">
       <div class="modal-backdrop"></div>
       <div class="modal-content">
         <div class="modal-header">
-          <h3>Confirmar Pagamento</h3>
+          <h3>Registrar Pagamento</h3>
           <button type="button" class="modal-close" data-close="pay-modal">&times;</button>
         </div>
         <div class="modal-body">
@@ -529,10 +568,102 @@
             <button type="button" class="pay-method active" data-method="Pix">Pix</button>
             <button type="button" class="pay-method" data-method="Dinheiro">Dinheiro</button>
             <button type="button" class="pay-method" data-method="Cartão">Cartão</button>
+            <button type="button" class="pay-method" data-method="Transferência">Transferência</button>
           </div>
           <label class="pay-field-label">Data / Hora</label>
           <input type="datetime-local" id="pay-datetime" class="pay-datetime">
-          <button type="button" class="btn btn-primary comm-cta" id="btn-confirm-pay">Confirmar e Gerar Recibo</button>
+          <button type="button" class="btn btn-primary comm-cta" id="btn-confirm-pay">Confirmar Pagamento</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: EDITAR PERFIL DO BARBEIRO ===== -->
+    <div id="barber-edit-modal" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Editar Perfil do Barbeiro</h3>
+          <button type="button" class="modal-close" data-close="barber-edit-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="field">
+            <label for="barber-edit-name">NOME</label>
+            <input type="text" id="barber-edit-name" placeholder="Nome do barbeiro" autocomplete="off">
+            <span class="input-error"></span>
+          </div>
+          <div class="field">
+            <label for="barber-edit-email">E-MAIL</label>
+            <input type="email" id="barber-edit-email" placeholder="email@barbearia.com" autocomplete="off">
+            <span class="input-error"></span>
+          </div>
+          <div class="field">
+            <label for="barber-edit-password">SENHA</label>
+            <input type="password" id="barber-edit-password" placeholder="••••••••" autocomplete="new-password">
+            <span class="input-error"></span>
+          </div>
+          <div class="field">
+            <label for="barber-edit-cut">% DE COMISSÃO</label>
+            <input type="number" id="barber-edit-cut" min="0" max="100" step="0.5" placeholder="50">
+            <span class="input-error"></span>
+          </div>
+          <button type="button" class="btn btn-primary" id="barber-edit-save">Salvar Alterações</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: EDITAR PAGAMENTO DO HISTÓRICO ===== -->
+    <div id="pay-edit-modal" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Editar Pagamento</h3>
+          <button type="button" class="modal-close" data-close="pay-edit-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <label class="pay-field-label">Data / Hora</label>
+          <input type="datetime-local" id="pay-edit-datetime" class="pay-datetime">
+          <div class="field">
+            <label for="pay-edit-value">VALOR</label>
+            <input type="number" id="pay-edit-value" min="0" step="0.01" placeholder="0,00">
+            <span class="input-error"></span>
+          </div>
+          <label class="pay-field-label">Forma de Pagamento</label>
+          <div class="pay-methods" id="pay-edit-methods">
+            <button type="button" class="pay-method" data-method="Pix">Pix</button>
+            <button type="button" class="pay-method" data-method="Dinheiro">Dinheiro</button>
+            <button type="button" class="pay-method" data-method="Cartão">Cartão</button>
+            <button type="button" class="pay-method" data-method="Transferência">Transferência</button>
+          </div>
+          <button type="button" class="btn btn-primary" id="pay-edit-save">Salvar Alterações</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: EDITAR DADOS DO CLIENTE ===== -->
+    <div id="client-edit-modal" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Editar Cliente</h3>
+          <button type="button" class="modal-close" data-close="client-edit-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="field">
+            <label for="client-edit-name">NOME</label>
+            <input type="text" id="client-edit-name" placeholder="Nome do cliente" autocomplete="off">
+            <span class="input-error"></span>
+          </div>
+          <div class="field">
+            <label for="client-edit-phone">TELEFONE</label>
+            <input type="tel" id="client-edit-phone" placeholder="(11) 99999-9999" autocomplete="tel">
+            <span class="input-error"></span>
+          </div>
+          <div class="field">
+            <label for="client-edit-notes">OBSERVAÇÕES</label>
+            <textarea id="client-edit-notes" class="notes-input" rows="3" placeholder="Preferências, histórico, observações..."></textarea>
+            <span class="input-error"></span>
+          </div>
+          <button type="button" class="btn btn-primary" id="client-edit-save">Salvar Alterações</button>
         </div>
       </div>
     </div>
@@ -548,6 +679,42 @@
         <div class="modal-body">
           <div class="chart-bars" id="chart-bars"></div>
           <p class="modal-note">Faturamento semanal (R$)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: CADASTRAR CLIENTE ===== -->
+    <div id="client-modal" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Cadastrar Cliente</h3>
+          <button type="button" class="modal-close" data-close="client-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="field">
+            <label for="client-name">NOME COMPLETO</label>
+            <input type="text" id="client-name" placeholder="Nome completo do cliente" autocomplete="off">
+            <span class="input-error"></span>
+          </div>
+          <div class="field">
+            <label for="client-phone">TELEFONE / WHATSAPP</label>
+            <input type="tel" id="client-phone" placeholder="(11) 99999-9999" autocomplete="tel">
+            <span class="input-error"></span>
+          </div>
+          <div class="field">
+            <label for="client-email">E-MAIL <span class="optional">(opcional)</span></label>
+            <input type="email" id="client-email" placeholder="email@exemplo.com" autocomplete="email">
+            <span class="input-error"></span>
+          </div>
+          <div class="field">
+            <label for="client-notes">OBSERVAÇÕES / PREFERÊNCIAS DE CORTE <span class="optional">(opcional)</span></label>
+            <textarea id="client-notes" class="notes-input" rows="3" placeholder="Preferências, histórico, observações..."></textarea>
+            <span class="input-error"></span>
+          </div>
+          <button type="button" class="btn btn-primary ios-card-highlight client-save-btn" id="client-save">
+            <span class="btn-label">Salvar Cliente</span>
+          </button>
         </div>
       </div>
     </div>
@@ -626,6 +793,6 @@
 
   </main>
 
-  <script src="script.js"></script>
+  <script type="module" src="./js/app.js"></script>
 </body>
 </html>

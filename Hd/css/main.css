@@ -1,0 +1,361 @@
+/* ==========================================================
+   HD Barbearia — main.css
+   Design System iOS Dark Glassmorphic:
+   - Variáveis globais (vidro escuro + destaque claro)
+   - Reset, tipografia, estrutura do app
+   - Cartão de destaque (.ios-card-highlight) e botões
+   ========================================================== */
+
+/* ===== RESET BÁSICO ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== VARIÁVEIS CSS (DESIGN SYSTEM IOS DARK GLASS) ===== */
+:root {
+  /* Paleta neutra */
+  --black: #000000;
+  --gray-dark: #121212;
+  --gray-card: #1e1e1e;
+  --gray-border: #2a2a2a;
+  --gold: #ffd700;
+  --white: #ffffff;
+  --muted: #c4c4cc;
+  --muted-dim: #9ca3af;
+  --placeholder: #8a8a93;
+  --error: #ef4444;
+  --success: #22c55e;
+
+  /* Vidro escuro (Glassmorphism) */
+  --glass-bg: rgba(24, 24, 27, 0.65);
+  --glass-bg-soft: rgba(24, 24, 27, 0.55);
+  --glass-blur: blur(20px);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --separator: rgba(255, 255, 255, 0.05);
+
+  /* Destaque fosco confortável (.ios-card-highlight) —
+     evita branco absoluto #FFFFFF para não causar ofuscamento */
+  --highlight-bg: rgba(235, 235, 240, 0.92);
+  --ink: #18181b;
+
+  /* Raios iOS */
+  --radius-input: 12px;
+  --radius-button: 16px;
+  --radius-card: 16px;
+  --radius-ios: 22px;
+
+  --font: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ===== BASE ===== */
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+html,
+body,
+.app,
+.app-container {
+  overflow-x: hidden !important;
+  overflow-x: clip !important;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--black);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== FUNDO DESKTOP (a partir de 768px) ===== */
+@media (min-width: 768px) {
+  body {
+    background: radial-gradient(
+        circle at 50% 0%,
+        rgba(255, 215, 0, 0.06),
+        transparent 45%
+      ),
+      linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
+  }
+}
+
+/* ===== ESTRUTURA APP (MOBILE: 100vw x 100dvh) ===== */
+.app {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-x: clip;
+  background: radial-gradient(
+      420px 420px at 85% -5%,
+      rgba(255, 215, 0, 0.1),
+      transparent 70%
+    ),
+    radial-gradient(400px 400px at 0% 18%, rgba(255, 255, 255, 0.055), transparent 70%),
+    radial-gradient(520px 520px at 55% 118%, rgba(96, 96, 104, 0.12), transparent 70%),
+    var(--gray-dark);
+}
+
+/* ===== FRAME DE DISPOSITIVO (DESKTOP / TABLET) ===== */
+@media (min-width: 768px) {
+  .app {
+    width: 100%;
+    max-width: 1200px;
+    height: 100vh;
+    height: 100dvh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+/* ===== TELAS ===== */
+.screen {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(24px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  overflow-x: hidden;
+}
+
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* ===== ANIMAÇÕES GLOBAIS ===== */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes commFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================
+   TELA 1: ONBOARDING / TELAS DE AUTENTICAÇÃO
+   ========================================================== */
+
+/* ===== ONBOARDING ===== */
+#welcome-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  position: relative;
+  height: 70%;
+  background-image: url("https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1200&q=80");
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 18, 18, 0) 40%,
+    var(--gray-dark) 100%
+  );
+}
+
+.welcome-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 24px 28px 40px;
+  background: var(--gray-dark);
+}
+
+.welcome-content h1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+
+.welcome-content h1 span {
+  color: var(--gold);
+}
+
+.welcome-content p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ===== TELAS DE FORMULÁRIO (LOGIN / REGISTER / FORGOT) ===== */
+.form-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 28px 28px;
+  background: rgba(9, 9, 11, 0.45);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overflow-x: clip;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.link-accent {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  padding: 16px 0;
+}
+
+.screen-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.screen-description {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+  margin-top: -24px;
+}
+
+.link-muted {
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.link-muted:hover {
+  color: var(--white);
+}
+
+/* ===== ACESSO RÁPIDO / BIOMETRIA ===== */
+.biometric-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-button);
+  color: var(--muted);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease,
+    transform 0.1s ease;
+}
+
+.biometric-btn:hover {
+  color: var(--white);
+  border-color: var(--glass-border);
+}
+
+.biometric-btn:active {
+  transform: scale(0.98);
+}
+
+.biometric-icon {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ===== SUPORTE NO RODAPÉ ===== */
+.login-footer {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 16px 0 4px;
+}
+
+.support-link {
+  color: #a1a1aa;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.support-link:hover {
+  color: var(--gold);
+}
+
+/* ==========================================================
+   CARD DE DESTAQUE (IOS HIGHLIGHT — FOSCO CONFORTAVEL)
+   Fundo off-white translúcido (sem #FFFFFF puro), texto
+   grafite #18181B, blur suave, borda sutil e sombra leve.
+   Botão primário interno vira grafite escuro.
+   ========================================================== */
+.ios-card-highlight {
+  background: var(--highlight-bg);
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-ios);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.ios-card-highlight .btn-primary {
+  background: var(--ink);
+  color: #ffffff;
+  border: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.ios-card-highlight .btn-primary:hover {
+  filter: brightness(1.15);
+}

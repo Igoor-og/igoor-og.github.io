@@ -24,14 +24,31 @@ Para abrir no celular, acesse esse endereço pelo navegador do aparelho (Chrome/
 ## Estrutura
 
 ```
-├── index.html   # telas do app (onboarding, login, dashboard, comissões)
-├── style.css    # design system dark + componentes
-└── script.js    # lógica (navegação, comissões, atendimentos, raio-x)
+├── index.html               # telas do app (onboarding, login, dashboard, comissões)
+├── css/
+│   ├── main.css             # design system dark (variáveis, reset, tipografia, auth)
+│   ├── components.css       # componentes reutilizáveis (botões, modais, toast, dropdowns)
+│   ├── dashboard.css        # estilos da Home / painel operacional
+│   ├── sales.css            # estilos do histórico de vendas e fluxo de caixa
+│   └── management.css       # estilos da gestão & comissões e fechamentos
+└── js/
+    ├── app.js               # entry point (router de telas, auth, composição)
+    ├── config.js            # configurações (taxa de cartão, percentual de comissão)
+    ├── utils.js             # helpers compartilhados (formatação, toast, modais, validação)
+    ├── components/
+    │   └── modal-attendance.js   # modal "Novo Atendimento" (cliente + serviços)
+    └── screens/
+        ├── dashboard.js     # feed de atendimentos e atalhos
+        ├── sales.js         # vendas, filtros e fluxo de caixa
+        └── management.js    # comissões, fechamento e raio-x de clientes
 ```
+
+> Os módulos JS usam **ECMAScript Modules** (`import`/`export`) e são carregados via
+> `<script type="module" src="js/app.js">`.
 
 ## Estado do projeto
 
-- ⚠️ **Demonstração**: os dados são fictícios e fixos no `script.js`.
+- ⚠️ **Demonstração**: os dados são fictícios e fixos nos módulos de `js/screens/`.
 - Sem backend e sem banco de dados — dados não persistem entre sessões.
 - Testado em layout mobile (420px). No desktop, o app aparece centralizado em um "frame" de celular.
 
