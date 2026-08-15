@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HD Barbearia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+
+    <!-- ===== TELA 1: ONBOARDING ===== -->
+    <section id="welcome-screen" class="screen active">
+      <div class="hero" role="img" aria-label="Interior de uma barbearia premium">
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="welcome-content">
+        <h1>Bem-vindo ao <span>HD Barbearia</span></h1>
+        <p>Gerencie seus agendamentos e clientes em um só lugar.</p>
+        <button id="btn-next" class="btn btn-primary"><span class="btn-label">Próximo</span></button>
+      </div>
+    </section>
+
+    <!-- ===== TELA 2: LOGIN ===== -->
+    <section id="login-screen" class="screen form-screen">
+      <div class="topbar">
+        <button id="btn-back-login" class="back-btn" aria-label="Voltar">&lt;</button>
+        <a href="#" id="link-register" class="link-accent">Criar conta</a>
+      </div>
+
+      <div class="content">
+        <h1 class="screen-title">Entrar</h1>
+
+        <form id="login-form" class="form" novalidate>
+          <div class="field">
+            <label for="login-email">E-MAIL</label>
+            <input type="email" id="login-email" name="email" placeholder="seu@email.com" autocomplete="email">
+            <span class="input-error"></span>
+          </div>
+
+          <div class="field">
+            <label for="login-password">SENHA</label>
+            <div class="input-wrap">
+              <input type="password" id="login-password" name="password" placeholder="••••••••" autocomplete="current-password">
+              <button type="button" id="toggle-password" class="eye-btn" aria-label="Mostrar senha">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-open">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-closed">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"></path>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"></path>
+                  <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
+            </div>
+            <span class="input-error"></span>
+          </div>
+
+          <div class="field-actions">
+            <a href="#" id="link-forgot" class="link-muted">Esqueceu a senha?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="login-submit"><span class="btn-label">Entrar</span></button>
+        </form>
+
+        <button type="button" id="biometric-btn" class="biometric-btn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" class="biometric-icon">
+            <path d="M12 2a6 6 0 0 0-6 6v1c-1.24 0-2 1-2 2v9h16v-9c0-1-0.76-2-2-2V8a6 6 0 0 0-6-6zm0 2a4 4 0 0 1 4 4v2H8V8a4 4 0 0 1 4-4z"></path>
+          </svg>
+          <span>Entrar com Biometria / Face ID</span>
+        </button>
+      </div>
+
+      <footer class="login-footer">
+        <a href="#" id="link-support" class="support-link">Precisa de ajuda? Fale com o suporte</a>
+      </footer>
+    </section>
+
+    <!-- ===== TELA 3: CRIAR CONTA ===== -->
+    <section id="register-screen" class="screen form-screen">
+      <div class="topbar">
+        <button id="btn-back-register" class="back-btn" aria-label="Voltar">&lt;</button>
+      </div>
+
+      <div class="content">
+        <h1 class="screen-title">Criar Conta</h1>
+
+        <form id="register-form" class="form" novalidate>
+          <div class="field">
+            <label for="register-name">NOME COMPLETO</label>
+            <input type="text" id="register-name" name="name" placeholder="Seu nome" autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="register-phone">WHATSAPP / TELEFONE</label>
+            <input type="tel" id="register-phone" name="phone" placeholder="(11) 99999-9999" autocomplete="tel">
+          </div>
+
+          <div class="field">
+            <label for="register-email">E-MAIL</label>
+            <input type="email" id="register-email" name="email" placeholder="seu@email.com" autocomplete="email">
+            <span class="input-error"></span>
+          </div>
+
+          <div class="field">
+            <label for="register-password">SENHA</label>
+            <input type="password" id="register-password" name="password" placeholder="••••••••" autocomplete="new-password">
+            <span class="input-error"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="register-submit"><span class="btn-label">Cadastrar</span></button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== TELA 4: ESQUECEU A SENHA ===== -->
+    <section id="forgot-screen" class="screen form-screen">
+      <div class="topbar">
+        <button id="btn-back-forgot" class="back-btn" aria-label="Voltar">&lt;</button>
+      </div>
+
+      <div class="content">
+        <h1 class="screen-title">Recuperar Senha</h1>
+        <p class="screen-description">Digite seu e-mail cadastrado para receber as instruções de redefinição.</p>
+
+        <form id="forgot-form" class="form" novalidate>
+          <div class="field">
+            <label for="forgot-email">E-MAIL</label>
+            <input type="email" id="forgot-email" name="email" placeholder="seu@email.com" autocomplete="email">
+            <span class="input-error"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="forgot-submit"><span class="btn-label">Enviar Instruções</span></button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== TELA 5: DASHBOARD / PAINEL OPERACIONAL ===== -->
+    <section id="dashboard-screen" class="screen dashboard-screen">
+      <header class="dashboard-header">
+        <div class="welcome-text">
+          <p class="welcome-label">Bem-vindo,</p>
+          <h2 class="welcome-name">Carlos Barbeiro</h2>
+        </div>
+        <div class="header-actions">
+          <button type="button" id="notif-btn" class="icon-btn" aria-label="Notificações">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="notif-badge"></span>
+          </button>
+          <button type="button" id="profile-btn" class="avatar-btn" aria-label="Abrir perfil">CB</button>
+        </div>
+      </header>
+
+      <div class="dashboard-body">
+        <div class="metrics-grid">
+          <div class="metric-card metric-primary">
+            <span class="metric-label">Sua Comissão Hoje</span>
+            <span class="metric-value">R$ 158,00</span>
+            <span class="metric-sub">+12% vs ontem</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Cortes Hoje</span>
+            <span class="metric-value">14</span>
+            <span class="metric-sub">cortes concluídos</span>
+          </div>
+        </div>
+
+        <button type="button" id="charts-btn" class="link-btn">
+          Ver gráficos de vendas
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
+        <button type="button" id="new-attend-btn" class="btn btn-primary cta-btn">
+          <span class="btn-label">+ NOVO ATENDIMENTO</span>
+        </button>
+
+        <div class="shortcuts-grid">
+          <button type="button" class="shortcut-card" data-shortcut="carimbo" aria-label="Lançar Carimbo">
+            <span class="shortcut-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 21h14"></path>
+                <path d="M6 18h12"></path>
+                <path d="M21 12l-9 9-9-9 5-5 4 4V2"></path>
+              </svg>
+            </span>
+            <span class="shortcut-label">Lançar Carimbo</span>
+          </button>
+          <button type="button" class="shortcut-card" data-shortcut="cliente" aria-label="Cadastrar Cliente">
+            <span class="shortcut-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <line x1="19" y1="8" x2="19" y2="14"></line>
+                <line x1="22" y1="11" x2="16" y2="11"></line>
+              </svg>
+            </span>
+            <span class="shortcut-label">Cadastrar Cliente</span>
+          </button>
+          <button type="button" class="shortcut-card" data-shortcut="historico" aria-label="Histórico de Vendas">
+            <span class="shortcut-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <path d="M14 2v6h6"></path>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+            </span>
+            <span class="shortcut-label">Histórico de Vendas</span>
+          </button>
+          <button type="button" class="shortcut-card" data-shortcut="time" aria-label="Gerenciar Time">
+            <span class="shortcut-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </span>
+            <span class="shortcut-label">Gerenciar Time</span>
+          </button>
+          <button type="button" class="shortcut-card" data-shortcut="loja" aria-label="Gerenciar Loja">
+            <span class="shortcut-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+            </span>
+            <span class="shortcut-label">Gerenciar Loja</span>
+          </button>
+          <button type="button" class="shortcut-card" data-shortcut="comissao" aria-label="Gerenciar Comissão">
+            <span class="shortcut-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"></path>
+                <line x1="12" y1="6" x2="12" y2="18"></line>
+              </svg>
+            </span>
+            <span class="shortcut-label">Gerenciar Comissão</span>
+          </button>
+        </div>
+
+        <div class="feed-section">
+          <h3 class="feed-title">Últimos Atendimentos</h3>
+          <div class="feed-list" id="feed-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TELA 6: HISTÓRICO DE VENDAS E COMISSÕES ===== -->
+    <section id="sales-history-screen" class="screen sales-screen">
+      <div class="sales-header">
+        <button type="button" id="btn-back-sales" class="back-btn" aria-label="Voltar">&lt;</button>
+        <h1 class="screen-title">Histórico &amp; Comissões</h1>
+        <button type="button" id="export-btn" class="icon-btn" aria-label="Exportar relatório">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="sales-body">
+        <div class="period-tabs" id="period-tabs">
+          <button type="button" class="tab-btn active" data-period="hoje">Hoje</button>
+          <button type="button" class="tab-btn" data-period="semana">Esta Semana</button>
+          <button type="button" class="tab-btn" data-period="mes">Este Mês</button>
+        </div>
+
+        <div class="sales-filters" id="sales-filters">
+          <div class="filters-header">
+            <button type="button" class="filters-toggle" id="filters-toggle">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+              </svg>
+              Filtros
+            </button>
+            <button type="button" class="clear-filters-btn" id="clear-filters">Limpar Filtros</button>
+          </div>
+
+          <div class="filters-body" id="filters-body">
+            <div class="filter-field">
+              <label class="filter-label" for="filter-barber">Barbeiro</label>
+              <div class="select-pill" data-select="barber">
+                <input type="text" id="filter-barber" class="filter-input" value="Todos" readonly>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+              <div class="select-dropdown" data-dropdown="barber">
+                <button type="button" class="select-option" data-value="">Todos</button>
+                <button type="button" class="select-option" data-value="meu">Meu Histórico</button>
+                <button type="button" class="select-option" data-value="gabriel">Gabriel</button>
+                <button type="button" class="select-option" data-value="lucas">Lucas</button>
+              </div>
+            </div>
+
+            <div class="filter-field">
+              <label class="filter-label" for="filter-client">Cliente</label>
+              <input type="text" id="filter-client" class="filter-input" placeholder="Buscar por cliente">
+            </div>
+
+            <div class="filter-field">
+              <label class="filter-label" for="filter-service">Serviço</label>
+              <div class="select-pill" data-select="service">
+                <input type="text" id="filter-service" class="filter-input" value="Todos" readonly>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+              <div class="select-dropdown" data-dropdown="service">
+                <button type="button" class="select-option" data-value="">Todos</button>
+                <button type="button" class="select-option" data-value="corte">Corte</button>
+                <button type="button" class="select-option" data-value="barba">Barba</button>
+                <button type="button" class="select-option" data-value="combo">Combo</button>
+                <button type="button" class="select-option" data-value="pigmentacao">Pigmentação</button>
+              </div>
+            </div>
+
+            <div class="filter-field filter-date-wrap">
+              <label class="filter-label">Data / Intervalo</label>
+              <div class="date-range">
+                <input type="date" id="filter-date-start" class="filter-input filter-date" aria-label="Data inicial">
+                <span class="date-sep">até</span>
+                <input type="date" id="filter-date-end" class="filter-input filter-date" aria-label="Data final">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-card cashflow-card">
+          <div class="cashflow-row">
+            <span class="cashflow-label">Faturamento Bruto</span>
+            <span class="cashflow-value" id="summary-total">R$ 0,00</span>
+          </div>
+
+          <div class="cashflow-row cashflow-fee">
+            <span class="cashflow-label cashflow-fee-label">
+              Taxas de Cartão
+              <button type="button" class="info-tip" tabindex="0" aria-label="Informação sobre a taxa de cartão">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span class="fee-hint">Aplicado apenas em pagamentos com Cartão. Ajustável nas configurações.</span>
+              </button>
+            </span>
+            <span class="cashflow-value cashflow-negative" id="summary-fees">-R$ 0,00</span>
+          </div>
+
+          <div class="cashflow-row cashflow-fee">
+            <span class="cashflow-label">
+              Cortes / Comissões <span class="fee-rate" id="summary-cut-rate">(50%)</span>
+            </span>
+            <span class="cashflow-value cashflow-negative" id="summary-commission">-R$ 0,00</span>
+          </div>
+
+          <div class="cashflow-divider"></div>
+
+          <div class="cashflow-net">
+            <span class="cashflow-net-label">Valor Final Líquido</span>
+            <span class="cashflow-net-value" id="summary-net">R$ 0,00</span>
+          </div>
+
+          <span class="summary-sub" id="summary-sub">Total de 0 atendimentos realizados no período</span>
+        </div>
+
+        <h3 class="sales-section-title">Detalhamento de Serviços</h3>
+        <div class="sales-list" id="sales-list"></div>
+      </div>
+    </section>
+
+    <!-- ===== TELA 7: GESTÃO & COMISSÕES ===== -->
+    <section id="commission-screen" class="screen commission-screen">
+      <div class="commission-header">
+        <button type="button" id="btn-back-commission" class="back-btn" aria-label="Voltar">&lt;</button>
+        <h1 class="screen-title commission-title">Gestão &amp; Comissões</h1>
+        <span class="commission-header-spacer"></span>
+      </div>
+
+      <div class="commission-tabs" id="commission-tabs">
+        <button type="button" class="comm-tab active" data-view="overview">Visão Geral</button>
+        <button type="button" class="comm-tab" data-view="closure">Fechamento Barbeiros</button>
+        <button type="button" class="comm-tab" data-view="xray">Raio-X Clientes</button>
+      </div>
+
+      <!-- VISÃO GERAL -->
+      <div class="comm-view active" id="view-overview">
+        <div class="comm-body">
+          <h3 class="comm-section-title">Métricas do Mês</h3>
+          <div class="metrics-grid comm-metrics">
+            <div class="metric-card comm-metric">
+              <span class="metric-label">Clientes Novos</span>
+              <span class="comm-metric-value comm-value-new" id="m-new-clients">12</span>
+              <span class="comm-metric-sub" id="m-new-pct">40% do total</span>
+            </div>
+            <div class="metric-card comm-metric">
+              <span class="metric-label">Clientes Recorrentes</span>
+              <span class="comm-metric-value comm-value-rec" id="m-recurrent">18</span>
+              <span class="comm-metric-sub">cortaram 2x+ este mês</span>
+            </div>
+            <div class="metric-card comm-metric metric-primary">
+              <span class="metric-label">A Pagar (Pedro - 50%)</span>
+              <span class="comm-metric-value comm-metric-gold" id="m-payable">R$ 0,00</span>
+              <span class="comm-metric-sub">acumulado pendente</span>
+            </div>
+          </div>
+
+          <h3 class="comm-section-title">Fechamento &amp; Pagamento do Barbeiro</h3>
+          <div class="barber-card" id="barber-card">
+            <div class="barber-head">
+              <div class="barber-id">
+                <div class="barber-avatar">P</div>
+                <div class="barber-info">
+                  <span class="barber-name">Pedro</span>
+                  <span class="barber-role">Barbeiro · Comissão 50%</span>
+                </div>
+              </div>
+              <span class="pay-badge" id="pay-badge">PENDENTE DE PAGAMENTO</span>
+            </div>
+            <div class="barber-split">
+              <div class="barber-stat">
+                <span class="barber-stat-label">Bruto Gerado</span>
+                <span class="barber-stat-value" id="barber-gross">R$ 0,00</span>
+              </div>
+              <div class="barber-stat">
+                <span class="barber-stat-label">Comissão Devida</span>
+                <span class="barber-stat-value barber-stat-gold" id="barber-commission">R$ 0,00</span>
+              </div>
+            </div>
+            <div id="barber-status-row" class="barber-status-row">
+              <span class="pay-status-tag" id="pay-status-tag">A PAGAR</span>
+            </div>
+            <button type="button" class="btn btn-primary comm-cta" id="btn-open-pay">MARCAR PAGAMENTO REALIZADO</button>
+            <div id="receipt-stamp" class="receipt-stamp" style="display:none"></div>
+          </div>
+
+          <h3 class="comm-section-title">Desempenho do Mês</h3>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-label">Faturamento Bruto</span>
+              <span class="kpi-value" id="kpi-gross">R$ 0,00</span>
+            </div>
+            <div class="kpi-card kpi-card-gold">
+              <span class="kpi-label">Comissão Devida</span>
+              <span class="kpi-value" id="kpi-commission">R$ 0,00</span>
+            </div>
+          </div>
+
+          <div class="kpi-card kpi-clients">
+            <span class="kpi-label">Clientes Atendidos no Mês</span>
+            <div class="client-split-bar" id="client-split-bar">
+              <span class="split-seg split-rec" id="split-rec" style="width:0%"></span>
+              <span class="split-seg split-new" id="split-new" style="width:0%"></span>
+              <span class="split-seg split-miss" id="split-miss" style="width:0%"></span>
+            </div>
+            <div class="client-split-legend" id="client-split-legend">
+              <span class="legend-item"><span class="legend-dot dot-rec"></span>Recorrentes <b id="legend-rec">0</b></span>
+              <span class="legend-item"><span class="legend-dot dot-new"></span>Novos <b id="legend-new">0</b></span>
+              <span class="legend-item"><span class="legend-dot dot-miss"></span>Sumidos <b id="legend-miss">0</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FECHAMENTO BARBEIROS -->
+      <div class="comm-view" id="view-closure">
+        <div class="comm-body">
+          <h3 class="comm-section-title">Histórico de Pagamentos</h3>
+          <div class="closure-list" id="closure-list"></div>
+        </div>
+      </div>
+
+      <!-- RAIO-X CLIENTES -->
+      <div class="comm-view" id="view-xray">
+        <div class="comm-body">
+          <h3 class="comm-section-title">Inteligência de Clientes</h3>
+
+          <div class="retention-card">
+            <div class="retention-head">
+              <span class="retention-title">Retenção no Mês</span>
+              <span class="retention-pct" id="retention-pct">0%</span>
+            </div>
+            <div class="retention-bar">
+              <span class="ret-seg ret-rec" id="ret-rec" style="width:0%"></span>
+              <span class="ret-seg ret-new" id="ret-new" style="width:0%"></span>
+            </div>
+            <div class="retention-legend">
+              <span class="legend-item"><span class="legend-dot dot-rec"></span>Recorrentes</span>
+              <span class="legend-item"><span class="legend-dot dot-new"></span>Novos</span>
+            </div>
+          </div>
+
+          <div class="retention-tabs" id="retention-tabs">
+            <button type="button" class="ret-tab active" data-filter="todos">Todos</button>
+            <button type="button" class="ret-tab" data-filter="novos">Novos</button>
+            <button type="button" class="ret-tab" data-filter="recorrentes">Recorrentes</button>
+            <button type="button" class="ret-tab" data-filter="sumidos">Sumidos / Oferta</button>
+          </div>
+          <div class="client-xray-list" id="client-xray-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MODAL: CONFIRMAÇÃO DE PAGAMENTO DO BARBEIRO ===== -->
+    <div id="pay-modal" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirmar Pagamento</h3>
+          <button type="button" class="modal-close" data-close="pay-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="pay-confirm-row">
+            <span class="pay-label">Comissão a Pagar</span>
+            <span class="pay-value" id="pay-amount">R$ 0,00</span>
+          </div>
+          <label class="pay-field-label">Forma de Pagamento</label>
+          <div class="pay-methods" id="pay-methods">
+            <button type="button" class="pay-method active" data-method="Pix">Pix</button>
+            <button type="button" class="pay-method" data-method="Dinheiro">Dinheiro</button>
+            <button type="button" class="pay-method" data-method="Cartão">Cartão</button>
+          </div>
+          <label class="pay-field-label">Data / Hora</label>
+          <input type="datetime-local" id="pay-datetime" class="pay-datetime">
+          <button type="button" class="btn btn-primary comm-cta" id="btn-confirm-pay">Confirmar e Gerar Recibo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: RESUMO SEMANAL ===== -->
+    <div id="charts-modal" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Resumo de Vendas</h3>
+          <button type="button" class="modal-close" data-close="charts-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="chart-bars" id="chart-bars"></div>
+          <p class="modal-note">Faturamento semanal (R$)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: NOVO ATENDIMENTO ===== -->
+    <div id="attend-modal" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Novo Atendimento</h3>
+          <button type="button" class="modal-close" data-close="attend-modal">&times;</button>
+        </div>
+
+        <div class="attend-form">
+          <!-- CAMPO 1: CLIENTE (BUSCA + DROPDOWN) -->
+          <div class="field">
+            <label for="attend-client">CLIENTE</label>
+            <div class="search-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="attend-client" class="client-input" placeholder="Buscar cliente..." autocomplete="off">
+            </div>
+            <span class="input-error"></span>
+            <div class="client-dropdown" id="client-dropdown">
+              <div class="dropdown-section">
+                <p class="dropdown-title">Frequentes / Top 3</p>
+                <div class="dropdown-list" id="recurrent-list"></div>
+              </div>
+              <div class="dropdown-divider" id="divider"></div>
+              <div class="dropdown-section">
+                <p class="dropdown-title">Todos os Clientes (A-Z)</p>
+                <div class="dropdown-list" id="all-clients-list"></div>
+              </div>
+              <p class="dropdown-empty" id="dropdown-empty" style="display:none">Nenhum cliente encontrado</p>
+            </div>
+          </div>
+
+          <!-- CAMPO 2: SERVIÇOS (CUSTOM DROPDOWN + MÚLTIPLOS) -->
+          <div class="field">
+            <label>SERVIÇOS</label>
+            <button type="button" class="service-dropdown-trigger" id="service-trigger">
+              <span id="service-trigger-text">Selecione um serviço</span>
+              <svg class="service-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <span class="input-error" id="service-error"></span>
+            <div class="service-menu" id="service-menu"></div>
+            <button type="button" class="add-service-btn" id="add-service">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Adicionar outro serviço
+            </button>
+            <div class="service-pills" id="service-pills"></div>
+            <div class="attend-total" id="attend-total">
+              <span>Total Acumulado</span>
+              <span class="attend-total-value" id="attend-total-value">R$ 0,00</span>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary attend-submit" id="attend-submit">
+            <span class="btn-label">Confirmar Atendimento</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div id="toast" class="toast" role="status" aria-live="polite">
+      <span id="toast-text" class="toast-text">Mensagem</span>
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
